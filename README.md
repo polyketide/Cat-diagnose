@@ -1,1 +1,74 @@
 # Cat-diagnose
+
+**A Claude Code sub-agent for evidence-based veterinary × human medical analysis, plus a cited feline-oncology knowledge base.**
+
+一个用于**循证医学分析的 Claude Code 子代理**（跨兽医与人医），附带一套**带文献引用的猫肿瘤知识库**。
+
+> ⚠️ **This is not medical advice.** All content is a literature-referenced aid for discussing options with a licensed veterinarian. It does not diagnose, prescribe, or replace your vet.
+> ⚠️ **本仓库不是医疗建议。** 所有内容是供你与执业兽医共同审阅的循证参考，不下诊断、不开处方、不能替代兽医。
+
+---
+
+## What's inside / 内容
+
+```
+.claude/agents/medical.md          # 子代理定义（放进项目即可用）
+knowledge-base/
+  ├── 猫抗肿瘤药物毒性谱.md          # 8 种药 × 肝/肾/食欲/骨髓 四轴毒性矩阵
+  ├── 猫淋巴瘤_靶向与免疫治疗证据.md  # 靶向/免疫(检查点·CAR-T)证据地图 + 为什么猫落后于犬
+  ├── 猫肿瘤支持与姑息照护.md        # 增重·止吐·疼痛评估(FGS)·发烧·喂食安全·QOL 工具
+  └── 猫肿瘤全景文献survey.md        # 8 域最新文献综述（早筛/诊断/各瘤种/放疗/靶向免疫/预后/临终关怀）
+```
+
+## The agent / 关于这个子代理
+
+`medical.md` 是一个**跨物种循证分析**代理：遇到兽医问题会主动去找对应的人医证据（机制、药理、剂量原则），反之亦然，并强制标注跨物种外推的局限。
+
+它的特点不在"更懂医学"，而在**一套防止自己胡说的纪律**：
+
+- **工具优先**：涉及数值、剂量、发生率、文献结论时，强制调用 PubMed / Consensus / ClinicalTrials / ChEMBL 检索，**绝不凭记忆或编造数字**。
+- **标注可信度**：每条结论区分【已查证】/【推断】/【外推】/【未知】。
+- **⭐ 前提追溯纪律**：这是它最核心的机制，来自 4 次真实的推理失败——每一步都要自问"我依赖的这个前提，是**对方给的**还是**我自己填的**？"，强制澄清解剖学歧义词，统计"为维护框架而绕着解释"的次数（绕得越多越该怀疑框架），并禁止把"疑似"在复述中悄悄升级成"确诊"。
+- **安全红线**：不开处方；主动核对种属特异性毒性（如对乙酰氨基酚对猫致命、恩诺沙星在猫的剂量上限、NSAID 与类固醇叠加等）；急症识别优先于诊断完美。
+
+### Usage / 用法
+
+```bash
+git clone https://github.com/polyketide/Cat-diagnose.git
+# 把 .claude/agents/medical.md 复制到你自己项目的 .claude/agents/ 下
+```
+
+然后在 Claude Code 里让它接手医疗类问题即可（解读检查报告、鉴别诊断、用药安全核对、疗法证据评估等）。
+
+推荐配合 [bio-research 类 MCP 工具](https://docs.claude.com/en/docs/claude-code/mcp)（PubMed / Consensus / ClinicalTrials / ChEMBL）使用——代理的检索纪律依赖这些工具。
+
+## The knowledge base / 关于知识库
+
+由多智能体并行文献检索 + 对抗式核查生成，**每条结论尽量附 PMID/DOI**，并明确区分「已确立的 solid 数据」与「新兴/未证实/仅犬数据/临床前」。涵盖：
+
+- 早期发现与筛查（血清 TK1、老年猫结构化筛查；cfDNA 液体活检仍为概念验证）
+- 诊断（2023 ACVIM 共识、多靶点 PARR、克隆性阳性 ≠ 肿瘤、细胞块优于涂片做 ICC）
+- 淋巴瘤（低级别 vs 高级别策略、各解剖型预后、挽救方案）
+- 其他实体瘤（乳腺癌、口腔鳞癌、注射部位肉瘤、肥大细胞瘤）
+- 放疗（SBRT/再程放疗、急性 vs 晚期毒性、骨坏死风险）
+- 靶向与免疫（托拉尼布是猫唯一有真实临床数据的靶向药；检查点/CAR-T 在猫仍无临床试验）
+- 预后因子（体况 BCS、贫血、FeLV 进展型 vs 消退型、达 CR 的分量）
+- 临终关怀（2023 AAFP/IAAHPC 猫专属指南、FGS 疼痛量表、安乐死决策研究）
+
+### Caveats / 使用须知
+
+- 内容以**中文**撰写，文献引用为英文。
+- 部分机制/发生率来自**人或犬的数据外推**，正文均已标注——请勿当作猫的实测值。
+- 文献截至 **2026-07**；医学进展很快，重要决策请核对最新文献并咨询兽医。
+- 个别标注"经 Consensus 检索"的条目 DOI 未逐条复核，已在文中注明。
+
+## Origin / 由来
+
+这套东西诞生于一次真实的、危重的猫科头颈部肿瘤病例照护过程。仓库已移除全部可识别的私人与第三方信息（患猫、饲主、诊所、兽医姓名、病理编号、费用等），仅保留可复用的方法论与文献证据。
+
+代理里那套"前提追溯纪律"，是在那次照护中被**一次次纠正**换来的——最有价值的部分或许不是它查到了什么，而是它学会了**怎么不骗自己**。
+
+---
+
+*Contributions and corrections welcome — especially citation fixes.*
+*欢迎指正，尤其是文献引用方面的错误。*
