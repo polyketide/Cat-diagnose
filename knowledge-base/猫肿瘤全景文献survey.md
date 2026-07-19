@@ -102,3 +102,45 @@
 **临终/姑息**：Eigner 2023 (37768060, AAFP/IAAHPC临终指南)；Ray 2021 (34167339, AAFP老年)；Evangelista 2019 (31836868, FGS)；Monteiro 2023 (36649089, FGS饲主)；Gruen 2021 (34724255, frunevetmab)；Reynolds 2010 (20738770, QoL>寿命)；Doit 2021 (33941335, QoL工具综述)；Littlewood 2021 (33924569, 安乐死决策)；Cleary 2022 (33881389, 哀伤)。
 
 > 完整逐条数据(每域 key advances / solid data / emerging 全文)见工作流 journal 存档;本页为 curated 版。所有引用来自工具检索,标注了物种外推与"未证实"。个别标"经Consensus检索"者 DOI 未逐条核对,已注明。
+
+---
+
+---
+
+---
+
+---
+
+## 参考文献（原文记录）
+
+> 本节标题、期刊、卷期页**一律为 PubMed 原文**，不翻译、不缩写。
+> 正文中的中文表述仅为解读；**如需引用，请引用下方原文条目**。
+> 非英文文献保留其原始语言标题并标注语种。
+
+- Baez JL, et al. A prospective investigation of the prevalence and prognostic significance of weight loss and changes in body condition in feline cancer patients. *J Feline Med Surg* 2007;9(5):411-7. PMID 17451991. [DOI](https://doi.org/10.1016/j.jfms.2007.02.005)
+- Reynolds CA, et al. Perceptions of quality of life and priorities of owners of cats with heart disease. *J Vet Intern Med* 2010;24(6):1421-6. PMID 20738770. [DOI](https://doi.org/10.1111/j.1939-1676.2010.0583.x)
+- Taylor SS, et al. Serum thymidine kinase activity in clinically healthy and diseased cats: a potential biomarker for lymphoma. *J Feline Med Surg* 2012;15(2):142-7. PMID 23076596. [DOI](https://doi.org/10.1177/1098612X12463928)
+- Winkel VM, et al. Serum α-1 acid glycoprotein and serum amyloid A concentrations in cats receiving antineoplastic treatment for lymphoma. *Am J Vet Res* 2015;76(11):983-8. PMID 26512544. [DOI](https://doi.org/10.2460/ajvr.76.11.983)
+- Pope KV, et al. Outcome and toxicity assessment of feline small cell lymphoma: 56 cases (2000-2010). *Vet Med Sci* 2015;1(2):51-62. PMID 29067174. [DOI](https://doi.org/10.1002/vms3.9)
+- Dagher E, et al. Feline Invasive Mammary Carcinomas: Prognostic Value of Histological Grading. *Vet Pathol* 2019;56(5):660-670. PMID 31113336. [DOI](https://doi.org/10.1177/0300985819846870)
+- Rout ED, et al. Assessment of immunoglobulin heavy chain, immunoglobulin light chain, and T-cell receptor clonality testing in the diagnosis of feline lymphoid neoplasia. *Vet Clin Pathol* 2019;48 Suppl 1:45-58. PMID 31478220. [DOI](https://doi.org/10.1111/vcp.12767)
+- Petrucci GN, et al. Adjuvant doxorubicin vs metronomic cyclophosphamide and meloxicam vs surgery alone for cats with mammary carcinomas: A retrospective study of 137 cases. *Vet Comp Oncol* 2020;19(4):714-723. PMID 33140523. [DOI](https://doi.org/10.1111/vco.12660)
+- Yoshikawa H, et al. Retrospective evaluation of intranasal carcinomas in cats treated with external-beam radiotherapy: 42 cases. *J Vet Intern Med* 2021;35(2):1018-1030. PMID 33660305. [DOI](https://doi.org/10.1111/jvim.16098)
+- Ray M, et al. 2021 AAFP Feline Senior Care Guidelines. *J Feline Med Surg* 2021;23(7):613-638. PMID 34167339. [DOI](https://doi.org/10.1177/1098612X211021538)
+- Freiche V, et al. Histopathologic, phenotypic, and molecular criteria to discriminate low-grade intestinal T-cell lymphoma in cats from lymphoplasmacytic enteritis. *J Vet Intern Med* 2021;35(6):2673-2684. PMID 34374109. [DOI](https://doi.org/10.1111/jvim.16231)
+- Wang L, et al. Feline thymidine kinase 1: molecular characterization and evaluation of its serum form as a diagnostic biomarker. *BMC Vet Res* 2021;17(1):316. PMID 34579716. [DOI](https://doi.org/10.1186/s12917-021-03030-5)
+- Reczynska AI, et al. Outcome of stereotactic body radiation for treatment of nasal and nasopharyngeal lymphoma in 32 cats. *J Vet Intern Med* 2022;36(2):733-742. PMID 35188694. [DOI](https://doi.org/10.1111/jvim.16388)
+- Rohrer Bley C, et al. Dose- and Volume-Limiting Late Toxicity of FLASH Radiotherapy in Cats with Squamous Cell Carcinoma of the Nasal Planum and in Mini Pigs. *Clin Cancer Res* 2022;28(17):3814-3823. PMID 35421221. [DOI](https://doi.org/10.1158/1078-0432.CCR-22-0262)
+- Ii T, et al. Intraepithelial cytotoxic lymphocytes are associated with a poor prognosis in feline intestinal T-cell lymphoma. *Vet Pathol* 2022;59(6):931-939. PMID 36052863. [DOI](https://doi.org/10.1177/03009858221120010)
+- Rodriguez-Piza I, et al. Clinical presentation, treatment and outcome in 23 cats with laryngeal or tracheal lymphoma. *J Feline Med Surg* 2023;25(1):1098612X221143769. PMID 36655881. [DOI](https://doi.org/10.1177/1098612X221143769)
+- Sampaio F, et al. Detection of Lymphoid Markers (CD3 and PAX5) for Immunophenotyping in Dogs and Cats: Comparison of Stained Cytology Slides and Matched Cell Blocks. *Vet Sci* 2023;10(2). PMID 36851461. [DOI](https://doi.org/10.3390/vetsci10020157)
+- Marsilio S, et al. ACVIM consensus statement guidelines on diagnosing and distinguishing low-grade neoplastic from inflammatory lymphocytic chronic enteropathies in cats. *J Vet Intern Med* 2023;37(3):794-816. PMID 37130034. [DOI](https://doi.org/10.1111/jvim.16690)
+- Eigner DR, et al. 2023 AAFP/IAAHPC feline hospice and palliative care guidelines. *J Feline Med Surg* 2023;25(9):1098612X231201683. PMID 37768060. [DOI](https://doi.org/10.1177/1098612X231201683)
+- Moore AS, Frimberger AE. Treatment of feline intermediate to high-grade alimentary lymphoma: A retrospective evaluation of 55 cats treated with the VAPC combination chemotherapy protocol (2017-2021). *Vet Comp Oncol* 2023;22(1):106-114. PMID 38152842. [DOI](https://doi.org/10.1111/vco.12958)
+- Weyrich A, et al. Comparative analysis of primer sets for the assessment of clonality in feline lymphomas. *Front Vet Sci* 2024;11:1356330. PMID 38774911. [DOI](https://doi.org/10.3389/fvets.2024.1356330)
+- Wolfesberger B, et al. Immunophenotype investigation in feline intestinal non-B-cell lymphoma. *J Comp Pathol* 2024;212:20-26. PMID 38943798. [DOI](https://doi.org/10.1016/j.jcpa.2024.05.004)
+- Mortier F, et al. Value of repeated health screening in 259 apparently healthy mature adult and senior cats followed for 2 years. *J Vet Intern Med* 2024;38(4):2089-2098. PMID 38967102. [DOI](https://doi.org/10.1111/jvim.17138)
+- Ruiz-Perez CA, et al. Proof-of-concept evaluation of next-generation sequencing-based liquid biopsy for non-invasive cancer detection in cats. *Front Vet Sci* 2024;11:1394686. PMID 39346958. [DOI](https://doi.org/10.3389/fvets.2024.1394686)
+- Pui Yung Anna L, et al. Use of Cyclophosphamide, Vincristine, Prednisolone and Vinblastine for the Treatment of Large Cell Lymphoma in Cats. *J Vet Intern Med* 2025;39(2):e70066. PMID 40119555. [DOI](https://doi.org/10.1111/jvim.70066)
+- Lai NA, et al. Comparison of outcomes in feline intermediate- to large-cell lymphoma treated with CMOP (cyclophosphamide, mitoxantrone, vincristine and prednisolone) instead of CHOP (cyclophosphamide, doxorubicin, vincristine and prednisolone). *J Feline Med Surg* 2025;27(5):1098612X251335635. PMID 40443182. [DOI](https://doi.org/10.1177/1098612X251335635)
+- Biezus G, et al. Survival analysis and clinical abnormalities in cats with progressive or regressive feline leukemia virus (FeLV) infection in Brazil. *PLoS One* 2025;20(7):e0322691. PMID 40591622. [DOI](https://doi.org/10.1371/journal.pone.0322691)
