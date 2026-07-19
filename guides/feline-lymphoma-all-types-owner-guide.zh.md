@@ -1162,7 +1162,9 @@
 
 ⚠️ **我没有找到任何专门针对猫淋巴瘤的学会指南或共识声明。** 如果看到有人引用"学会指南说……"，请要求给出具体文件。**建议引用上面的原始文献，而不是科普网页转述的数字。**
 
----## 附录 C · 我明确查不到的事
+---
+
+## 附录 C · 我明确查不到的事
 
 **以下是文献中真实的空白。任何人给你一个填补这些空白的数字，那都是编的。**
 
@@ -1200,6 +1202,8 @@
 > 任何具体的方案、剂量、时机，都必须由能亲手检查这只猫的兽医决定。
 >
 > 祝好运。 🐾
+
+---
 
 ---
 
@@ -1246,7 +1250,7 @@
 > Retrospective case series.  41 cats with histologically confirmed low-grade lymphocytic lymphoma.
 
 **PMID 18412532** · Zitz JC 2008
-> ⚠️ 正文引用的 `1825` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `1825` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 18974017** · Oberthaler KT 2008
 > Seventeen (74%) of the 23 cats had only one treatment of doxorubicin.
@@ -1299,7 +1303,7 @@
 
 **PMID 28556532** · Finotello R 2017
 > Median time to progression (MTTP) was 5 days, and median survival time (MST) 21 days.
-> ⚠️ 正文引用的 `109` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `109` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 28978714** · Kuzi S 2017
 > The overall mortality was 38 per cent (27/71 cats).
@@ -1335,6 +1339,12 @@
 
 **PMID 36655881** · Rodriguez-Piza I 2023
 > Median PFS and OS were 909 days (range 23-1484) and 909 days (range 23-2423), respectively.
+> **【已取 PMC 全文核对】**
+> The mean duration of clinical signs before presentation was recorded in 21/23 cases and was 57.5 days (range 2-515).
+> Immunohistochemistry was available in 11 cases (48%); all were consistent with B-cell lymphoma.
+> Lymphoma grade was reviewed in 11 cases, of which nine were classified as low grade and two as intermediate grade.
+> No cases had lymphoma documented in a location other than the primary site.
+> ⚠️ ⚠️ 摘要与正文自相矛盾：摘要称 "Pretreatment with steroids was associated with longer OS (p = 0.003)"，而正文 Results 写 "Age, breed, sex, retroviral status, anatomical location, anaemia at presentation, debulking surgery and pretreatment with corticosteroids did not affect PFS or OS." 引用此点时必须说明该矛盾。
 
 **PMID 37768060** · Eigner DR 2023
 > The '2023 AAFP/IAAHPC Feline Hospice and Palliative Care Guidelines' are authored by a Task Force of experts in feline hospice and palliative care convened by the American Association of Feline Practitioners and the International Association for Animal Hospice and Palliative Care.

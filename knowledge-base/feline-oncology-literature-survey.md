@@ -149,6 +149,8 @@
 
 ---
 
+---
+
 ## 原文摘录（source excerpts）
 
 > 下列为**文献原文句子，逐字摘录**，未经翻译。
@@ -157,34 +159,36 @@
 
 **PMID 17451991** · Baez JL 2007
 > Feline cancer patients having a BCS <5 had a median survival time (MST) of 3.3 months compared to that of 16.7 months for cats with a BCS of > or = 5 (P=0.008).
-> ⚠️ 正文引用的 `2018, 2609` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `2018, 2609` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 20738770** · Reynolds CA 2010
 > Ninety-three percent of owners were willing to trade survival time for good QoL; 57% of these were willing to trade up to 6 months.
-> ⚠️ 正文引用的 `93` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> **【已取 PMC 全文核对】**
+> Ninety-three percent of owners were willing to trade survival time for good QoL; 57% of these were willing to trade up to 6 months.
+> ⚠️ 核对通过。注意：原文把数字拼写为英文单词 "Ninety-three percent"，纯数字匹配会漏掉——这是我标记算法的已知假阳性来源。
 
 **PMID 23076596** · Taylor SS 2012
-> ⚠️ 正文引用的 `0.83, 0.95, 0.98, 2013, 2021` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `0.83, 0.95, 0.98, 2013, 2021` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 26512544** · Winkel VM 2015
-> ⚠️ 正文引用的 `270, 832` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `270, 832` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 29067174** · Pope KV 2015
 > Median overall survival was 1317 days.
 > Medical records from 56 cats were evaluated.
 > Median progression-free survival was 1078 days.
-> ⚠️ 正文引用的 `76, 18.9, 2009` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `76, 18.9, 2009` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 31113336** · Dagher E 2019
-> ⚠️ 正文引用的 `2020` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `2020` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 31478220** · Rout ED 2019
 > The IGH-VDJ reaction alone only detected clonality in 50% (19/38) of these cases.
 > Using four immunoglobulin primer sets (IGH-VDJ, IGH-DJ, Kde, and IGL), clonal immunoglobulin rearrangements were detected in 87% (33/38) of the presumed B-cell neoplasms.
-> ⚠️ 正文引用的 `2024` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `2024` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 33140523** · Petrucci GN 2020
-> ⚠️ 正文引用的 `2019` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `2019` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 33660305** · Yoshikawa H 2021
 > Cats that underwent second DRT course at time of recurrence lived significantly longer than cats that received 1 RT course (either DRT or PRT [median OST 824 days (95% CI: 237-1410 days) vs 434 days (95% CI: 277-591 days); p = .028]).
@@ -192,7 +196,7 @@
 
 **PMID 34167339** · Ray M 2021
 > The '2021 AAFP Feline Senior Care Guidelines' are authored by a Task Force of experts in feline clinical medicine and serve as an update and extension of those published in 2009.
-> ⚠️ 正文引用的 `21, 259, 2024` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `21, 259, 2024` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 34374109** · Freiche V 2021
 > The Ki-67 20%- and 30%-thresholds discriminated between LGITL and LPE within both the epithelium (specificity >95%) and lamina propria (specificity >95%), respectively.
@@ -200,7 +204,10 @@
 
 **PMID 34579716** · Wang L 2021
 > ROC analysis revealed an area under the curve (AUC) of 0.98 with a sensitivity of 0.83 and a specificity of 0.95 for felines with lymphoma.
-> ⚠️ 正文引用的 `2013` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> **【已取 PMC 全文核对】**
+> ROC (receiver operating characteristic) analysis showed an AUC (area under the curve) value of 0.98 (< 0.0001) for the lymphoma group and 0.86 (< 0.001) for the solid tumor group, at 95% confidence interval.
+> At the chosen cutoff value the sensitivity was 0.83 and the specificity was 0.95 for lymphoma.
+> ⚠️ 核对通过：AUC 0.98、灵敏度 0.83、特异度 0.95 均与正文一致。
 
 **PMID 35188694** · Reczynska AI 2022
 > Negative prognostic factors included cribriform lysis (MST 121 vs. 876 days, P = 0.0009) and intracalvarial involvement (MST 100 vs. 438 days, P = 0.0007).
@@ -212,17 +219,23 @@
 > Cats with T1-T2, N0 carcinomas of the nasal planum were randomly assigned to two arms of electron irradiation: arm 1 was the standard of care (SoC) and used 10 × 4.8 Gy (90% isodose); arm 2 used 1 × 30 Gy (90% isodose) FLASH.
 
 **PMID 36052863** · Ii T 2022
-> ⚠️ 正文引用的 `85, 2024` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `85, 2024` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 36655881** · Rodriguez-Piza I 2023
 > Median PFS and OS were 909 days (range 23-1484) and 909 days (range 23-2423), respectively.
+> **【已取 PMC 全文核对】**
+> The mean duration of clinical signs before presentation was recorded in 21/23 cases and was 57.5 days (range 2-515).
+> Immunohistochemistry was available in 11 cases (48%); all were consistent with B-cell lymphoma.
+> Lymphoma grade was reviewed in 11 cases, of which nine were classified as low grade and two as intermediate grade.
+> No cases had lymphoma documented in a location other than the primary site.
+> ⚠️ ⚠️ 摘要与正文自相矛盾：摘要称 "Pretreatment with steroids was associated with longer OS (p = 0.003)"，而正文 Results 写 "Age, breed, sex, retroviral status, anatomical location, anaemia at presentation, debulking surgery and pretreatment with corticosteroids did not affect PFS or OS." 引用此点时必须说明该矛盾。
 
 **PMID 36851461** · Sampaio F 2023
 > Immunophenotyping was inconclusive in 54% RSC and 19% CB.
 
 **PMID 37768060** · Eigner DR 2023
 > The '2023 AAFP/IAAHPC Feline Hospice and Palliative Care Guidelines' are authored by a Task Force of experts in feline hospice and palliative care convened by the American Association of Feline Practitioners and the International Association for Animal Hospice and Palliative Care.
-> ⚠️ 正文引用的 `93, 2010` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `93, 2010` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 38152842** · Moore AS 2023
 > On multivariate analysis, 40 cats that achieved CR had a median survival time of 341 days (78 days for PR, 45 days for NR); PFS times were also significantly affected by lymphocyte:monocyte L:M ratio (>3.4 = 700 days vs. ≤3.4 = 126 days) and B-cell versus T-cell phenotype (220 days vs. 42 days, respectively).
@@ -231,28 +244,30 @@
 
 **PMID 38774911** · Weyrich A 2024
 > Formalin-fixed and paraffin-embedded samples from 31 feline T-cell lymphomas, 29 B-cell lymphomas, and 11 non-neoplastic controls were analyzed by PCR combined with capillary electrophoresis.
-> ⚠️ 正文引用的 `50, 87, 2019` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `50, 87, 2019` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 38943798** · Wolfesberger B 2024
 > Neoplastic lymphoid cells were immunopositive for CD3 in 93% (14/15), granzyme B in 87% (13/15), CD5 in 20% (3/15), CD8 in 13% (2/15), CD4 in 7% (1/15) and CD56 in 7% (1/15) of cases.
 > Feline small intestinal lymphoma predominantly demonstrates a T-cell immunophenotype identified by standard immunopositivity for T cells with CD3 or immunopositivity for B cells with CD20.
 > Without immunohistochemical labelling of the cytotoxic protein granzyme B, the cytotoxic status would have been missed in 46% (6/13) of the cytological and in 85% (11/13) of the histopathological slides.
-> ⚠️ 正文引用的 `2022` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `2022` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 38967102** · Mortier F 2024
 > Thorough history, physical examination, blood tests, and urinalysis were performed in 259 apparently healthy mature adult (7-10 years) and senior (>10 years) cats.
 > At baseline, 21% of apparently healthy cats were not considered healthy but were diagnosed with International Renal Interest Society (IRIS) ≥ stage 2 chronic kidney disease (CKD; 7.7%) or hyperthyroidism (4.6%), among other disorders.
-> ⚠️ 正文引用的 `2021` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> **【已取 PMC 全文核对】**
+> Median age of the 259 apparently healthy cats was 10 years (range, 7-18 years).
+> ⚠️ 核对通过：259 只表面健康猫，中位年龄 10 岁。
 
 **PMID 40119555** · Pui Yung Anna L 2025
 > Progression-free survival was 264 days (range, 6-1486 days), the disease-free interval was 812 days (range, 39-1486 days) and the median survival time for all cats was 412 days (range, 7-1772 days).
 > Complete response was achieved in 59% of the cases, and partial response was observed in 17%.
-> ⚠️ 正文引用的 `123` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `123` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 40443182** · Lai NA 2025
 > A multivariate analysis was also conducted to determine whether differences in prognostic factors between the groups may have biased outcomes.ResultsA total of 123 cats were enrolled, with 41 cats in the CMOP group and 82 cats in the CHOP group.
 > No significant differences were identified between the response rates (66% in both groups), median PFI (CMOP 69 days, CHOP 59 days) and median ST (CMOP 103 days, CHOP 80 days) of cats treated with CMOP instead of CHOP.Conclusions and relevanceCMOP is a well-tolerated and suitable substitute for CHOP for feline intermediate- to large-cell lymphoma.
-> ⚠️ 正文引用的 `412` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `412` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 
 **PMID 40591622** · Biezus G 2025
 > The median survival time following FeLV diagnosis was 30 days for the FeLV+P group.

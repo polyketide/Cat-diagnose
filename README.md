@@ -1,92 +1,170 @@
 # Cat-diagnose
 
-**A Claude Code sub-agent for evidence-based veterinary × human medical analysis, plus a cited feline-oncology knowledge base.**
+**An evidence-first sub-agent for veterinary × human medical analysis, a cited feline-oncology knowledge base, and the tooling that keeps its citations honest.**
 
-一个用于**循证医学分析的 Claude Code 子代理**（跨兽医与人医），附带一套**带文献引用的猫肿瘤知识库**。
+[English](#english) · [日本語](#日本語) · [中文](#中文)
 
-> ⚠️ **This is not medical advice.** All content is a literature-referenced aid for discussing options with a licensed veterinarian. It does not diagnose, prescribe, or replace your vet.
-> ⚠️ **本仓库不是医疗建议。** 所有内容是供你与执业兽医共同审阅的循证参考，不下诊断、不开处方、不能替代兽医。
+> ⚠️ **Not medical advice.** Everything here is literature-referenced material for discussing options with a licensed veterinarian. It does not diagnose, prescribe, or replace your vet.
+> ⚠️ **医療アドバイスではありません。** 本リポジトリの内容は、獣医師と選択肢を検討するための文献参照資料です。診断・処方・獣医師の代替にはなりません。
+> ⚠️ **不是医疗建议。** 所有内容是供你与执业兽医共同审阅的循证参考，不下诊断、不开处方、不能替代兽医。
+
+```
+.claude/agents/medical.md              # the sub-agent definition
+knowledge-base/                        # analysis-facing notes (Chinese prose, English sources)
+  ├── antineoplastic-drug-toxicity.md
+  ├── targeted-and-immunotherapy-evidence.md
+  ├── supportive-and-palliative-care.md
+  ├── feline-oncology-literature-survey.md
+  └── upper-airway-response-marker-validity.md
+guides/                                # owner-facing guides, Markdown + PDF (Chinese)
+  ├── feline-lymphoma-all-types-owner-guide.zh.{md,pdf}
+  └── feline-nasal-lymphoma-owner-guide.zh.{md,pdf}
+tools/                                 # citation-integrity and rendering scripts
+  ├── rebuild_references.py
+  ├── extract_source_excerpts.py
+  └── render_markdown.py
+```
 
 ---
 
-## What's inside / 内容
+## English
 
-```
-.claude/agents/medical.md          # 子代理定义（放进项目即可用）
-knowledge-base/
-  ├── 猫抗肿瘤药物毒性谱.md          # 8 种药 × 肝/肾/食欲/骨髓 四轴毒性矩阵
-  ├── 猫淋巴瘤_靶向与免疫治疗证据.md  # 靶向/免疫(检查点·CAR-T)证据地图 + 为什么猫落后于犬
-  ├── 猫肿瘤支持与姑息照护.md        # 增重·止吐·疼痛评估(FGS)·发烧·喂食安全·QOL 工具
-  ├── 猫肿瘤全景文献survey.md        # 8 域最新文献综述（早筛/诊断/各瘤种/放疗/靶向免疫/预后/临终关怀）
-  └── 猫上气道肿瘤_疗效指标效度与失声瞬膜动力学.md
-                                    # 哪些指标"不能"当疗效指标；喘鸣的不对称性；转运致死风险
-guides/                             # 面向猫主人的科普指南（零医学背景可读，含 PDF）
-  ├── 猫淋巴瘤_全类型通用指南.md/.pdf      # 全部解剖型；先分型再看对应章节
-  └── 猫鼻腔淋巴瘤_给主人的完整指南.md/.pdf # 鼻腔型专题
-```
+### What this is
 
-## Owner guides / 给猫主人的指南
+A Claude Code sub-agent for cross-species evidence-based analysis: given a veterinary question it goes looking for the corresponding human-medicine evidence (mechanism, pharmacology, dosing principles) and vice versa, while flagging the limits of any cross-species extrapolation.
 
-`guides/` 里两份文档是写给**没有任何医学背景的猫主**的，可以直接转发。每个术语都有大白话注释，每个数字都标了 PMID/DOI，**PDF 可直接下载打印**。
+Its value is not that it "knows more medicine." It is a set of disciplines that stop it from making things up.
 
-它们和知识库的区别在于**写作立场**：知识库服务于分析，指南服务于"主人在诊室里能问出更好的问题"。所以每一份都包含：
+### The citation discipline
 
-- **哪些数字不适用于你家的猫**（例如：苯丁酸氮芥的 1317 天只属于消化道小细胞型，套到其他型是严重的错误外推）
-- **哪些流传很广的说法其实没有证据**（例如：雾化缓解鼻塞、"厌食 3 天必脂肪肝"、"淋巴瘤占猫全部肿瘤 1/3"）
-- **文献里真实存在的空白与矛盾**，明确列出而不抹平（例如：确诊前用类固醇，两项研究结论方向相反）
-- **该问兽医的问题清单**，每条附"为什么这个问题重要"
+This is the part worth stealing even if you never use the agent.
 
-> 通用版的核心结论是：**"猫淋巴瘤的预后"这句话本身几乎没有意义**——按部位与细胞类型分开看，中位生存期实测跨度约 60 倍（21 天 到 1317 天）。所以它的第一章是分型分诊，而不是概述。
+**Literature is recorded in its original language, verbatim — the content, not just the title.**
 
-## The agent / 关于这个子代理
+A knowledge base written in one language about literature written in another has a silent failure mode: the figures survive translation, but *what the authors actually said* exists only as the author's rendering. That rendering cannot be quoted, cannot be checked, and drift between it and the source is invisible — there is nothing to compare against.
 
-`medical.md` 是一个**跨物种循证分析**代理：遇到兽医问题会主动去找对应的人医证据（机制、药理、剂量原则），反之亦然，并强制标注跨物种外推的局限。
+So every document here carries a **source excerpts** section: for each cited paper, the verbatim sentences that carry the load-bearing figures, untranslated. The prose is interpretation; the excerpt is evidence.
 
-它的特点不在"更懂医学"，而在**一套防止自己胡说的纪律**：
+The tooling enforces it:
 
-- **工具优先**：涉及数值、剂量、发生率、文献结论时，强制调用 PubMed / Consensus / ClinicalTrials / ChEMBL 检索，**绝不凭记忆或编造数字**。
-- **标注可信度**：每条结论区分【已查证】/【推断】/【外推】/【未知】。
-- **⭐ 前提追溯纪律**：这是它最核心的机制，来自 4 次真实的推理失败——每一步都要自问"我依赖的这个前提，是**对方给的**还是**我自己填的**？"，强制澄清解剖学歧义词，统计"为维护框架而绕着解释"的次数（绕得越多越该怀疑框架），并禁止把"疑似"在复述中悄悄升级成"确诊"。
-- **安全红线**：不开处方；主动核对种属特异性毒性（如对乙酰氨基酚对猫致命、恩诺沙星在猫的剂量上限、NSAID 与类固醇叠加等）；急症识别优先于诊断完美。
+| Script | What it does |
+|---|---|
+| `rebuild_references.py` | Regenerates each reference entry from the PubMed record keyed by PMID, rather than editing it. Title, ISO journal abbreviation, volume/issue/pages, DOI verbatim. Author commentary is demoted to a trailing note so it can never be mistaken for part of the title. |
+| `extract_source_excerpts.py` | Pulls the source sentences carrying each cited figure, and **reports figures the document cites that do not appear in the source** — those may come from full text the abstract omits, or may be wrong, but either way must not pass as verified. |
+| `render_markdown.py` | Standard-library Markdown → print-ready HTML with GitHub-compatible anchors, for PDF via headless Chrome. No toolchain to install. |
 
-### Usage / 用法
+**What this actually caught**, on a corpus of ~150 references:
 
-```bash
-git clone https://github.com/polyketide/Cat-diagnose.git
-# 把 .claude/agents/medical.md 复制到你自己项目的 .claude/agents/ 下
-```
+- A **PMID pointing at an unrelated dental-informatics paper**, used as the source for a rescue-chemotherapy protocol. Every figure attached to it was correct; only the identifier was wrong. Nothing short of returning to the source would have surfaced this.
+- A **percentage attributed to the wrong clinical sign** — a cough frequency recorded as a dysphonia frequency, shifting a reported range by half.
+- A **response-rate range that did not exist in the cited paper at all**.
+- Wrong years, wrong author initials, a wrong first author, and truncated titles throughout.
+- One paper whose **abstract contradicts its own results section** on whether a covariate affected survival.
 
-然后在 Claude Code 里让它接手医疗类问题即可（解读检查报告、鉴别诊断、用药安全核对、疗法证据评估等）。
+The point is not that these were careless mistakes. It is that reading carefully does not catch them, and returning to the source does.
 
-推荐配合 [bio-research 类 MCP 工具](https://docs.claude.com/en/docs/claude-code/mcp)（PubMed / Consensus / ClinicalTrials / ChEMBL）使用——代理的检索纪律依赖这些工具。
+### Reusing the agent
 
-## The knowledge base / 关于知识库
+Drop `.claude/agents/medical.md` into any project's `.claude/agents/`. It expects the [bio-research MCP servers](https://github.com/anthropics/claude-code) (PubMed, ClinicalTrials, ChEMBL, Consensus) and loads them on demand.
 
-由多智能体并行文献检索 + 对抗式核查生成，**每条结论尽量附 PMID/DOI**，并明确区分「已确立的 solid 数据」与「新兴/未证实/仅犬数据/临床前」。涵盖：
-
-- 早期发现与筛查（血清 TK1、老年猫结构化筛查；cfDNA 液体活检仍为概念验证）
-- 诊断（2023 ACVIM 共识、多靶点 PARR、克隆性阳性 ≠ 肿瘤、细胞块优于涂片做 ICC）
-- 淋巴瘤（低级别 vs 高级别策略、各解剖型预后、挽救方案）
-- 其他实体瘤（乳腺癌、口腔鳞癌、注射部位肉瘤、肥大细胞瘤）
-- 放疗（SBRT/再程放疗、急性 vs 晚期毒性、骨坏死风险）
-- 靶向与免疫（托拉尼布是猫唯一有真实临床数据的靶向药；检查点/CAR-T 在猫仍无临床试验）
-- 预后因子（体况 BCS、贫血、FeLV 进展型 vs 消退型、达 CR 的分量）
-- 临终关怀（2023 AAFP/IAAHPC 猫专属指南、FGS 疼痛量表、安乐死决策研究）
-
-### Caveats / 使用须知
-
-- 内容以**中文**撰写，文献引用为英文。
-- 部分机制/发生率来自**人或犬的数据外推**，正文均已标注——请勿当作猫的实测值。
-- 文献截至 **2026-07**；医学进展很快，重要决策请核对最新文献并咨询兽医。
-- 个别标注"经 Consensus 检索"的条目 DOI 未逐条复核，已在文中注明。
-
-## Origin / 由来
-
-这套东西诞生于一次真实的、危重的猫科头颈部肿瘤病例照护过程。仓库已移除全部可识别的私人与第三方信息（患猫、饲主、诊所、兽医姓名、病理编号、费用等），仅保留可复用的方法论与文献证据。
-
-代理里那套"前提追溯纪律"，是在那次照护中被**一次次纠正**换来的——最有价值的部分或许不是它查到了什么，而是它学会了**怎么不骗自己**。
+The agent's own rules are in that file. In brief: search rather than recall for anything numeric; label every claim as verified / inferred / extrapolated / unknown; trace which premises came from the user versus which it filled in itself; never prescribe; treat emergency recognition as outranking diagnostic completeness.
 
 ---
 
-*Contributions and corrections welcome — especially citation fixes.*
-*欢迎指正，尤其是文献引用方面的错误。*
+## 日本語
+
+### これは何か
+
+獣医学 × 人医学を横断してエビデンスを検証する Claude Code サブエージェントと、出典付きの猫腫瘍学ナレッジベース、そして引用の正確性を担保するツール群です。
+
+獣医学の問いに対しては対応する人医学のエビデンス（機序・薬理・用量原則）を探しに行き、逆方向も同様に行います。その際、種を跨いだ外挿の限界を必ず明示します。
+
+このエージェントの価値は「医学に詳しいこと」ではなく、**自らの捏造を防ぐ規律**にあります。
+
+### 引用の規律
+
+エージェントを使わない場合でも、この部分だけは持ち帰る価値があります。
+
+**文献は原語のまま、逐語的に記録する — タイトルだけでなく「内容」を。**
+
+ある言語で書かれたナレッジベースが別言語の文献を扱うとき、静かな失敗様式が生じます。数値は翻訳を生き延びますが、**著者が実際に何と述べたか**は執筆者の訳文としてしか残りません。訳文は引用できず、検証もできず、原文との乖離は不可視です（比較対象が存在しないため）。
+
+そこで本リポジトリの全文書には **原文抜粋（source excerpts）** の節があります。引用した各論文について、結論を担う文を未翻訳のまま逐語収録しています。本文の記述は解釈であり、抜粋が証拠です。
+
+ツールがこれを機械的に強制します：
+
+| スクリプト | 機能 |
+|---|---|
+| `rebuild_references.py` | 参考文献項目を編集するのではなく、PMID を鍵に PubMed レコードから**再生成**。タイトル・ISO 誌名略記・巻号頁・DOI を逐語採録。執筆者の注記は末尾に降格し、タイトルの一部と誤認されない位置に置く。 |
+| `extract_source_excerpts.py` | 引用された各数値を担う原文の文を抽出し、さらに**本文が引用しているが原文に存在しない数値を報告**する。全文にのみ記載がある場合も、誤りである場合もあるが、いずれにせよ「検証済み」として通してはならない。 |
+| `render_markdown.py` | 標準ライブラリのみで Markdown → 印刷用 HTML（GitHub 互換アンカー付き）。headless Chrome で PDF 化。追加インストール不要。 |
+
+**約 150 件の参考文献に適用して実際に検出されたもの：**
+
+- 救援化学療法プロトコルの出典として記載されていた **PMID が、無関係な歯科情報学の論文を指していた**。付随する数値はすべて正しく、識別子のみが誤り。原文に戻る以外に発見手段はなかった。
+- **臨床徴候の取り違え** — 咳嗽の頻度を発声障害の頻度として記録しており、報告範囲が半分ずれていた。
+- **引用先論文に存在しない奏効率の範囲**。
+- 発行年・著者イニシャル・筆頭著者の誤り、およびタイトルの切り詰めが多数。
+- **抄録と結果セクションが互いに矛盾している**論文が 1 件（ある共変量が生存に影響したか否かについて）。
+
+これらが不注意による誤りだという話ではありません。**注意深く読んでも発見できず、原文に戻れば発見できる**という点が要点です。
+
+### エージェントの再利用
+
+`.claude/agents/medical.md` を任意のプロジェクトの `.claude/agents/` に置くだけで動作します。bio-research 系 MCP サーバ（PubMed / ClinicalTrials / ChEMBL / Consensus）を必要時に読み込みます。
+
+規律の詳細は同ファイル内に記載。要約すると：数値に関わる事項は記憶ではなく検索で確認する／全主張を【検証済】【推論】【外挿】【不明】に分類する／どの前提が利用者由来でどれが自らの補完かを追跡する／処方は行わない／診断の完全性より救急認識を優先する。
+
+---
+
+## 中文
+
+### 这是什么
+
+一个**跨兽医与人医的循证分析** Claude Code 子代理，附带一套带原文出处的猫肿瘤知识库，以及保证引用可核对的工具。
+
+遇到兽医问题会主动去找对应的人医证据（机制、药理、剂量原则），反之亦然，并强制标注跨物种外推的局限。
+
+它的特点不在"更懂医学"，而在**一套防止自己胡说的纪律**。
+
+### 引用纪律
+
+即使你不用这个 agent，这部分也值得拿走。
+
+**文献按原语言逐字记录——记的是「内容」，不只是标题。**
+
+用一种语言写、引用另一种语言文献的知识库有一个静默的失败模式：数字能活过翻译，但**作者到底说了什么**只剩下转述。转述无法被引用、无法被核对，而它与原文之间的漂移是**不可见**的——因为没有可比对的对象。
+
+所以本仓库每份文档都带 **原文摘录（source excerpts）** 一节：对每篇引用的论文，逐字收录承载结论的句子，不翻译。正文的中文是**解读**，摘录才是**证据**。
+
+工具把这条纪律机械化：
+
+| 脚本 | 作用 |
+|---|---|
+| `rebuild_references.py` | 参考文献条目不是"修改"而是按 PMID 从 PubMed 记录**重建**。标题、ISO 期刊缩写、卷期页、DOI 逐字采录。作者注解降级到末尾，永远不会被误认为标题的一部分。 |
+| `extract_source_excerpts.py` | 抽取承载每个引用数字的原文句子，并**报告正文引用了但原文中不存在的数字**——它们可能出自摘要不含的全文，也可能有误，但无论如何都不该以"已核实"的面目通过。 |
+| `render_markdown.py` | 纯标准库 Markdown → 印刷级 HTML（GitHub 兼容锚点），配 headless Chrome 出 PDF。零依赖安装。 |
+
+**在约 150 条参考文献上实际抓到的：**
+
+- 一个**指向无关牙科信息学论文的 PMID**，却被当作救援化疗方案的出处。挂在它名下的数据**全部正确**，只有编号错了。不回原文永远发现不了。
+- 一处**临床征象张冠李戴**——把咳嗽的发生率记成了发声障碍的发生率，导致报告区间整体偏移一半。
+- 一个**在被引论文中根本不存在**的应答率区间。
+- 若干错误的年份、作者缩写、第一作者，以及大量被截短的标题。
+- 一篇论文的**摘要与其自身结果部分互相矛盾**（关于某协变量是否影响生存）。
+
+要点不是"这些是粗心造成的错误"，而是：**认真读发现不了，回原文才能发现。**
+
+### 复用这个 agent
+
+把 `.claude/agents/medical.md` 放进任意项目的 `.claude/agents/` 即可。它按需加载 bio-research 系列 MCP 工具（PubMed / ClinicalTrials / ChEMBL / Consensus）。
+
+具体纪律写在该文件里。简述：涉及数值一律检索而非凭记忆；每条结论标注【已查证】【推断】【外推】【未知】；追溯哪些前提来自用户、哪些是自己填的；不开处方；急症识别优先于诊断完美。
+
+---
+
+## License
+
+MIT. See [LICENSE](LICENSE).
+
+Literature quoted in this repository belongs to its respective publishers; excerpts are limited to the sentences needed to verify a specific claim, each attributed with PMID and DOI.

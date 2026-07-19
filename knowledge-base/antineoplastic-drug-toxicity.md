@@ -61,6 +61,8 @@
 
 ---
 
+---
+
 ## 原文摘录（source excerpts）
 
 > 下列为**文献原文句子，逐字摘录**，未经翻译。
@@ -71,5 +73,5 @@
 > The most common adverse event was hyperammonemia, which occurred in 10 of 12 cases where we could compare plasma ammonia concentrations before and after the first dose of L-Asp.
 > This study included 43 cats.
 > Plasma phosphate concentrations were also significantly increased (P<0.001) within 24 hr after the first dose.
-> ⚠️ 正文引用的 `197, 1996, 2016, 8947875, 26834270` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> ⚠️ 正文引用的 `197, 1996, 2016, 8947875, 26834270` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
 

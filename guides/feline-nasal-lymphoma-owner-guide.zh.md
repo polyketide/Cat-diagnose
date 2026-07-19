@@ -805,7 +805,9 @@
 
 ⚠️ **注意**：我**没有**找到任何专门针对**猫鼻腔淋巴瘤**的学会指南或共识声明。如果看到有人引用"学会指南说……"，请要求给出具体文件。另外，**建议引用上面的原始文献，而不是科普网页转述的数字**。
 
----## 附录 C · 我明确查不到的事
+---
+
+## 附录 C · 我明确查不到的事
 
 **以下是文献中真实的空白。任何人给你一个填补这些空白的数字，那都是编的（包括我，如果我给了，那就是我错了）。**
 
@@ -833,6 +835,8 @@
 > 任何具体的方案、剂量、时机，都必须由能亲手检查这只猫的兽医决定。
 >
 > 祝好运。 🐾
+
+---
 
 ---
 
@@ -893,7 +897,9 @@
 > Medical records from 56 cats were evaluated.
 
 **PMID 30506924** · Poole M 2018
-> ⚠️ 正文引用的 `177` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。
+> **【已取 PMC 全文核对】**
+> Safety population Per Protocol population Mirtazapine (n = 115) Placebo (n = 115) All (n = 230) Mirtazapine (n = 83) Placebo (n = 94) All (n = 177).
+> ⚠️ 核对通过：n=177 为符合方案人群（安全性人群为 230）。引用时宜写明是哪一个人群。
 
 **PMID 31631737** · Ferguson S 2019
 > Records from the laboratory were searched for feline submissions received between 31 May 2006 and 31 October 2013.
