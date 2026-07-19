@@ -1,4 +1,4 @@
-# Cat-diagnose
+# catmed
 
 **An evidence-first sub-agent for veterinary × human medical analysis, a cited feline-oncology knowledge base, and the tooling that keeps its citations honest.**
 
@@ -10,7 +10,7 @@
 
 ```
 .claude/agents/medical.md              # the sub-agent definition
-knowledge-base/                        # analysis-facing notes (Chinese prose, English sources)
+knowledge-base/                        # analysis-facing notes (English, with verbatim source excerpts)
   ├── antineoplastic-drug-toxicity.md
   ├── targeted-and-immunotherapy-evidence.md
   ├── supportive-and-palliative-care.md
@@ -135,7 +135,7 @@ The agent's own rules are in that file. In brief: search rather than recall for 
 
 用一种语言写、引用另一种语言文献的知识库有一个静默的失败模式：数字能活过翻译，但**作者到底说了什么**只剩下转述。转述无法被引用、无法被核对，而它与原文之间的漂移是**不可见**的——因为没有可比对的对象。
 
-所以本仓库每份文档都带 **原文摘录（source excerpts）** 一节：对每篇引用的论文，逐字收录承载结论的句子，不翻译。正文的中文是**解读**，摘录才是**证据**。
+所以本仓库每份文档都带 **原文摘录（source excerpts）** 一节：对每篇引用的论文，逐字收录承载结论的句子，不翻译。正文是**解读**，摘录才是**证据**。
 
 工具把这条纪律机械化：
 
