@@ -30,7 +30,32 @@ And it names the consequence without hedging: **"This unfortunately results in s
 
 **⭐ The paper's own prescription includes the thing this project is.** Among its stated aims is **"the provision of easily accessible tools that permit clinicians to incorporate EBVM into their daily practice."** That is an independent statement of need, published by the field's own association, not a rationale constructed after the fact by this repository.
 
-⚠️ **Scope limit, stated because it is easy to overclaim here.** Block 2024 is a review and position paper, not a study. Its full text reports figures on trial bias, industry sponsorship and curriculum coverage that are **not in the abstract and were not verified verbatim** for this file — they are therefore not cited here. If those figures are wanted, retrieve the full text and check them before use.
+### 2.1 What the full text adds — with attribution corrected
+
+**Read 2026-07-20 from the publisher PDF.** The figures below were previously excluded from this file as unverified; they are now quoted from the source. One correction matters more than the additions.
+
+⚠️ **The 62% bad-trials figure is human medicine, not veterinary.** It comes from a 2022 analysis of 96 reviews by over 500 reviewers across 49 Cochrane Review Groups covering 1659 trials in 84 countries: **"Of 1640 trials providing risk of bias information, 1013 (62%) were high risk of bias (bad), 494 (30%) unclear and 133 (8%) low risk of bias."** Block cites it as context for a shared problem. An earlier summary of this paper elsewhere in this project treated it as a veterinary figure — it is not, and the distinction is exactly the kind this repository exists to preserve. Its conclusion is worth quoting whole: **"Most randomised trials are bad and most trial participants will be in one. The research community has tolerated this for decades."**
+
+**Veterinary-specific findings, correctly attributed:**
+
+- **Funding bias**: a 2017 study found **"veterinary RCTs sponsored by the pharmaceutical industry were statistically more likely to report positive outcomes than unsponsored studies."**
+- **Reporting quality**: **"none of 212 RCT abstracts fulfilled CONSORT (Consolidated Standards of Reporting Trails) recommendations for minimum abstract information."** Not a majority failing — none.
+- **Evidence grade**: three recent systematic reviews (tramadol analgesia, vegan diets for dogs, cannabidiol for canine osteoarthritis) **"all were found to have GRADE ... ratings of 'low' or 'very low'"**.
+- **Consensus statements say so themselves**: they **"frequently note a dearth of quality evidence limiting the authors' ability to make definitive recommendations"**, with comments such as **"most recommendations by the panel were supported by a moderate or low level of evidence"** and **"the 'strength of our recommendations based on the literature are weak.'"**
+- **Retractions**: the veterinary rate rose **"from 0.03/1000 to 1.07/1000 over the period 1993 to 2019-an over 35-fold increase."**
+- **Funding scale**: **"Unlike human medical research in the United States which is supported by over 100 billion dollars annually, veterinary research receives only a tiny fraction of this amount. Many animal research projects are funded only if the results are anticipated to improve human, as opposed to animal health."**
+
+### 2.2 The most useful passage is a confession
+
+Block is a specialist writing about his own practice, and the paper's central admission is first-person:
+
+> **"I frequently found myself glossing over the statistics information in the materials and methods sections of veterinary journal articles, believing I had no way of knowing whether the authors appropriately utilized the Kruskal-Wallis test or Bonferroni correction. Until getting more involved in the EBVMA, I simply assumed that any paper published in a peer-reviewed journal was, by definition, free of design, execution, and interpretation errors, as there was no chance that reviewers and editors would allow a flawed manuscript to get past their screening processes."**
+
+> **⭐ This is the gap stated more precisely than any survey states it.** Not ignorance, not indifference — a trained specialist skipping the methods section because he had no way to evaluate it, and defaulting to the assumption that peer review had already done so. He names that assumption as incorrect.
+>
+> **It also defines the boundary of what a tool like this can honestly claim.** Reading the methods *for* someone does not give them the competence to judge it; at best it surfaces what to ask. And this project inherits the same limitation from the other side: it can report that a review carries a GRADE rating of "very low", but it cannot make the underlying evidence better.
+
+⚠️ **Block 2024 remains a perspective piece**, not a study — the figures above are ones it cites, and each carries the design of its own source. Where this file quotes a figure, it quotes Block quoting someone else.
 
 ---
 
@@ -108,7 +133,20 @@ The paper states the risk plainly: owners may **"misinterpret online information
 > This unfortunately results in suboptimal care for our patients and delayed medical advancements for our profession.
 > As part of the 20th anniversary of the founding of the Evidence-Based Veterinary Medicine Association (EBVMA), we are refocusing our efforts to highlight the need for dedicated teaching of EBVM at the university level, for rigorous adherence to established research reporting guidelines, for expansion of EBVM infrastructure, and for the provision of easily accessible tools that permit clinicians to incorporate EBVM into their daily practice.
 > Ultimately, EBVM is not an end unto itself, but rather a means to improve the quality of care we provide our patients.
-> ⚠️ Review and position paper, not a study. Its full text contains further figures (trial risk of bias, industry sponsorship, curriculum coverage) that were **not verified verbatim** and are deliberately absent from the body above.
+> ⚠️ Review and position paper, not a study.
+> **【Publisher full text retrieved and checked 2026-07-20 — source: publisher PDF】**
+> Of 1640 trials providing risk of bias information, 1013 (62%) were high risk of bias (bad), 494 (30%) unclear and 133 (8%) low risk of bias.
+> Most randomised trials are bad and most trial participants will be in one. The research community has tolerated this for decades.
+> A 2017 study demonstrating funding bias with veterinary RCTs sponsored by the pharmaceutical industry were statistically more likely to report positive outcomes than unsponsored studies.
+> Another study found none of 212 RCT abstracts fulfilled CONSORT (Consolidated Standards of Reporting Trails) recommendations for minimum abstract information.
+> Even our valuable ACVIM consensus statements frequently note a dearth of quality evidence limiting the authors' ability to make definitive recommendations.
+> the rate of veterinary article retractions increased from 0.03/1000 to 1.07/1000 over the period 1993 to 2019-an over 35-fold increase.
+> Unlike human medical research in the United States which is supported by over 100 billion dollars annually, veterinary research receives only a tiny fraction of this amount.
+> Many animal research projects are funded only if the results are anticipated to improve human, as opposed to animal health.
+> I frequently found myself glossing over the statistics information in the materials and methods sections of veterinary journal articles, believing I had no way of knowing whether the authors appropriately utilized the Kruskal-Wallis test or Bonferroni correction.
+> Until getting more involved in the EBVMA, I simply assumed that any paper published in a peer-reviewed journal was, by definition, free of design, execution, and interpretation errors, as there was no chance that reviewers and editors would allow a flawed manuscript to get past their screening processes.
+> Studies have consistently shown that the most common refrain from veterinarians limiting their ability to stay up to date on relevant literature is lack of time.
+> ⚠️ ATTRIBUTION: the 62% / 1640-trial figure is from a 2022 analysis of Cochrane reviews — **human medicine**, cited by Block as shared context. The funding-bias, CONSORT, GRADE, retraction and funding-scale figures are veterinary. Do not merge the two.
 
 **PMID 38966565** · Springer S 2024
 > Approximately one in three owners reported that they never used internet resources prior to (31.7%) or after (37.0%) a consultation with their veterinarian.

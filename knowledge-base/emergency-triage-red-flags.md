@@ -108,7 +108,8 @@ A systematic review of 27 studies of digital symptom checkers and urgent-care tr
 > **This contradicts the premise the Triage section was built on.** That section states that the primary harm of a triage tool is delay. In human medicine the measured tendency runs the other way — algorithmic triage sends *more* people to care than clinicians would, not fewer. A design tuned exclusively against delay is defending the flank that is not under attack.
 
 **Why this matters more in cats than in humans, and cuts both ways:**
-- Over-triage in human medicine costs money and clinic capacity. In cats it can cost more than that — **transport itself is a lethal risk item for a compromised patient**, documented in this knowledge base: a dog with laryngeal obstruction reached 42.5 °C and severe cyanosis from *the stress of transport plus the physical examination alone* (see `upper-airway-response-marker-validity.md` §4.3). For a cat with marginal airway reserve, an unnecessary trip is not a neutral cost.
+- Over-triage in human medicine costs money and clinic capacity. In cats it **may** cost more — a dog with laryngeal obstruction reached 42.5 °C and severe cyanosis from *the stress of transport plus the physical examination alone* (`upper-airway-response-marker-validity.md` §4.3).
+  ⚠️ **Mechanism documented, magnitude not established — corrected 2026-07-20 on reading the full text.** Population data from the same literature record veterinary or groomer handling as a real trigger of heat-related illness (31 events, 3 fatalities, 9.7%), but with a fatality **odds ratio of 1.3 (95% CI 0.37–4.51, p = 0.680)** — not significantly above exertional cases, and the interval does not exclude no effect. An earlier draft of this section asserted transport was "a lethal risk item" on the strength of one canine case report. It is a plausible cost to weigh, not a quantified one to cite, and it is dog data with no feline equivalent found.
 - ⚠️ **But the counter-argument is real and unresolved**: veterinary care is usually paid out of pocket and the patient cannot report symptoms, so owners' baseline may already lean toward waiting rather than over-attending. Whether the human-medicine direction of error transfers to owners and cats is **untested** — see §3.4.
 
 ### 3.2 Triage accuracy is consistently better than diagnostic accuracy
@@ -137,7 +138,7 @@ Every study above is **human medicine**. No veterinary equivalent was found: sea
 - ~~Permethrin toxicosis in cats: a case series.~~ **Partly closed** — a 9-cat treatment series now supports the clinical picture (Ricci 2022, §2). Incidence data remain absent.
 - Whether owner-facing triage tools change time-to-presentation **in veterinary settings**. Searched 2026-07-20 — see §3. Human-medicine evidence exists and partly contradicts this project's assumptions; **no veterinary outcome study was found**, so the core question stands open.
 - Owner *compliance* with triage advice, in any species. This is the step every claimed benefit and every feared harm passes through, and Chambers 2019 found the human evidence on it "very limited".
-- Whether over-triage in cats carries measurable harm through transport stress specifically — the mechanism is documented in a single canine case (`upper-airway-response-marker-validity.md` §4.3) and nowhere quantified.
+- Whether over-triage in cats carries measurable harm through transport stress specifically. **Partly answered 2026-07-20 and not in this project's favour**: in canine population data the fatality odds ratio for veterinary/groomer handling was 1.3 (95% CI 0.37–4.51) — real as a trigger, unproven as an elevated risk. No feline data exist.
 
 ---
 

@@ -135,8 +135,14 @@ SAVSNET primary-care surveillance in the UK, 2013–2018, 174 heat-related illne
 - **Seasonality: cases occurred May–September, with 12/16 (75.0%) concentrated in June and July** (6 each).
 
 ### 4.2 Canine quantitative data (counterintuitive)
-- Among exertional HRI cases, **372/551 (67.5%) followed nothing more than "a walk"**, with high-intensity activity accounting for only 17.6% (PMID 32751913) → **low-intensity activity is sufficient.**
+- Among exertional HRI cases, **372/551 (67.5%) followed nothing more than "a walk"**, with high-intensity activity accounting for only 17.6% (PMID 32751913) → **low-intensity activity is sufficient.** ✅ Verified against the publisher full text 2026-07-20.
   ⚠️ The category "a walk" has no equivalent exposure in cats, so **this proportional distribution is not transferable to them.**
+
+**⭐ From the same paper's full text — a finding that weakens an argument made elsewhere in this project.** Among triggers for heat-related illness, **"undergoing treatment (vet/groomer)" accounted for 31 events (5.2% of known triggers), with 3 fatalities (9.7%)** — but the odds ratio for fatality was **1.3 (95% CI 0.37–4.51, p = 0.680)**, i.e. **not significantly different** from exertional HRI. For comparison, building confinement was significant at OR 6.06 (2.13–17.22, p = 0.001).
+
+> **What this does and does not support.** It confirms that being handled at a veterinary practice or groomer is a *recorded trigger* of heat-related illness, and that such events do kill. It does **not** support the stronger claim that attending a clinic carries a distinctively elevated fatality risk — in this dataset it did not, and the confidence interval is wide enough to include no effect.
+>
+> ⚠️ **This project has used "transport is itself a lethal risk" to argue that over-triage has a real cost** (`docs/LITERATURE-PIPELINE-SOP.md`, `emergency-triage-red-flags.md` §3). That argument rested on a single canine case reaching 42.5 °C. The population data here are more equivocal, and the honest position is now: the mechanism is real and documented, the magnitude is not established, and it should not be quoted as though it were. **This is a dog dataset besides; no feline equivalent has been found.**
 - On the days of HRI events, the **median ambient temperature was only 16.9 °C** (PMID 35622759) → **heat injury does not require extreme heat.**
   ⚠️ Note on wording: the abstract states "ambient temperature". An earlier draft of this document described this figure as WBGT (wet bulb globe temperature, a composite heat-stress index of air temperature, radiant heat, humidity and wind speed, and a daily peak rather than a mean); **the abstract does not support that characterisation** — treat it as ambient temperature unless the full text says otherwise.
 
@@ -341,7 +347,11 @@ Of these, **van den Broek 1987 carries two key assertions — that miosis is the
 > Specificity of laryngeal stridor for laryngeal collapse was 100% (pre-exercise and postexercise).
 
 **PMID 32751913** ·  
-> ⚠️ The figures `372, 551, 17.6, 67.5` cited in the body **do not appear in the abstract text** — they may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
+> **【Publisher full text retrieved and checked 2026-07-20 — source: publisher PDF】**
+> Of the remaining 551 events, 372 (67.5%) occurred after walking, 97 (17.6%) after high-intensity activities such as running or cycling, 76 (13.8%) after periods of play and 6 (1.1%) of those events occurred after canine competitions.
+> Of the events with a known trigger, building confinement (OR 6.06, 95% CI 2.13-17.22) had greater odds for HRI associated fatality when compared to exertional HRI only.
+> ⚠️ Table 2 of the same paper records "Undergoing treatment (vet/groomer)" as 31 events (5.2% of known triggers), 3 fatalities (9.7%), OR 1.3, 95% CI 0.37-4.51, p = 0.680 — tabulated data, not a prose sentence. Cited in the body as a limit on this project's own transport-risk argument.
+> ⚠️ Previously flagged: the figures `372, 551, 17.6, 67.5` did not appear in the abstract — they may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
 
 **PMID 35342739** ·  
 > Cases were defined as animals presented for consultation with strong evidence of current, or recent heat induced illness during the study period (2013–2018).
