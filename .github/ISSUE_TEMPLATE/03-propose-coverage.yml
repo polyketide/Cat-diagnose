@@ -1,0 +1,49 @@
+name: "③ 建议增加覆盖 / Propose new coverage"
+description: "某个病应该被覆盖但没有 · A condition that should be covered and is not"
+title: "[coverage] "
+labels: ["coverage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        覆盖面目前由一只猫的病史塑造（肿瘤为主），正在按**猫实际的就诊与死因分布**重排——
+        依据在 `knowledge-base/feline-disease-frequency.md`。
+
+        ⚠️ **先读一条选题规则**（`docs/LITERATURE-PIPELINE-SOP.md` §7a）：本项目只处理**整合缺口**，
+        不处理**数据缺口**。「没人做过这个研究」这里补不了——再多检索也创造不出证据。
+        「证据存在，但分散在两个没人一起读的领域」才是能补的。
+
+        Coverage was shaped by one cat's illness and is being re-ordered by what cats actually
+        present with. This project takes **integration gaps**, not **data gaps**: "nobody has run
+        that study" cannot be fixed by retrieval.
+  - type: input
+    id: condition
+    attributes:
+      label: "什么病 · Which condition"
+      placeholder: "糖尿病 / 牙周病 / FLUTD / FIP"
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: "为什么值得写 · Why it is worth writing"
+      description: |
+        最有说服力的理由是：**两个专科各握一半，没人把它们放在一起读。**
+        （已有的最好例子：甲亢和肾病互相掩盖，分别属于内分泌和肾脏两个门诊。）
+      placeholder: |
+        例：糖尿病猫里约四分之一实际是垂体生长激素瘤，而多数不表现典型外貌——
+        内分泌文献里有，糖尿病管理常规里没人查。
+    validations:
+      required: true
+  - type: checkboxes
+    id: gap
+    attributes:
+      label: "这属于哪种缺口 · Which kind of gap"
+      options:
+        - label: "整合缺口：证据存在，但没人把两边放在一起 · Integration gap"
+        - label: "数据缺口：这个研究根本没人做过 · Data gap（本项目补不了，但值得记录为已知空白）"
+  - type: textarea
+    id: starting
+    attributes:
+      label: "起点文献（可选）· Starting references (optional)"
+      placeholder: "PMID / DOI，几篇就够"

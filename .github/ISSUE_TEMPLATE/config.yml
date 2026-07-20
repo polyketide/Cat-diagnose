@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: "先读贡献指南 · Read CONTRIBUTING first"
+    url: https://github.com/polyketide/catmed/blob/main/CONTRIBUTING.md
+    about: "逐字引用契约、本地检查怎么跑、什么样的贡献会被拒绝。"
+  - name: "在线阅读资料 · Read the material online"
+    url: https://polyketide.github.io/catmed/
+    about: "主人指南与知识库，不需要 git。"
+  - name: "🚨 你的猫现在有急症 · Your cat is in an emergency right now"
+    url: https://polyketide.github.io/catmed/
+    about: "请立刻联系兽医，不要在这里开 issue。GitHub issue 没有人 24 小时值守。"

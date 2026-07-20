@@ -1,0 +1,73 @@
+name: "① 质疑一个数字 / Challenge a figure"
+description: "某个数字错了、被错误归属、或被过度解读 · A figure is wrong, misattributed, or overstated"
+title: "[figure] "
+labels: ["evidence", "needs-verification"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **这是本仓库最欢迎的一类 issue。** 十二处归属错位、一次把三个真实发现当作无据删除的「核查」——
+        这些都是被人（或被检查器）找出来的，不是被作者自己发现的。
+
+        **This is the most valuable issue you can file here.** Twelve misattributed figures and one
+        verification pass that *deleted three real findings* were all caught by checking, not by
+        the author noticing.
+
+        写中文、日本語或英文都可以 · Chinese, Japanese or English are all fine.
+
+  - type: input
+    id: location
+    attributes:
+      label: "在哪 · Where"
+      description: "文件与行号，或直接粘贴那句话 · File and line, or just paste the sentence"
+      placeholder: "knowledge-base/chronic-kidney-disease.md:42 —— 或直接粘贴原句"
+    validations:
+      required: true
+
+  - type: input
+    id: figure
+    attributes:
+      label: "哪个数字 · Which figure"
+      placeholder: "388 days / 58.6% / HR 0.55"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: "问题类型 · What kind of problem"
+      options:
+        - "数字本身错了 · The figure is simply wrong"
+        - "挂在了错误的论文上 · Attributed to the wrong paper"
+        - "数字对，但正文的解读超出了原文 · Figure correct, prose overstates it"
+        - "缺少必要的限定（人群/设计/物种）· Missing a limitation that changes its meaning"
+        - "这个数字应该有出处但没有 · Uncited"
+        - "其他 · Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: "你的依据 · Your evidence"
+      description: |
+        **如果你手上有原文，请逐字粘贴那一句，并给出 PMID 或 DOI。**
+        逐字很重要——本仓库的全部纪律就建立在「原句 vs 转述」的区别上。
+
+        If you have the source, paste the sentence **verbatim** with its PMID or DOI. Verbatim
+        matters: the entire discipline here rests on the difference between a quoted sentence and
+        a paraphrase of one.
+      placeholder: |
+        PMID 31023949 原文：“Median survival time following diagnosis was 388 days (IQR 88-1042 days).”
+        我认为正文写成「大约一年」丢掉了四分位距，而跨度才是重点。
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: sourced
+    attributes:
+      label: "证据性质 · Nature of your evidence"
+      description: "**两种都要，请如实勾选。** 未附出处的专业判断同样有价值——但必须标成判断，不能当成已核实的证据入库。"
+      options:
+        - label: "我引用了原文（上面有 PMID/DOI 和逐字句子）· I have quoted the source"
+        - label: "这是我的临床/专业判断，未附出处 · This is my clinical or professional judgement, unsourced"

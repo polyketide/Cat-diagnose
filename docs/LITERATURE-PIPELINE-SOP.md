@@ -114,6 +114,10 @@ Diagnosed the conflict: three higher-ranked instructions pulled the other way �
 
 It can read `knowledge-base/` and `guides/` and nothing else. Compliance stops being a judgement call. `medical` keeps its full toolset for research, where unrestricted search is the entire point.
 
+**Attempt 3 — the same question, put to the restricted agent. It declined.** Emergency screen first; an explicit statement that diabetes is not covered; no prognosis, no survival figure, no dietary advice. It then did the useful things that need no evidence — how to record a weight curve, what to ask the vet, what fructosamine measures — and noted that CKD and hyperthyroidism *are* covered and could be discussed with sources, since an 11-year-old cat with polydipsia and weight loss sits at their intersection. It also reported the anorexia threshold as genuinely unpublished rather than supplying a number. **Three tool calls, against fifteen and seventeen for the two unrestricted attempts.**
+
+**The comparison is the finding.** Same model, same question, same knowledge base, and the only difference was which tools existed. Two rounds of increasingly emphatic prose changed nothing; deleting the capability changed everything on the first try.
+
 **Rules.**
 1. **Test every behavioural rule with the case it was written to prevent.** This one was tested immediately and failed immediately. Written and not tested, it would have shipped as a safety property that did not exist — which is worse than no rule, because it would have been believed.
 2. **When a rule loses to a competing instruction twice, stop rewriting it.** The second failure is the signal to change the mechanism. A third rewrite is the same experiment expecting a different result.
@@ -374,3 +378,53 @@ Page-fetching tools return a *model's summary* of a page, not the page. Its word
 2. ~~Where does the archive live?~~ **Resolved: outside the repository**, with the rebuild inputs committed inside it (§3).
 3. ~~Measure the token cost.~~ **Done 2026-07-20.** 1.9× on the cited set, 1.8× on a candidate pool — and the discarded-candidate saving I expected to be larger turned out to be mostly unavailable, because taking it costs recall (§1). The bankable figure is ~1.8–1.9×, from lossless field trimming.
 4. Decide whether the local model is used at all in v1. Given that the installed 9B is a known-bad build with a 4096-token context, the honest default is **build the pipeline with no local model**, prove the deterministic path end to end, and add a model only if a measured need survives that. A pipeline that works with the model switched off is the one worth having anyway (§6).
+
+---
+
+## 9. ⚠️ Reaching readers is a separate problem from being right, and it was ignored for longer
+
+For months the most rigorously verified veterinary material in this project had an audience of one. The only route to a single sentence was `git clone`. Diagnosed 2026-07-21, and the diagnosis had three parts that had been running together:
+
+| | State when diagnosed | Fixed by |
+|---|---|---|
+| **Trustworthy** | knowledge base verified; owner guides **not in the corpus at all** | §3e — `corpus_files()` widened |
+| **Traceable** | guide bodies carried **no inline citations**; a reader could not learn which of 144 references a figure came from | the CKD guide, built with inline attribution from the first draft; the two older guides remain a tracked debt |
+| **Reachable** | nothing readable without git | `tools/build_site.py` + GitHub Pages |
+
+**They must be fixed in that order and the reason is not aesthetic.** A guide that reaches thousands of owners and cannot be checked is more dangerous than one that reaches nobody. Reach multiplies whatever is already true of the document — including its errors.
+
+**Two defects surfaced only by previewing at phone width**, which is how an owner is likeliest to arrive:
+
+1. **Dark mode rendered the site blank.** `render_markdown.py` is a *print* stylesheet: it sets `color: #1a1a1a` and, correctly for paper, no `background`. A browser in dark mode painted a dark background under dark text. Fixed on the site only, leaving the PDF path untouched.
+2. **Nothing handled horizontal overflow.** An ASCII diagram in a `<pre>`, six-column tables, and a reference list of long DOI URLs all overflow 375px.
+
+**Rules.**
+1. **Look at the artifact on the device its reader uses.** Both defects are invisible in a terminal, in a desktop browser, and in the Markdown source. Neither is subtle once seen.
+2. **A print stylesheet is not a screen stylesheet.** Reusing one is fine; assuming it transfers is not.
+3. **State the audience order explicitly in the artifact.** The site's index puts owner guides first and analysis notes second — the inverse of the repository layout, because the repository is organised around how material is produced and a site has to be organised around who is reading.
+
+---
+
+## 10. ⭐ How professional critique enters — including when it has no citation
+
+Veterinarians, biologists and clinical pathologists are the readers most able to find what is wrong here, and the repository has to be able to take their input **without either dismissing it or laundering it into evidence it is not.**
+
+Three issue templates exist (`.github/ISSUE_TEMPLATE/`): challenge a figure, clinical review, propose coverage.
+
+### The problem this has to solve
+
+The discipline is verbatim citation. But **the single most valuable thing a practising vet can say is often unciteable**: *"your red-flag list is missing X"*, *"an owner will read that sentence as permission to wait"*, *"that advice does not work in a real consulting room."* Demanding a PMID for that is demanding the one thing clinical experience does not come with — and it would filter out exactly the expertise this project lacks. **The author of the triage path has never watched a cat come through a consulting room.**
+
+### The resolution: a third grade, never promoted
+
+The repository already has the precedent. Several red flags are recorded as **standard clinical teaching that this project searched for and could not source** — open-mouth breathing, the anorexia duration threshold, permethrin. They stay on the list; only the wording differs. Professional judgement enters the same class:
+
+1. **Record it as judgement, attributed and dated**, in the same visible way an unsourced figure is flagged. `⚠️ Clinical judgement contributed by a reviewer (UK first-opinion, 2026-07), not a sourced finding. No literature located.`
+2. **Never promote it to evidence, and never quietly drop it either.** It does not go in an excerpt block — those are byte-exact source text and admit nothing else. It goes in the prose, labelled.
+3. **Treat it as a hypothesis that triggers a search.** A clinician saying "cats with X usually also show Y" is a testable claim; look for it. If literature exists, the entry upgrades and the contributor found it. If nothing exists, that absence is itself recordable — and now it is documented rather than assumed.
+4. **Contradiction between a reviewer and the literature is a finding, not an error to resolve.** If a vet's experience runs against a published figure, write both down and say they disagree. The published figure may be a referral population; the clinician may be seeing a different one. **Do not average them and do not pick the one with a DOI by default.**
+5. **Practice context is metadata, not credentials.** Country, first-opinion versus referral, feline-only or mixed — asked for because it bounds where a judgement applies, never as identity verification. There is no gatekeeping here and there cannot be: the check on a contribution is whether it survives scrutiny, not who filed it.
+
+### What critique must not be allowed to become
+
+⚠️ **A reviewer's authority does not license skipping verification.** "A vet said so" is a source of judgement, not a source of figures. If a reviewer supplies a number, it goes through the same excerpt-and-archive path as any other number, and the fact that a professional supplied it changes nothing about that. **This is the same failure the checkers here have committed repeatedly — trusting the plausible thing because of where it came from.**

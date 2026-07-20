@@ -161,6 +161,31 @@ it reaches your working tree**, not before you commit. Git remembers.
 
 ---
 
+## If you are a vet, pathologist or biologist: what to file, and how
+
+Three issue templates exist and they are the fastest route in — **[① challenge a figure](../../issues/new?template=01-challenge-a-figure.yml)**, **[② clinical review](../../issues/new?template=02-clinical-review.yml)**, **[③ propose coverage](../../issues/new?template=03-propose-coverage.yml)**.
+
+### You do not need a citation to be useful here
+
+This is the part worth saying plainly. The discipline in this repository is verbatim citation — and **the most valuable thing a practising clinician can say is often unciteable**: *"your red-flag list is missing X"*, *"an owner will read that sentence as permission to wait"*, *"that advice does not work in a real consulting room."*
+
+Demanding a PMID for that would filter out exactly the expertise this project lacks. **The person who wrote the triage path has never watched a cat come through a consulting room.** That gap is not going to be closed by more literature.
+
+So professional judgement is accepted, and it is handled like this:
+
+- **Recorded as judgement, attributed and dated**, visibly labelled the same way an unsourced figure is. It never enters an excerpt block — those are byte-exact source text and admit nothing else.
+- **Never promoted to evidence, and never quietly dropped either.** There is precedent: several red flags here are already recorded as *standard clinical teaching that this project searched for and could not source* (open-mouth breathing, the anorexia duration threshold, permethrin). They stay on the list; only the wording differs.
+- **Treated as a hypothesis that triggers a search.** "Cats with X usually also show Y" is testable. If literature exists, the entry upgrades and you found it. If nothing exists, that absence gets documented rather than assumed.
+- **A disagreement with the published figure is a finding, not an error.** If your experience runs against a paper, both get written down along with the fact that they disagree. The paper may be a referral population and you may be seeing a different one. **Neither gets averaged away, and the one with a DOI does not win by default.**
+
+⚠️ **The one thing authority does not buy is a shortcut past verification.** If you supply a *number*, it goes through the same archive-and-excerpt path as any other number. That a professional supplied it changes nothing — trusting a plausible thing because of where it came from is the failure this repository's own checkers have committed repeatedly.
+
+Practice context (country, first-opinion vs referral, feline-only) is asked for because it **bounds where a judgement applies**, never as credential verification. There is no gatekeeping and there cannot be: the check on a contribution is whether it survives scrutiny, not who filed it.
+
+### Proposing the change yourself
+
+A pull request is welcome and not required — a well-described issue is genuinely enough, and for clinical review it is often the better format. If you do open a PR, `CONTRIBUTING`'s citation contract applies to any figure you add, and CI will check it.
+
 ## What would help most
 
 Roughly in order of usefulness:

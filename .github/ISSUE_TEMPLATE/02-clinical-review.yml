@@ -1,0 +1,90 @@
+name: "② 临床审阅（兽医）/ Clinical review"
+description: "分诊路径、红旗清单或给主人的建议可能造成伤害 · Triage, red flags, or owner-facing advice could cause harm"
+title: "[clinical] "
+labels: ["clinical-review", "safety"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **这是本仓库最需要、也最缺的一类输入。**
+
+        急诊红旗清单和主人指南是**唯一可能直接伤到一只猫**的部分。它们由文献和推理构建，
+        而写它们的人**没有临床经验**——没有见过一千只猫走进诊室，不知道哪种表述会被主人误解成
+        「可以再等等」。这一格只有执业兽医能填。
+
+        **⚠️ 不要因为没有文献出处就不提。** 这里恰恰需要你的判断本身。
+        本仓库已经明确记录了多处「临床共识但检索不到证据」的条目（张口呼吸、厌食时长阈值、
+        除虫菊酯），它们照样进了红旗清单，只是措辞不同。**你的经验就是这一类，直接说。**
+
+        ---
+
+        **This is the input this repository most needs and least has.**
+
+        The emergency red-flag list and the owner guides are the only parts that can **directly
+        harm a cat**. They were built from literature and reasoning by someone with **no clinical
+        experience** — who has never watched a thousand cats come through a consulting room, and
+        does not know which phrasing an owner will read as permission to wait.
+
+        **⚠️ Do not withhold because you lack a citation.** Your judgement is the thing that is
+        missing. Several entries here are already recorded as "standard teaching, searched for and
+        not sourced" and are kept on the list with different wording. Yours belongs in that class.
+
+  - type: input
+    id: location
+    attributes:
+      label: "在哪 · Where"
+      placeholder: "knowledge-base/emergency-triage-red-flags.md，或 guides/feline-ckd-owner-guide.zh.md 第 9 章"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: "问题类型 · What kind"
+      options:
+        - "红旗清单漏了一条 · A red flag is missing"
+        - "某条表述可能被读成「可以再等等」· Wording could be read as permission to wait"
+        - "某条建议在实际诊室里行不通 · Advice is impractical in real practice"
+        - "过度警示，会造成不必要的转运/应激 · Over-triage; unnecessary transport or stress"
+        - "术语或流程描述不符合实际 · Terminology or workflow is not how it actually works"
+        - "其他 · Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: harm
+    attributes:
+      label: "⭐ 具体会怎么出事 · What would actually go wrong"
+      description: |
+        请具体到一只猫。**「这里写得不严谨」帮助有限；「一只 XX 情况的猫，主人读到这句会 YY，然后 ZZ」
+        可以直接改。**
+
+        Be concrete about one cat. "This is imprecise" is hard to act on; "a cat with X, whose owner
+        reads this sentence, will do Y, and then Z" can be fixed directly.
+      placeholder: |
+        例：一只已经开始张口呼吸的猫，主人读到「先记录呼吸频率再决定」，
+        会去数三十秒——而这个时候正确动作是立刻放下手机出门。
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: "你会怎么写 · How you would put it"
+      description: "有具体措辞最好；没有也没关系，指出问题已经足够。"
+
+  - type: checkboxes
+    id: basis
+    attributes:
+      label: "依据 · Basis"
+      options:
+        - label: "临床经验，无文献出处 · Clinical experience, no citation — 这完全可以，会如实标注为专业判断"
+        - label: "有文献支持（请在下方补 PMID/DOI）· Literature support"
+        - label: "本国/本地区指南 · A national or regional guideline"
+
+  - type: input
+    id: context
+    attributes:
+      label: "你的执业背景（可选）· Your practice context (optional)"
+      description: "国家/地区、初诊还是转诊、猫专科与否。**只影响我们如何标注适用范围，不用于任何身份验证。** 不想写就留空。"
+      placeholder: "日本、初诊、猫专科 / UK first-opinion / 中国大陆转诊医院"
