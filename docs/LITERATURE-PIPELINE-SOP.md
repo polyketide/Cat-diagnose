@@ -81,6 +81,19 @@ The pipeline writes a raw archive that Claude reads directly. Requirements:
 - **Any local-model output stored in a separate field**, clearly named as a hint (e.g. `local_relevance_note`), never merged into the payload. If a future reader cannot tell at a glance which bytes came from PubMed and which from a 14B model, the format is wrong.
 - **Fetch provenance**: timestamp, query used, tool version.
 
+## 3c. ⚠️ The rebuild input is circular, and 33% of the cited literature fell through it
+
+`pmids_from_kb()` builds the archive's rebuild list by scanning **only** for `**PMID n**` headers **inside the `## 原文摘录` section**. That is the excerpt blocks — which is to say, the papers that have already been archived.
+
+**The circularity:** a paper is archived only if it has an excerpt block, and it gets an excerpt block only once archived. A citation added to the body alone never enters the loop. It is never fetched, so Leg 1 never checks it, so nothing ever reports it missing. **The verification chain is silent about it — not failing, silent.** That is the worst failure mode a checker can have, because a green result reads as coverage.
+
+**Measured 2026-07-20: 119 PMIDs are cited in body text or index lines; 80 have excerpt blocks. 39 are orphaned — 33%.** Chasing one of them (Teng 2018, PMID 29393723) is what exposed the pattern: its sample size `2609` was flagged unverified, the flag landed on the neighbouring citation in the same sentence, and a full-text retrieval request went to the operator for a paper that could never have contained the figure. **One orphan produced a wrong flag, a wrong diagnosis, and a wasted human request.** There are 38 more.
+
+**Rules.**
+1. **A file's verification status is bounded by its rebuild input, never by its pass rate.** "Leg 1: 0 unmatched" means every excerpt that exists was checked — it says nothing about citations that never became excerpts. Report both numbers or neither.
+2. **Widen `pmids_from_kb()` to scan the whole file**, not the excerpt section, so a body citation pulls its own paper into the archive. Until that lands, the orphan count is a standing figure to re-measure, not a one-off.
+3. **When a coverage check can only ever inspect what is already covered, it is measuring itself.** Ask of every checker: what would have to be true for this to stay green while being wrong?
+
 ## 4. Frozen-baseline regression (the self-check)
 
 Adapted from the sibling project's flywheel rule for a domain with no ground-truth oracle: *lock a benchmark that never participates in training; only a run that does not degrade it counts as an improvement; if it degrades, stop, alert, and keep the old artefact.*
