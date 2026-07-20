@@ -78,7 +78,9 @@ Modelled on the sibling project's DR drill, whose governing idea is `runs ≠ wo
 
 ### The legs
 
-**Status 2026-07-20: Legs 1 and 2 are implemented in `tools/dr_drill.py`, each with a self-test that proves it detects its own fault class. All four checks pass.** Legs 3–4 are still specification.
+**Status 2026-07-20: Legs 1, 2 and 4 are implemented in `tools/dr_drill.py`; all five checks pass.** Leg 3 is deliberately not built as a separate leg — its content (hash integrity, deliberate corruption, detection proof) is already enforced by the grade gate in `pubmed_archive.py` and exercised by Leg 1's self-test and Leg 4. A separate leg would restate rather than add.
+
+Leg 4 required building the mechanism it tests: the grade contract existed on paper but nothing enforced it. `gate_record()` now runs inside the archive loader, so a record failing it is never available to excerpt verification at all — a gate that only reports is a gate standing beside an open door. Applying it retroactively rejected all 63 existing records for carrying no explicit grade, which is the correct answer: an artefact that does not declare what it is should not be trusted as evidence. They were re-fetched.
 
 Leg 2 found a real defect on its first run — `--limit` was applied after the already-archived filter, so a resumed run fetched a *different* subset instead of completing the intended one, ending with more records than requested. Fixed, and the reason is recorded in the code. The archive now also writes atomically (temp file + `rename`), because a crash mid-write would otherwise leave a truncated record that a later resume skips as already done; the drill did not happen to hit that window, which is precisely why it should not be left to luck.
 

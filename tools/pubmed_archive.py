@@ -35,6 +35,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 TOOL_VERSION = "1"
+
+# Grade vocabulary (docs/LITERATURE-PIPELINE-SOP.md section 5a). Only GRADE_RAW may
+# ever reach `## 原文摘录`. Anything a local model produced lives in a field with
+# HINT_PREFIX and is a routing hint, never evidence.
+GRADE_RAW = "raw_api_payload"
+ALLOWED_SOURCES = {"pubmed efetch"}
+HINT_PREFIX = "local_"
 EFETCH = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
 BATCH = 20            # PubMed is fine with more, but keep batches reviewable
 SLEEP = 0.4           # stay under the 3 req/s courtesy limit without an API key
@@ -151,6 +158,7 @@ def cmd_fetch(args) -> int:
                 "bytes": len(raw),
                 "fetched_at": datetime.now(timezone.utc).isoformat(),
                 "source": "pubmed efetch",
+                "grade": GRADE_RAW,
                 "tool_version": TOOL_VERSION,
                 "cited_by": origin.get(pmid, []),
             }
@@ -299,6 +307,64 @@ def cmd_measure(args) -> int:
     return 0
 
 
+# ------------------------------------------------------------------- the gate
+
+def gate_record(rec: dict) -> list[str]:
+    """Reasons this record must NOT be trusted as verbatim source text.
+
+    Empty list = admissible into the excerpt path. This is the enforcement point
+    for the grade contract: a local model's prose must never be able to occupy
+    the position where a raw payload belongs, because everything downstream
+    treats that position as evidence.
+
+    The checks are layered because no single one is sufficient. Schema alone
+    would accept well-formed fabrication; identity alone would accept a genuine
+    record relabelled; grade alone is just a self-declaration.
+    """
+    problems: list[str] = []
+
+    if rec.get("grade") != GRADE_RAW:
+        problems.append(f"grade is {rec.get('grade')!r}, not {GRADE_RAW!r}")
+    if rec.get("source") not in ALLOWED_SOURCES:
+        problems.append(f"source {rec.get('source')!r} is not a known fetcher")
+
+    raw = rec.get("raw_xml")
+    if not isinstance(raw, str) or not raw.strip():
+        problems.append("raw_xml missing or empty")
+        return problems
+
+    if hashlib.sha256(raw.encode("utf-8")).hexdigest() != rec.get("sha256"):
+        problems.append("sha256 does not match raw_xml (payload altered after fetch)")
+
+    try:
+        art = ET.fromstring(raw)
+    except Exception as exc:
+        # Prose does not parse as XML. This catches the blunt substitution:
+        # a model summary dropped straight into the payload field.
+        problems.append(f"raw_xml is not parseable XML ({type(exc).__name__})")
+        return problems
+
+    if art.tag != "PubmedArticle":
+        problems.append(f"root element <{art.tag}>, expected <PubmedArticle>")
+    inner = art.findtext(".//PMID")
+    if not inner:
+        problems.append("payload contains no PMID element")
+    elif inner != rec.get("pmid"):
+        problems.append(f"payload PMID {inner} does not match record PMID {rec.get('pmid')}")
+    if art.find(".//ArticleTitle") is None:
+        problems.append("payload contains no ArticleTitle element")
+
+    # Hint content must stay in its own field. If it also appears inside the
+    # payload, the two grades have been merged and the boundary is gone.
+    for key, val in rec.items():
+        if key.startswith(HINT_PREFIX) and isinstance(val, str) and val.strip():
+            probe = val.strip()[:40]
+            if probe and probe in raw:
+                problems.append(f"hint field {key!r} content found inside raw_xml")
+
+    return problems
+
+
 # -------------------------------------------------------------------- verifying
 
 def cmd_verify(args) -> int:
@@ -309,12 +375,12 @@ def cmd_verify(args) -> int:
     bad = 0
     for f in files:
         rec = json.loads(f.read_text(encoding="utf-8"))
-        actual = hashlib.sha256(rec["raw_xml"].encode("utf-8")).hexdigest()
-        if actual != rec["sha256"]:
-            print(f"  HASH-MISMATCH {rec['pmid']}: stored {rec['sha256'][:12]} "
-                  f"actual {actual[:12]}", file=sys.stderr)
+        problems = gate_record(rec)
+        if problems:
+            print(f"  REJECTED {rec.get('pmid', f.name)}: {'; '.join(problems)}",
+                  file=sys.stderr)
             bad += 1
-    print(f"verified {len(files)} records, {bad} corrupted")
+    print(f"verified {len(files)} records, {bad} rejected")
     return 1 if bad else 0
 
 

@@ -21,6 +21,7 @@ SKIP; it never fabricates a PASS.
 Usage:
   dr_drill.py leg1 [--archive DIR] [-v]
   dr_drill.py leg2 [--count N] [--batch N]
+  dr_drill.py leg4 [--archive DIR] [-v]
   dr_drill.py self-test [--archive DIR]
 """
 from __future__ import annotations
@@ -37,7 +38,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from pubmed_archive import archive_dir, KB  # noqa: E402
+from pubmed_archive import archive_dir, KB, gate_record, GRADE_RAW  # noqa: E402
 
 # Excerpt lines beginning with these are the author's own annotations, not source
 # text, and are excluded from verification.
@@ -126,12 +127,27 @@ def abstract_of(raw_xml: str) -> str:
     return " ".join(parts)
 
 
-def load_archive(arc: Path) -> dict[str, str]:
-    recs = {}
-    for f in (arc / "records").glob("*.json"):
-        rec = json.loads(f.read_text(encoding="utf-8"))
-        recs[rec["pmid"]] = rec["raw_xml"]
-    return recs
+def load_archive(arc: Path) -> tuple[dict[str, str], dict[str, list[str]]]:
+    """Returns (admissible payloads, rejected pmid -> reasons).
+
+    The gate runs HERE, not as a separate audit, so that a record which fails it
+    is never available to excerpt verification at all. A gate that only reports
+    is a gate standing next to an open door.
+    """
+    recs: dict[str, str] = {}
+    rejected: dict[str, list[str]] = {}
+    for f in sorted((arc / "records").glob("*.json")):
+        try:
+            rec = json.loads(f.read_text(encoding="utf-8"))
+        except Exception as exc:
+            rejected[f.stem] = [f"unreadable record ({type(exc).__name__})"]
+            continue
+        problems = gate_record(rec)
+        if problems:
+            rejected[rec.get("pmid", f.stem)] = problems
+        else:
+            recs[rec["pmid"]] = rec["raw_xml"]
+    return recs, rejected
 
 
 def leg1(arc: Path, verbose: bool = False) -> tuple[str, str, set]:
@@ -148,7 +164,7 @@ def leg1(arc: Path, verbose: bool = False) -> tuple[str, str, set]:
     if not excerpts:
         return "SKIP", "no source excerpts found in knowledge-base/", set()
 
-    archive = load_archive(arc)
+    archive, rejected = load_archive(arc)
 
     missing_records: list[str] = []
     unmatched: list[tuple[str, str, str]] = []
@@ -175,12 +191,22 @@ def leg1(arc: Path, verbose: bool = False) -> tuple[str, str, set]:
                   f"{'...' if len(sent) > 100 else ''}")
         for pmid in missing_records:
             print(f"  NO-RECORD {pmid}")
+        for pmid, reasons in rejected.items():
+            print(f"  GATE-REJECTED {pmid}: {'; '.join(reasons)}")
 
     detail = (f"{len(excerpts)} PMIDs, {checked} abstract-sourced excerpts checked, "
               f"{len(unmatched)} unmatched, {len(missing_records)} records missing, "
               f"{skipped_fulltext} full-text excerpts not verifiable here")
+    if rejected:
+        detail += f", {len(rejected)} records rejected by the grade gate"
+    # Findings are keyed by (pmid, what-was-found). A gate rejection is a finding
+    # too — and a stronger one than an excerpt mismatch, since it stops the record
+    # before it can be read as evidence at all. The self-test compares these sets,
+    # so it must see both kinds or it will report a regression when a fault is
+    # merely caught earlier than it used to be.
     keys = {(p, s) for p, _f, s in unmatched}
-    if missing_records or unmatched:
+    keys |= {(p, f"<gate-rejected: {r[0]}>") for p, r in rejected.items() if r}
+    if missing_records or unmatched or rejected:
         return "FAIL", detail, keys
     return "PASS", detail, keys
 
@@ -387,6 +413,113 @@ def cmd_leg2(args) -> int:
         return 0
 
 
+FAKE_SUMMARY = ("This retrospective study of 250 cats found that most were "
+                "euthanised at presentation, though some survived beyond a year.")
+
+
+def _attacks(rec: dict) -> list[tuple[str, dict]]:
+    """Ways a model-authored artefact could come to occupy a raw payload's place.
+
+    Each returns a mutated record that MUST be refused. They escalate: the first
+    is a careless substitution, the last is a deliberate forgery that satisfies
+    every check except provenance and integrity. The point of the ladder is that
+    no single check catches all of them.
+    """
+    import copy
+    out = []
+
+    # 1. Blunt substitution: prose dropped into the payload field.
+    a = copy.deepcopy(rec); a["raw_xml"] = FAKE_SUMMARY
+    out.append(("prose in place of payload", a))
+
+    # 2. Same, but the hash is updated so integrity alone would pass.
+    import hashlib
+    b = copy.deepcopy(rec); b["raw_xml"] = FAKE_SUMMARY
+    b["sha256"] = hashlib.sha256(FAKE_SUMMARY.encode()).hexdigest()
+    out.append(("prose with a recomputed hash", b))
+
+    # 3. Well-formed XML, but not a PubMed record — fabrication that parses.
+    c = copy.deepcopy(rec)
+    c["raw_xml"] = f"<Summary><Text>{FAKE_SUMMARY}</Text></Summary>"
+    c["sha256"] = hashlib.sha256(c["raw_xml"].encode()).hexdigest()
+    out.append(("well-formed XML that is not a PubmedArticle", c))
+
+    # 4. A genuine record relabelled as another paper's — right bytes, wrong claim.
+    d = copy.deepcopy(rec); d["pmid"] = "99999999"
+    out.append(("payload attributed to the wrong PMID", d))
+
+    # 5. Grade downgraded but content left alone: an honest hint that must still
+    #    never reach the excerpt path.
+    e = copy.deepcopy(rec); e["grade"] = "local_relevance_hint"
+    out.append(("record self-declared as a local hint", e))
+
+    # 6. Hint text merged into the payload — the boundary erased rather than crossed.
+    f = copy.deepcopy(rec)
+    f["local_relevance_note"] = FAKE_SUMMARY
+    f["raw_xml"] = rec["raw_xml"].replace("<Abstract>", f"<Abstract>{FAKE_SUMMARY}", 1) \
+        if "<Abstract>" in rec["raw_xml"] else rec["raw_xml"] + FAKE_SUMMARY
+    f["sha256"] = hashlib.sha256(f["raw_xml"].encode()).hexdigest()
+    out.append(("hint text merged into the payload", f))
+
+    return out
+
+
+def cmd_leg4(args) -> int:
+    """Leg 4 — grade enforcement.
+
+    Inject artefacts that a local model could plausibly have produced into the
+    position a raw payload occupies, and assert every one is refused.
+
+    This leg guards the project's core asset. `## 原文摘录` is trusted as evidence
+    precisely because nothing but a fetched payload can reach it; if that stops
+    being true, every downstream verification is checking a paraphrase while
+    reporting that it checked a source.
+    """
+    arc = archive_dir(args.archive)
+    records_dir = arc / "records"
+    if not records_dir.is_dir():
+        print(f"DR_LEG4: SKIP (no archive at {arc})")
+        return 0
+
+    # Use a record that Leg 1 actually verifies, so admission would be consequential.
+    excerpts = excerpts_from_kb()
+    sample = None
+    for pmid in sorted(excerpts):
+        f = records_dir / f"{pmid}.json"
+        if f.exists():
+            rec = json.loads(f.read_text(encoding="utf-8"))
+            if not gate_record(rec):
+                sample = rec
+                break
+    if sample is None:
+        print("DR_LEG4: SKIP (no admissible record to build attacks from)")
+        return 0
+
+    # Control: the untouched record must pass, or the leg proves nothing by
+    # rejecting everything.
+    if gate_record(sample):
+        print(f"DR_LEG4: FAIL (control record {sample['pmid']} was itself rejected)",
+              file=sys.stderr)
+        return 1
+
+    admitted = []
+    for name, mutated in _attacks(sample):
+        problems = gate_record(mutated)
+        if not problems:
+            admitted.append(name)
+        elif args.verbose:
+            print(f"  refused [{name}]: {problems[0]}")
+
+    total = len(_attacks(sample))
+    if admitted:
+        print(f"DR_LEG4: FAIL ({len(admitted)}/{total} forged artefacts ADMITTED as "
+              f"verbatim source: {'; '.join(admitted)})", file=sys.stderr)
+        return 1
+    print(f"DR_LEG4: PASS (control admitted; {total}/{total} forged artefacts refused, "
+          f"built from PMID {sample['pmid']})")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -404,6 +537,10 @@ def main() -> int:
     p3.add_argument("--timeout", type=float, default=120.0)
     p3.add_argument("--self-test", action="store_true",
                     help="prove this leg detects a fetch that does NOT resume")
+    p4 = sub.add_parser("leg4")
+    p4.add_argument("--archive")
+    p4.add_argument("-v", "--verbose", action="store_true")
+    p4.set_defaults(fn=cmd_leg4)
     p3.set_defaults(fn=cmd_leg2)
     args = ap.parse_args()
     return args.fn(args)
