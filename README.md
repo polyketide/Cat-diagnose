@@ -20,6 +20,8 @@ knowledge-base/                        # analysis-facing notes (English, with ve
 guides/                                # owner-facing guides, Markdown + PDF (Chinese)
   ├── feline-lymphoma-all-types-owner-guide.zh.{md,pdf}
   └── feline-nasal-lymphoma-owner-guide.zh.{md,pdf}
+docs/                                  # engineering SOPs
+  └── LITERATURE-PIPELINE-SOP.md       # offloading literature retrieval to a local node (design, not yet built)
 tools/                                 # citation-integrity and rendering scripts
   ├── rebuild_references.py
   ├── extract_source_excerpts.py
