@@ -35,21 +35,39 @@ identifiers that are **not sources at all**:
 `guides/*.zh.md` entered verification on 2026-07-21, having been written before the
 citation contract existed. Bringing them in exposed something the excerpt count hides:
 
-**Their body prose carries no inline citations at all.** Not one `PMID` appears before
-`## 附录 B`. A reader meets "某项研究里…中位数 296 天" and has 144 references and 64
-excerpt blocks available, and **no way to learn which one that number came from.**
+**⚠️ The original wording of this note was wrong, and it is corrected here rather than
+rewritten away.** It read: *"Their body prose carries no inline citations at all. Not one
+`PMID` appears before `## 附录 B`."* The second sentence was true. The first did not follow
+from it — **I grepped for the citation form I expected and reported the absence of that form
+as the absence of attribution.** The guides do cite, by author and year: *Sfiligoi 2007*,
+*Haney 2009*, *Goto 2022*, in tables and 依据 lines. A reader can trace those to the reference
+list by name.
 
-So the 60 entries below are suppressed, and it is important to be clear about what that
-does and does not mean. It does not mean the references are unused or the figures are
-wrong. It means the documents cannot presently demonstrate which source any given figure
-rests on — and **backfilling 60 excerpt blocks would not fix that.** It would produce 144
-verified excerpts still unconnected to any sentence a reader actually reads.
+**Measured 2026-07-21: 58 of 951 substantive body lines carried author-year attribution — about
+6%.** So the finding was directionally right and overstated in degree, which is exactly the
+error class this repository keeps catching in its own checkers: testing for one representation
+and concluding about the thing itself.
 
-**The fix is inline attribution in the guide bodies, and it is outstanding work.** These
-suppressions exist so CI reports the real state of the corpus instead of a permanent red;
-they are the marker for that debt, not its discharge. The owner guide being written for
-chronic kidney disease is being built with inline attribution from the first draft, so
-the debt does not grow.
+**Work done 2026-07-21.** 62 of 87 author-year mentions resolved uniquely to an archived record
+(0 ambiguous) and now carry their PMID inline — safe because *the paper was already named in the
+prose*, so no sentence-level attribution judgement was involved. `tools/attribution_candidates.py`
+was written to propose the rest without deciding: it sorts figures into UNIQUE / AMBIGUOUS /
+UNMATCHED and hands the judgement to a human, because a figure appearing in one abstract is not
+proof the sentence is about that paper.
+
+**What remains, measured rather than estimated:**
+
+- **25 author-year mentions that do not resolve** to an archived record (Collette 2015, Kogan 2026,
+  Tzannes 2007, May 1987 …). Either not archived, or the guide names a different author position.
+- **~94% of body lines still carry no attribution.** Distinctive figures (3+ digits) across both
+  guides: 198 UNIQUE candidates over 136 lines and 66 papers, plus 99 AMBIGUOUS and 53 UNMATCHED.
+  Every UNIQUE one still needs a human to read the sentence.
+- The 60 suppressions below remain accurate: these PMIDs appear only in the reference appendix and
+  have no excerpt block.
+
+**These suppressions are the marker for that debt, not its discharge.** The CKD guide was built
+with inline attribution from its first draft so the debt does not grow.
+
 
 
 - orphans: 3597844 — reference-list entry in feline-lymphoma-all-types-owner-guide.zh.md; see the note above.

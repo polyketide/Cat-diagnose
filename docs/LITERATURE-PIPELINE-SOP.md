@@ -388,7 +388,7 @@ For months the most rigorously verified veterinary material in this project had 
 | | State when diagnosed | Fixed by |
 |---|---|---|
 | **Trustworthy** | knowledge base verified; owner guides **not in the corpus at all** | §3e — `corpus_files()` widened |
-| **Traceable** | guide bodies carried **no inline citations**; a reader could not learn which of 144 references a figure came from | the CKD guide, built with inline attribution from the first draft; the two older guides remain a tracked debt |
+| **Traceable** | ~94% of guide body lines carried no attribution; a reader could not learn which of 144 references a figure came from | the CKD guide, built with inline attribution from the first draft; 62 author-year mentions in the older guides now carry their PMID, the rest is a measured debt |
 | **Reachable** | nothing readable without git | `tools/build_site.py` + GitHub Pages |
 
 **They must be fixed in that order and the reason is not aesthetic.** A guide that reaches thousands of owners and cannot be checked is more dangerous than one that reaches nobody. Reach multiplies whatever is already true of the document — including its errors.
@@ -404,6 +404,14 @@ For months the most rigorously verified veterinary material in this project had 
 3. **State the audience order explicitly in the artifact.** The site's index puts owner guides first and analysis notes second — the inverse of the repository layout, because the repository is organised around how material is produced and a site has to be organised around who is reading.
 
 ---
+
+### ⚠️ And the first statement of this finding was itself overstated
+
+The traceability defect was first written down as *"the guide bodies carry no inline citations at all."* **Measured the next day: 58 of 951 substantive body lines carried author-year attribution — about 6%.** The guides do cite *Sfiligoi 2007*, *Haney 2009*, *Goto 2022*; a reader can follow those to the reference list by name.
+
+The claim had been made by grepping for `PMID` and finding none. **Absence of the expected representation was reported as absence of the thing.** That is the same shape as the monolingual checker in §3e and the per-file orphan rule in `check_kb_hygiene.py` — and it is worth noticing that it happened *while writing up those very lessons*.
+
+**The rule, since three instances is a pattern: when you find nothing, verify you searched for every form the thing takes before concluding it is not there.** The finding survived — 94% unattributed is still the defect — but its first statement was wrong in degree, and the correction is recorded in `docs/kb-exceptions.md` rather than quietly edited away.
 
 ## 10. ⭐ How professional critique enters — including when it has no citation
 
