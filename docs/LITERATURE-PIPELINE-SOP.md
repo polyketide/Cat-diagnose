@@ -149,6 +149,7 @@ Carried over from the sibling project's own failure log. Each of these cost real
   - *Model empty-return* (the local model produces nothing): **retry with a counter, then give up loudly.** An empty return is indistinguishable from "no relevant literature", which is why it must never be allowed to pass as a result.
 - **Measure the failure *rate* before tuning.** A badly quantised local model returned empty on ~75% of requests; two days went into tuning input length, which the log later described as "chasing a coin-flip". Establish whether a fault is deterministic or probabilistic *first*.
 - **A detector must be proven against a known state.** Do not trust "no problems found" from a checker that has never been shown a problem it should catch.
+- **Normalise notation before reporting a mismatch.** Two false-positive classes have already been observed in numeric cross-checking: sources writing `38 per cent` where the body writes `38%`, and sources spelling numerals in words (`Eighty`, `One hundred seventeen`) where the body uses digits. Both are expected — excerpts keep the source's own wording, as they must. A checker that flags them produces noise, and **a checker producing noise is a checker nobody reads**, which fails in the same direction as one that reports nothing. Note that `extract_source_excerpts.py` has the mirror image of this blind spot, documented in its own output: it *misses* figures the source spells out.
 - **Every incident must leave behind the check that would have caught it.** Recording a fix without adding the detector is not finishing. And a root cause that has not been demonstrated with a probe is a hypothesis — write it as one.
 
 ## 5a. Account for every input; label every output by grade
@@ -195,6 +196,24 @@ catmed builds its **own** pipeline rather than extending the sibling's `reading_
 - Coupling would make catmed's citation discipline depend on a codebase that does not share it.
 
 Borrow the patterns and the scar tissue. Do not share the code or the state directory.
+
+## 7a. Choosing what to research next
+
+Established 2026-07-20, after a survey of documented gaps in feline medicine.
+
+**Separate the data gap from the integration gap, and only take the second.** "Nobody has run this study" is not addressable here — no amount of retrieval creates evidence. "The evidence exists but sits in two literatures nobody reads together" is exactly addressable. Before starting a topic, say which kind it is; if it is the first, the honest output is a recorded absence, not a file.
+
+**Prefer topics where two specialties each hold half.** The strongest entries this project has produced come from that shape — an abstract contradicting its own results section, an imaging report and a histology report read blind to each other, hyperthyroidism and kidney disease masking one another across endocrine and renal clinics. The value is in the join, which is where nobody is standing.
+
+**A stated need beats an inferred one.** The profession publishes its own diagnoses of what is missing (`evidence-to-practice-gap.md`). Building against a documented request is defensible in a way that building against a guess is not.
+
+**Prefer gaps the knowledge base itself flagged.** Each file ends with what it could not close. Those are pre-scoped, already justified, and immune to the charge of picking convenient topics.
+
+**Order by how often the question is faced, not by how interesting it is.** This repository grew from one rare tumour, which was right for its origin and wrong as a plan: the commonest chronic diseases of older cats had no entry at all until deliberately addressed.
+
+### ⚠️ A web page is not a source
+
+Page-fetching tools return a *model's summary* of a page, not the page. Its wording is not the author's wording, and its figures have passed through a paraphrase. **Nothing obtained that way may enter `## 原文摘录` or be quoted as verbatim.** Use web search to find out *what to look for*; then retrieve the record properly and quote from that. When a figure exists only in a full text that was read through such a tool, cite nothing and record that the check was not performed — as `evidence-to-practice-gap.md` §2 does.
 
 ## 8. Before building — open questions
 
