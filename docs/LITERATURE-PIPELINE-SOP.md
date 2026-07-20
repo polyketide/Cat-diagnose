@@ -223,6 +223,10 @@ Established 2026-07-20, after a survey of documented gaps in feline medicine.
 
 One such flag survived long enough to be put on a full-text retrieval list and to prompt an assertion that a load-bearing figure had never been verified. It had been verified continuously. **Before spending effort on a flag, confirm the figure actually belongs to the PMID it was filed under.** The cost of not doing so is not just wasted retrieval — it is a false claim about the state of the evidence base.
 
+Four were confirmed by hand: `85`/`2024` belonged to Wolfesberger not Ii; `123` to Lai not Lee; `412` to Lee not Lai — those two papers swapped flags, being cited in one sentence; and `27` was a percentage computed in the body from a fraction the source does state.
+
+⚠️ **The checker written to find these committed the same error it detects.** `suspect_misattribution()` in `dr_drill.py` flags a figure when it also appears under another PMID — and on its first run returned 14 candidates, most of them coincidence, because values like 10, 21, 30 and 50 recur across unrelated abstracts. It treated co-occurrence as attribution. **It raises suspicion and settles nothing**; each hit must be checked against the body sentence, and its output must never be bulk-cleared. A tool that finds this class of error is worth having, and is not itself exempt from it.
+
 ### ⚠️ Verify a cross-reference points at something
 
 Writing the hypertension entry produced a citation to a section of a file that did not contain it — the emergency red-flag list lives in the agent definition, not in the knowledge-base file of nearly the same name. Nothing caught it: the excerpt check verifies quotations against sources, not claims about this repository's own contents.

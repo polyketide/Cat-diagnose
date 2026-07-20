@@ -557,3 +557,40 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+# ── Attribution cross-check ────────────────────────────────────────────────
+# extract_source_excerpts.py assigns figures to citations BY SENTENCE, so a
+# sentence carrying two citations files one paper's numbers under the other and
+# reports them as unverified. Four such false positives were confirmed by hand
+# on 2026-07-20 (85/2024, 123, 412, 27).
+#
+# ⚠️ This check only RAISES SUSPICION. Its first run flagged 14 candidates, of
+# which most were coincidence: common values like 10, 21, 30 and 50 appear in
+# many abstracts for unrelated reasons. Written up as a lesson in its own right —
+# the checker committed the error class it exists to detect, treating
+# co-occurrence as attribution. Confirm each hit against the body sentence before
+# acting; never bulk-clear on its output.
+def suspect_misattribution(kb_dir=None):
+    import glob as _glob
+    kb = Path(kb_dir) if kb_dir else KB
+    year = re.compile(r"^(19|20)\d\d$")
+    out = []
+    for f in sorted(kb.glob("*.md")):
+        text = f.read_text(encoding="utf-8")
+        if "## 原文摘录" not in text:
+            continue
+        blocks = re.split(r"\*\*PMID (\d+)\*\*", text.split("## 原文摘录", 1)[1])
+        owner = {blocks[i]: blocks[i + 1] for i in range(1, len(blocks), 2)}
+        for pmid, body in owner.items():
+            g = re.search(r"The figures? `([^`]+)`", body)
+            if not g:
+                continue
+            for n in (x.strip() for x in g.group(1).split(",")):
+                if year.match(n) or len(n) > 7:
+                    continue
+                other = [p for p, b in owner.items()
+                         if p != pmid and re.search(r"\b" + re.escape(n) + r"\b", b)]
+                if other:
+                    out.append((f.name, pmid, n, other))
+    return out
