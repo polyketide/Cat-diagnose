@@ -184,7 +184,7 @@
 > ⚠️ Check passed. Note: the source spells the figure out as the words "Ninety-three percent", so a purely numeric match would miss it — this is a known source of false positives in my flagging algorithm.
 
 **PMID 23076596** · Taylor SS 2012
-> ⚠️ The figures `0.83, 0.95, 0.98, 2013, 2021` cited in the body **do not appear in the abstract text** — they may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
+> ⚠️ **FALSE POSITIVE, resolved 2026-07-20.** The figures `0.83, 0.95, 0.98` were flagged here. They are the TK1 ROC results of **Wang 2021 (PMID 34579716)**, quoted verbatim and marked "Check passed" in that paper's own excerpt block; the two papers are cited in one body sentence. `2013, 2021` are citation years, not data. Nothing was ever unverified.
 
 **PMID 26512544** · Winkel VM 2015
 > ⚠️ The figures `270, 832` cited in the body **do not appear in the abstract text** — they may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
@@ -212,7 +212,7 @@
 
 **PMID 34167339** · Ray M 2021
 > The '2021 AAFP Feline Senior Care Guidelines' are authored by a Task Force of experts in feline clinical medicine and serve as an update and extension of those published in 2009.
-> ⚠️ The figures `21, 259, 2024` cited in the body **do not appear in the abstract text** — they may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
+> ⚠️ **FALSE POSITIVE, resolved 2026-07-20.** The figures `21, 259` were flagged here. Both belong to **Mortier 2024 (PMID 38967102)** — "259 apparently healthy" cats, "21% ... were not considered healthy" — quoted verbatim in that paper's own excerpt block, from the PMC full text. The AAFP guidelines and Mortier are cited in one body sentence. `2024` is a citation year. Nothing was ever unverified.
 
 **PMID 34374109** · Freiche V 2021
 > The Ki-67 20%- and 30%-thresholds discriminated between LGITL and LPE within both the epithelium (specificity >95%) and lamina propria (specificity >95%), respectively.
@@ -261,7 +261,7 @@
 
 **PMID 37768060** · Eigner DR 2023
 > The '2023 AAFP/IAAHPC Feline Hospice and Palliative Care Guidelines' are authored by a Task Force of experts in feline hospice and palliative care convened by the American Association of Feline Practitioners and the International Association for Animal Hospice and Palliative Care.
-> ⚠️ The figures `93, 2010` cited in the body **do not appear in the abstract text** — they may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
+> ⚠️ **FALSE POSITIVE, resolved 2026-07-20.** The figure `93` was flagged here. It is the willingness-to-trade proportion of **Reynolds 2010 (PMID 20738770)**, already marked "Check passed" in that paper's own excerpt block — where the source spells it "Ninety-three percent", so a numeric match misses it twice over. The two are cited in one body sentence. `2010` is a citation year. Nothing was ever unverified.
 
 **PMID 38152842** · Moore AS 2023
 > On multivariate analysis, 40 cats that achieved CR had a median survival time of 341 days (78 days for PR, 45 days for NR); PFS times were also significantly affected by lymphocyte:monocyte L:M ratio (>3.4 = 700 days vs. ≤3.4 = 126 days) and B-cell versus T-cell phenotype (220 days vs. 42 days, respectively).
@@ -270,7 +270,7 @@
 
 **PMID 38774911** · Weyrich A 2024
 > Formalin-fixed and paraffin-embedded samples from 31 feline T-cell lymphomas, 29 B-cell lymphomas, and 11 non-neoplastic controls were analyzed by PCR combined with capillary electrophoresis.
-> ⚠️ The figures `50, 87, 2019` cited in the body **do not appear in the abstract text** — they may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
+> ⚠️ **FALSE POSITIVE, resolved 2026-07-20.** The figures `50, 87` were flagged here. Both are PARR detection rates from **Rout 2019 (PMID 31478220)** — "50% (19/38)" for IGH-VDJ alone, "87% (33/38)" for the four-primer combination — quoted verbatim in that paper's own excerpt block. Rout and Weyrich are cited in one body sentence. `2019` is a citation year. Nothing was ever unverified.
 
 **PMID 38943798** · Wolfesberger B 2024
 > Neoplastic lymphoid cells were immunopositive for CD3 in 93% (14/15), granzyme B in 87% (13/15), CD5 in 20% (3/15), CD8 in 13% (2/15), CD4 in 7% (1/15) and CD56 in 7% (1/15) of cases.

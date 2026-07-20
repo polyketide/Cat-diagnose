@@ -319,17 +319,17 @@ Of these, **van den Broek 1987 carries two key assertions — that miosis is the
 > The most common clinical signs were exophthalmos (84%), conjunctival hyperemia (40%), protrusion of the nictitating membrane (28%), exposure keratitis (20%) and fundus abnormalities (20%).
 
 **PMID 16675613** · Robertshaw D 2006
-> ⚠️ The figures `30, 35, 1985, 1988` cited in the body **do not appear in the abstract text** — they may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
+> ⚠️ **FLAG CORRECTED, not cleared, 2026-07-20.** The figures `30, 35` were flagged against this paper. They do not belong to it: the body sentence cites Robertshaw for the *nasal epithelium* heat-exchange mechanism, and attributes the panting thresholds (30 °C, 35 °C) to **Amini-Sereshki 1988**. But unlike the other misattributions resolved today, correcting the name does not clear the gap — **Amini-Sereshki 1988 has no excerpt block anywhere in this file and was never archived**, so those two figures remain genuinely unverified, now under the right paper. `1985, 1988` are citation years. **This is the one flag of the eight examined today that survived checking.**
 
 **PMID 19538664** · Hardie RJ 2009
 > Cats with laryngeal paralysis (n=10).
 > Of 10 cats, 9 had bilateral and 1 had unilateral laryngeal paralysis.
 > The calculated mean survival time for all 10 cats was 406 days (median, 150 days; range, 4-1825 days).
-> ⚠️ The figure `14` cited in the body **does not appear in the abstract text** — it may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
+> ⚠️ **FALSE POSITIVE, resolved 2026-07-20.** The figure `14` was flagged here. It is the case count of **Thunberg 2010 (PMID 21041335)** — "three of 14", "seven of 14" — quoted verbatim in that paper's own excerpt block. The body cites Hardie's 10 cats and Thunberg's 14 cats in one sentence, and the two counts were filed under each other. See the mirror-image note under PMID 21041335.
 
 **PMID 21041335** · Thunberg B 2010
 > Intraoperative and postoperative complications were seen in 21% (three of 14) and 50% (seven of 14) of cases, respectively.
-> ⚠️ The figure `10` cited in the body **does not appear in the abstract text** — it may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
+> ⚠️ **FALSE POSITIVE, resolved 2026-07-20.** The figure `10` was flagged here. It is the case count of **Hardie 2009 (PMID 19538664)** — "Of 10 cats", "all 10 cats" — quoted verbatim in that paper's own excerpt block. This is the mirror image of the note under PMID 19538664: one body sentence names both cohorts, and sentence-level attribution swapped them.
 
 **PMID 24028692** · Simpson KM 2013
 > Lesions were diagnosed as postganglionic (mydriasis within 20 min) or preganglionic (mydriasis between 20 and 45 min).
@@ -357,7 +357,7 @@ Of these, **van den Broek 1987 carries two key assertions — that miosis is the
 **PMID 35342739** ·  
 > Cases were defined as animals presented for consultation with strong evidence of current, or recent heat induced illness during the study period (2013–2018).
 > Results:  The HRI cases included 146 dogs, 16 cats, 8 guinea pigs, 3 rabbits and 1 ferret.
-> ⚠️ The figures `10, 62.5` cited in the body **do not appear in the abstract text** — they may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
+> ⚠️ **Gap confirmed real and narrowed, 2026-07-20.** The figures `10, 62.5` genuinely belong to this paper — the body attributes them to no one else — so this is not one of today's misattributions. The **denominator is verified**: "16 cats" is quoted above from the abstract. What is not verified is the numerator: the 10/16 with no documented trigger, and the 6 with one. **Retrieve the full text before citing those two.**
 
 **PMID 35622759** · Hall EJ 2022
 > The median ambient temperature on days of HRI events was 16.9 °C.
