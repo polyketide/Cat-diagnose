@@ -15,7 +15,8 @@ knowledge-base/                        # analysis-facing notes (English, with ve
   ├── targeted-and-immunotherapy-evidence.md
   ├── supportive-and-palliative-care.md
   ├── feline-oncology-literature-survey.md
-  └── upper-airway-response-marker-validity.md
+  ├── upper-airway-response-marker-validity.md
+  └── emergency-triage-red-flags.md
 guides/                                # owner-facing guides, Markdown + PDF (Chinese)
   ├── feline-lymphoma-all-types-owner-guide.zh.{md,pdf}
   └── feline-nasal-lymphoma-owner-guide.zh.{md,pdf}
