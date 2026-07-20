@@ -20,6 +20,7 @@ SKIP; it never fabricates a PASS.
 
 Usage:
   dr_drill.py leg1 [--archive DIR] [-v]
+  dr_drill.py leg2 [--count N] [--batch N]
   dr_drill.py self-test [--archive DIR]
 """
 from __future__ import annotations
@@ -257,6 +258,135 @@ def cmd_self_test(args) -> int:
         return 1
 
 
+def _hash_tree(records: Path) -> dict[str, str]:
+    """sha256 of each record FILE as it sits on disk — not the stored hash field,
+    which would be self-confirming. This is what proves bytes were reused rather
+    than rewritten."""
+    import hashlib
+    return {f.name: hashlib.sha256(f.read_bytes()).hexdigest()
+            for f in sorted(records.glob("*.json"))}
+
+
+def _broken_records(records: Path) -> list[str]:
+    """Records that do not parse or lack their payload — what a crash mid-write
+    leaves behind, and what a resume must never silently accept as done."""
+    bad = []
+    for f in sorted(records.glob("*.json")):
+        try:
+            rec = json.loads(f.read_text(encoding="utf-8"))
+            if not rec.get("raw_xml") or not rec.get("sha256"):
+                bad.append(f.name)
+        except Exception:
+            bad.append(f.name)
+    return bad
+
+
+def cmd_leg2(args) -> int:
+    """Leg 2 — crash resume.
+
+    Kill a fetch mid-flight, re-dispatch the identical command, and assert it
+    resumes from its checkpoint rather than starting over, reusing already-written
+    records byte for byte.
+
+    ⚠️ Controlled kill -9, never a real reboot: the node this pipeline targets has
+    an unresolved crash history, so rebooting to test crash-recovery risks
+    triggering the very fault, and the resume path exercised is identical.
+
+    ⚠️ The crash window is made by increasing the number of round trips (small
+    --batch), not by inserting delays. The sibling project's drill initially
+    tested nothing because the work finished before the killer fired; padding with
+    sleeps would only have measured the sleep.
+    """
+    import subprocess
+    import time
+
+    tool = Path(__file__).resolve().parent / "pubmed_archive.py"
+    total = args.count
+
+    with tempfile.TemporaryDirectory() as tmp:
+        scratch = Path(tmp) / "arc"
+        records = scratch / "records"
+        cmd = [sys.executable, str(tool), "fetch", "--archive", str(scratch),
+               "--batch", str(args.batch), "--limit", str(total)]
+
+        # --- run 1: kill it mid-flight -------------------------------------
+        proc = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        deadline = time.time() + args.timeout
+        killed_at = None
+        while time.time() < deadline:
+            n = len(list(records.glob("*.json"))) if records.is_dir() else 0
+            if n >= args.batch and n < total:      # at least one batch landed, not all
+                proc.kill()
+                killed_at = n
+                break
+            if proc.poll() is not None:            # finished before we could cut in
+                break
+            time.sleep(0.05)
+        proc.wait()
+
+        if killed_at is None:
+            n = len(list(records.glob("*.json"))) if records.is_dir() else 0
+            print(f"DR_LEG2: SKIP (no crash window: fetch reached {n}/{total} before "
+                  f"it could be killed — lower --batch or raise --count)")
+            return 0
+
+        before = _hash_tree(records)
+        broken_before = _broken_records(records)
+
+        # --- run 2: identical command, must resume -------------------------
+        # In --self-test the second run is deliberately given --force, which makes
+        # it refetch everything. That is exactly the fault this leg exists to
+        # catch, so the leg must FAIL on it; a leg that passes here detects
+        # nothing. Leg 1 taught this lesson the hard way.
+        cmd2 = cmd + (["--force"] if args.self_test else [])
+        r2 = subprocess.run(cmd2, capture_output=True, text=True)
+        stdout = r2.stdout.strip()
+        m = re.search(r"(\d+) PMIDs requested, (\d+) to fetch", stdout)
+        after = _hash_tree(records)
+        broken_after = _broken_records(records)
+
+        failures = []
+        # (a) resumed rather than restarted
+        if m:
+            to_fetch = int(m.group(2))
+            if to_fetch >= total:
+                failures.append(f"restarted from zero ({to_fetch}/{total} to fetch)")
+        else:
+            failures.append("could not parse resume report from run 2")
+        # (b) previously written records reused byte for byte
+        rewritten = [k for k, v in before.items() if after.get(k) != v]
+        if rewritten:
+            failures.append(f"{len(rewritten)} record(s) rewritten, not reused: "
+                            f"{', '.join(rewritten[:3])}")
+        # (c) completed
+        if len(after) != total:
+            failures.append(f"incomplete after resume: {len(after)}/{total}")
+        # (d) no corruption survived — a truncated record must not pass as done
+        new_broken = set(broken_after) - set(broken_before)
+        if broken_after:
+            failures.append(f"{len(broken_after)} unreadable record(s) after resume: "
+                            f"{', '.join(broken_after[:3])}")
+
+        detail = (f"killed after {killed_at}/{total} records, resumed "
+                  f"{to_fetch if m else '?'} remaining, {len(before)} carried over "
+                  f"byte-identical, {len(after)}/{total} final")
+        if broken_before:
+            detail += f", {len(broken_before)} truncated by the kill"
+        if args.self_test:
+            if failures:
+                print(f"DR_LEG2_SELFTEST: PASS (a non-resuming fetch was detected: "
+                      f"{'; '.join(failures)})")
+                return 0
+            print(f"DR_LEG2_SELFTEST: FAIL (a forced full refetch went UNDETECTED — "
+                  f"this leg proves nothing) [{detail}]", file=sys.stderr)
+            return 1
+        if failures:
+            print(f"DR_LEG2: FAIL ({'; '.join(failures)}) [{detail}]", file=sys.stderr)
+            return 1
+        print(f"DR_LEG2: PASS ({detail})")
+        return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -268,6 +398,13 @@ def main() -> int:
     p2 = sub.add_parser("self-test")
     p2.add_argument("--archive")
     p2.set_defaults(fn=cmd_self_test)
+    p3 = sub.add_parser("leg2")
+    p3.add_argument("--count", type=int, default=24, help="records to fetch in the drill")
+    p3.add_argument("--batch", type=int, default=4, help="records per request; smaller = wider crash window")
+    p3.add_argument("--timeout", type=float, default=120.0)
+    p3.add_argument("--self-test", action="store_true",
+                    help="prove this leg detects a fetch that does NOT resume")
+    p3.set_defaults(fn=cmd_leg2)
     args = ap.parse_args()
     return args.fn(args)
 

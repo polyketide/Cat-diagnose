@@ -112,19 +112,26 @@ def cmd_fetch(args) -> int:
         origin = pmids_from_kb()
         wanted = sorted(origin)
 
+    batch_size = getattr(args, "batch", None) or BATCH
+    # --limit selects a fixed SUBSET OF PMIDS, before the already-archived filter.
+    # Applying it after would make each run pick up a different `limit` records,
+    # so a resumed run would fetch beyond the intended set instead of completing
+    # it — the exact defect DR Leg 2 caught on its first run.
+    if getattr(args, "limit", None):
+        wanted = wanted[:args.limit]
     todo = [p for p in wanted
             if args.force or not (arc / "records" / f"{p}.json").exists()]
     print(f"{len(wanted)} PMIDs requested, {len(todo)} to fetch "
           f"({len(wanted)-len(todo)} already archived)")
 
     ok = failed = 0
-    for i in range(0, len(todo), BATCH):
-        batch = todo[i:i + BATCH]
+    for i in range(0, len(todo), batch_size):
+        batch = todo[i:i + batch_size]
         try:
             xml_text = fetch_batch(batch)
             records = split_records(xml_text)
         except Exception as exc:                      # never fabricate a substitute
-            print(f"  FETCH-ERROR batch {i//BATCH+1}: {exc}", file=sys.stderr)
+            print(f"  FETCH-ERROR batch {i//batch_size+1}: {exc}", file=sys.stderr)
             failed += len(batch)
             continue
 
@@ -147,9 +154,16 @@ def cmd_fetch(args) -> int:
                 "tool_version": TOOL_VERSION,
                 "cited_by": origin.get(pmid, []),
             }
-            (arc / "records" / f"{pmid}.json").write_text(
+            # Atomic write: a crash mid-write must not leave a truncated record
+            # that a later resume would skip as "already done". rename(2) is
+            # atomic within a filesystem, so a reader sees either the old state
+            # or the complete record, never a partial one.
+            dest = arc / "records" / f"{pmid}.json"
+            tmp_path = dest.with_suffix(".json.partial")
+            tmp_path.write_text(
                 json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8"
             )
+            os.replace(tmp_path, dest)
             ok += 1
         time.sleep(SLEEP)
 
@@ -314,6 +328,8 @@ def main() -> int:
         if name == "fetch":
             p.add_argument("--pmids", help="file of PMIDs; default = scan knowledge-base/")
             p.add_argument("--force", action="store_true", help="re-fetch existing records")
+            p.add_argument("--batch", type=int, help="records per request (default %d)" % BATCH)
+            p.add_argument("--limit", type=int, help="cap how many records to fetch this run")
         p.set_defaults(fn=fn)
     args = ap.parse_args()
     return args.fn(args)

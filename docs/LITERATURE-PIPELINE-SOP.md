@@ -78,7 +78,9 @@ Modelled on the sibling project's DR drill, whose governing idea is `runs ≠ wo
 
 ### The legs
 
-**Status 2026-07-20: Leg 1 and its self-test are implemented in `tools/dr_drill.py` and both pass.** Legs 2–4 are still specification.
+**Status 2026-07-20: Legs 1 and 2 are implemented in `tools/dr_drill.py`, each with a self-test that proves it detects its own fault class. All four checks pass.** Legs 3–4 are still specification.
+
+Leg 2 found a real defect on its first run — `--limit` was applied after the already-archived filter, so a resumed run fetched a *different* subset instead of completing the intended one, ending with more records than requested. Fixed, and the reason is recorded in the code. The archive now also writes atomically (temp file + `rename`), because a crash mid-write would otherwise leave a truncated record that a later resume skips as already done; the drill did not happen to hit that window, which is precisely why it should not be left to luck.
 
 **Leg 1 — Archive rebuild (the one that matters most).** Point the pipeline at an empty scratch archive and rebuild from the repository's committed PMID list alone. Assert every PMID resolves, and that the re-fetched payloads reproduce the verbatim excerpts currently in the knowledge base **byte-for-byte**. This simultaneously tests the §3 cache-not-truth split and the frozen-baseline invariant. If a PMID cannot be rebuilt because it exists only in the archive, that is the exact failure this design is meant to prevent — a `FAIL`, not a warning.
 
