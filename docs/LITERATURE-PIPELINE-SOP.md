@@ -47,8 +47,9 @@ Replaying ten real searches produced a 136-candidate pool, of which 12 are cited
 | Query construction | Local, escalate when unclear | Mechanical for known red flags; a genuinely new question is worth a Claude call |
 | PubMed search, metadata fetch | **Local** | Pure API work |
 | Deduplicate, index by PMID | **Local** | Dictionary lookup |
+| Skip what is already archived or cited | **Local** | Identity matching, not a judgement about content — lossless by construction |
 | Drop noise fields | **Local** | `query_translation` (PubMed's expanded query string) and the repeated legal notice are pure overhead |
-| Crude relevance filter | **Local** | "Does this abstract contain a quantitative result? Is the species right? Is this PMID already in the knowledge base?" |
+| ~~Relevance filtering by content~~ | **Nowhere** | **Measured and rejected** — 66.7% recall (§1). Dropping papers on quantitative or species signals discards load-bearing sources, silently. |
 | **Select the load-bearing paper** | **Claude** | Judgement |
 | **Choose the sentence to excerpt** | **Claude** | This is the project's core asset |
 | **Verify figures against source** | **Claude** | The check that catches transposed PMIDs and phantom numbers |
@@ -56,6 +57,8 @@ Replaying ten real searches produced a 136-candidate pool, of which 12 are cited
 | Write interpretation | **Claude** | — |
 
 **The invariant**: the local side moves bytes, the Claude side makes claims. A local model may rank a paper as promising; it may never produce a sentence that ends up inside `## 原文摘录`.
+
+**The line inside that invariant, learned by measurement**: the local side may decide by **identity**, never by **content**. Skipping a PMID already in the archive cannot lose a paper — the paper is already held. Deciding a paper looks irrelevant can, and the loss leaves no trace, because nothing downstream can miss what it was never shown. So ranking is permitted and truncation is not: **whatever the local side ranks, it hands over complete.** The moment a local score decides what the agent sees rather than what it sees first, content filtering has been reintroduced under another name.
 
 ## 3. Where the archive lives — and why that makes DR mandatory
 
