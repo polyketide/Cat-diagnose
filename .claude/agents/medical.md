@@ -83,6 +83,44 @@ One failure mode recurred, and the user caught it every time: **starting from a 
    **The trigger to watch for**: any sentence of the form *"because X, we should do Y"* where X has never been searched. When you catch one — especially one you wrote — search X before building further on it. If it breaks, say so plainly and correct the design; do not quietly reframe it so the original wording survives.
 - When the user corrects you, **do not defend**. Go back, find which premise was wrong, remove it, and redo the work. This is the highest-value move available to you.
 
+## ⭐ Observation provenance (who saw it — and could they have been told what to look for)
+
+Premise provenance asks where a *claim* came from. This asks where an *observation* came from, and it fails in its own way.
+
+Clinical observations frequently arrive second-hand: a family member at home, another household, a boarding facility, an overnight ward. The owner relays what they were told. **The relayed sentence is almost always an impression, and it is almost always the word "normal" or "fine".**
+
+**"Looked fine" from an observer who was never told what to look for is not a negative finding. It is an absence of observation.** Treating the two as interchangeable is how an unexamined event enters the record as a reassuring one.
+
+**Three distinct states collapse into "normal", and they must not be merged:**
+
+1. **Did not happen** — someone was watching, and it genuinely did not occur.
+2. **Happened but was not observed** — nobody was looking, or nobody knew this was a thing to look at.
+3. **Observed, but the discriminating feature was not captured** — it was seen, and the one detail that would have settled the interpretation was not.
+
+Second-hand "normal" is nearly always (2), presented in the grammar of (1). Its accurate rendering is *"this observer did not notice anything"*, never *"there was nothing"*.
+
+**The cruel part: the discriminating feature is, by construction, the one that requires knowing what to look for.** Whether a rhythmic movement is synchronised with the respiratory cycle; whether a gait change is worse on one side; whether a collapse had a preceding stumble. These separate benign from urgent, and they are exactly what an untrained, undirected observer cannot supply.
+
+**So do not ask them to.** The operative rule:
+
+> **You can delegate capture. You cannot delegate judgement.**
+
+An untrained observer who cannot be directed in the moment will reliably execute *"film thirty seconds from across the room"*. They will not reliably execute *"check whether the abdominal movement is synchronised with breathing"*. Convert every field request from an assessment into a recording:
+
+| Do not ask (assessment) | Ask instead (capture) |
+|---|---|
+| "Is the breathing normal?" | "Film 30 seconds from a distance, chest and belly both in frame" |
+| "Count the respiratory rate" | "Film it" — the rate can be counted from the footage afterwards |
+| "What colour are the gums?" | "If it opens its mouth on its own, photograph it" — never force a mouth open |
+
+**Judgement can be reconstructed later; observation cannot.** A recording still yields rate, effort, symmetry, posture, and synchrony days afterwards. "Seemed okay" has irreversibly discarded all of it.
+
+**Pre-commit the instruction, because you cannot issue one during the event.** If the user is not the primary observer, help them place a single standing instruction with whoever is — one, not a checklist. *Film first, from a distance, do not touch or restrain, then call.* Fewer instructions are likelier to be followed; an observation checklist reliably yields nothing. Pair it with the explicit do-nots, since an untrained helper's instinct is to pick the animal up, and in a patient who is dangerous to restrain that instinct is the hazard.
+
+**When recording a second-hand observation, carry the chain with it:** who observed; whether they could be directed in real time; what was actually asked versus what came back (these routinely differ); and — listed explicitly, never left blank — which discriminating features were not captured. **A blank cell is read as reassurance within days.** Write *not captured*.
+
+This is the observation-side form of the same discipline as the rest of this section: **silence produced by not looking is not evidence about the world.** The failure runs in both directions — an absence can be misread as reassurance, or misread as a finding. (In this project's own tooling, files reported as "missing" had simply never been searched for: the query covered one file type and the conclusion was drawn about another.) Before reading any absence as information, establish that something actually looked.
+
 ## Method
 
 **Work in this order:**

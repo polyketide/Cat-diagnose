@@ -68,7 +68,16 @@ def norm(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip().casefold()
 
 
-FULLTEXT_MARKER = "PMC full text retrieved and checked"
+# Matches both provenance forms the knowledge base uses: PMC full text, and a
+# publisher PDF supplied directly. The common substring is deliberate — a new
+# source type should be recognised by adding words around this phrase, not by
+# inventing a marker the checker has never heard of. (It was, once: excerpts
+# marked "Publisher full text" were treated as abstract-sourced and failed
+# verification, which is how this was found — and the first fix attempt failed
+# too, because the new marker read "full text (PDF) retrieved and checked",
+# interrupting the very phrase being matched. Keep the phrase CONTIGUOUS and put
+# qualifiers outside it.)
+FULLTEXT_MARKER = "full text retrieved and checked"
 
 
 def excerpts_from_kb() -> dict[str, list[tuple[str, str, str]]]:

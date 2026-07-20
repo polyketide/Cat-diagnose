@@ -56,7 +56,9 @@ This file has so far treated the eye as the visible consequence, because that is
 
 > **The brain matters for triage.** Neurological signs from hypertensive encephalopathy — including seizures — are a recognised presentation, which means a cat arriving with a first seizure may be arriving with an untreated blood pressure problem. The agent's own emergency screen (`.claude/agents/medical.md`, Triage §1) lists continuous seizures as a red flag; it now names hypertensive encephalopathy among the causes worth remembering, which it did not before this file existed.
 >
-> ⚠️ This knowledge base has **not** retrieved prevalence or outcome data for the cardiac, cerebral or renal consequences — only for the ocular ones (§1). Their absence here reflects what was searched, not their importance.
+**Now quantified from the full text** (this section previously recorded the absence): **"Studies have reported neurological signs in 15–46% of hypertensive cats, including disorientation, seizures, ataxia, depression and vestibular signs."** Ocular changes, for comparison, are reported in **"approximately 50% of hypertensive cats"**.
+
+> ⚠️ Cardiac and renal consequences remain unquantified here. And the guidelines are candid that the renal link runs both ways and is unresolved: **"the importance of hypertension in causing nephrosclerosis and in causing or contributing to the progression of CKD remains uncertain."**
 
 On treatment, the consensus is that **"amlodipine besylate is the treatment of choice to manage feline hypertension and is effective in the majority of cats, but the dose needed to successfully manage hypertension varies between individuals"**, with some cats needing long-term adjuvant therapy. ⚠️ Recorded for context only — **dosing and drug selection are the attending veterinarian's decisions**, and the individual variation the guidelines note is precisely why this cannot be read off a page.
 
@@ -73,6 +75,63 @@ Situational hypertension — the measurement itself raising the pressure — is 
 > ⚠️ Both figures are floors — the authors report them as "at least", and the two came from one Dutch first-opinion population. The direction is clear; the ratio should not be quoted as precise.
 
 **A practical implication that is actionable and cheap**: stress level and *sitting position* were both significantly associated with the reading. How a cat is positioned and settled is not a detail around the measurement — it is part of it.
+
+### 3.1 How large the white-coat effect can be — and what the guidelines do about it
+
+The magnitude is not small. Direct-measurement studies in healthy cats showed **"up to 80 mmHg change in SBP in response to a simulated clinic visit, showing the potential magnitude of 'white coat hypertension' in healthy cats"** (Taylor 2017, full text).
+
+> **⚠️ This complicates §3 and the file states so rather than burying it.** An 80 mmHg swing is larger than the entire distance between "normotensive" and "severely hypertensive". Taken alone it could be read as vindicating the 92.0% who worry about situational hypertension.
+>
+> **But the guidelines' answer is not to measure less — it is to measure again.** Their thresholds are built around exactly this: treatment is justified at **≥160 mmHg only "on at least two separate occasions"**, and at ≥170 mmHg likewise. A single reading was never meant to carry the decision.
+>
+> **∴ The corrected form of §3's argument**: the alternative to an unreliable single measurement is a repeated one, not an absent one. Declining to measure does not avoid the error — it converts a correctable false positive into an uncorrectable false negative.
+
+---
+
+## 3.5 The numbers the guidelines actually give
+
+**Read this as the field's stated position, not as instructions.** Whether any of it applies to a given cat is the attending veterinarian's judgement.
+
+**Categories** (IRIS staging by systolic pressure, with the risk of target organ damage attached):
+
+| SBP (mmHg) | Category | Risk of TOD |
+|---|---|---|
+| <150 | Normotensive | Minimal |
+| 150–159 | Borderline hypertensive | Low |
+| 160–179 | Hypertensive | Moderate |
+| ≥180 | Severely hypertensive | High |
+
+**When the Panel considers treatment justified** — note that every criterion pairs a pressure with either repetition or evidence of damage, never a single number alone:
+
+- **≥150 mmHg on a single occasion**, *and* clear evidence of ocular or neurological target organ damage
+- **≥160 mmHg on at least two separate occasions**, *and* evidence of TOD including ocular, neurological, cardiac or kidney damage
+- **≥170 mmHg on at least two separate occasions**, *and* the clinician does not consider 'white coat hypertension' likely to be the cause
+- **<150 mmHg but with clear evidence of active ocular TOD**
+
+**Targets, and a floor that is easy to overlook**: the short-term aim (ideally within 1–2 weeks) is to reduce SBP to **<160 mmHg**; longer term, **<150 mmHg** may be prudent. But **"A safe lower limit for indirectly measured SBP in cats on antihypertensive therapy has not been well established, but the Panel recommends SBP should be kept above 110 mmHg."**
+
+> **The floor deserves as much attention as the ceiling.** In the emergency setting the guidelines warn that **"Uncontrolled, abrupt reduction in SBP or development of hypotension can precipitate myocardial, cerebral or renal ischaemia and should be avoided."** Lower is not uniformly better — the same asymmetry this project keeps meeting.
+
+**Monitoring intervals for cats without hypertension**, which is the part relevant to an owner asking "should this have been checked?":
+
+| Cat | Frequency |
+|---|---|
+| Healthy adult (3–6 y) | Consider every 12 months |
+| Healthy senior (7–10 y) | At least every 12 months |
+| Healthy geriatric (≥11 y) | At least every 6–12 months |
+| Recognised risk factors (CKD, hyperthyroidism *including treated*, and others) | Measure immediately, reassess at least every 3–6 months |
+
+⚠️ **"Including treated"** is not a throwaway. A cat whose hyperthyroidism has been successfully treated remains in the higher-frequency category — which connects directly to `hyperthyroidism-and-kidney-disease.md`, where the post-treatment window is already where masked kidney disease surfaces.
+
+---
+
+## 3.6 What the guidelines admit they cannot show
+
+**"Although managing hypertension has not yet been demonstrated to provide a survival benefit"** (Taylor 2017, full text, discussing proteinuria and CKD).
+
+> This sits at the centre of this file and is easy to skip past. Everything above — the thresholds, the targets, the monitoring intervals — rests on preventing target organ damage, which is a reasonable and mechanistically sound aim. **It is not the same as a demonstrated survival benefit, and the guidelines do not claim one.** The §6 gap "does earlier detection change outcomes" is therefore not an oversight in this knowledge base; it is an open question in the field, acknowledged by the consensus document itself.
+
+⚠️ **Funding, recorded because this project records it**: **"These Guidelines were supported by an educational grant from Ceva to the ISFM."** The Panel declares no conflicts of interest. Ceva manufactures the synthetic facial pheromone the guidelines mention as one option for reducing stress during measurement. Educational grants are routine in veterinary guideline development and nothing here suggests the recommendations were shaped by it — but Block 2024 documents that sponsorship correlates with reported outcomes in veterinary studies generally, so noting the relationship is the consistent thing to do rather than an accusation.
 
 ---
 
@@ -144,6 +203,25 @@ Chronic kidney disease was again the commonest concurrent diagnosis in cats with
 > These Guidelines from the International Society of Feline Medicine (ISFM) are based on a comprehensive review of the currently available literature, and are aimed at providing practical recommendations to address the challenges of feline hypertension for veterinarians.
 > There are many areas where more data is required which, in the future, will serve to confirm or modify some of the recommendations in these Guidelines.
 > ⚠️ Consensus statement, not a clinical practice guideline: it incorporates expert judgement where evidence is limited, and says so itself in the final sentence above. Cited accordingly.
+> **【Publisher full text retrieved and checked 2026-07-20 — source: publisher PDF】**
+> Ocular changes have been reported in approximately 50% of hypertensive cats.
+> Studies have reported neurological signs in 15-46% of hypertensive cats, including disorientation, seizures, ataxia, depression and vestibular signs.
+> However, such lesions are not solely caused by hypertension; and, as many cats with hypertension have concomitant CKD, the importance of hypertension in causing nephrosclerosis and in causing or contributing to the progression of CKD remains uncertain.
+> although managing hypertension has not yet been demonstrated to provide a survival benefit
+> These studies also highlight the lability of feline BP in individual cats, with one demonstrating up to 80 mmHg change in SBP in response to a simulated clinic visit, showing the potential magnitude of 'white coat hypertension' in healthy cats.
+> Indirect SBP is >=150 mmHg on a single occasion, and there is clear evidence of ocular or neurological TOD.
+> Indirect SBP is >=160 mmHg on at least two separate occasions, and there is evidence of TOD including ocular, neurological, cardiac or kidney damage.
+> Indirect SBP is >=170 mmHg on at least two separate occasions, and the clinician does not consider 'white coat hypertension' is likely to be the cause.
+> Indirect SBP is <150 mmHg, but there is clear evidence of active ocular TOD.
+> The goal of therapy for hypertension is to decrease the risk of TOD, and help maintain or improve the health of the cat. This is generally achieved with an initial target SBP of <160 mmHg.
+> Given that the IRIS group suggests the risk of TOD is minimal if SBP is <150 mmHg, and that some cats with TOD have pressures below 160 mmHg, a target of <150 mmHg may be an appropriate long-term goal.
+> A safe lower limit for indirectly measured SBP in cats on antihypertensive therapy has not been well established, but the Panel recommends SBP should be kept above 110 mmHg.
+> Uncontrolled, abrupt reduction in SBP or development of hypotension can precipitate myocardial, cerebral or renal ischaemia and should be avoided.
+> The majority of cats reported in the literature to have TOD associated with hypertension have had indirect SBP measurements in excess of 160 mmHg
+> These Guidelines were supported by an educational grant from Ceva to the ISFM.
+> The Panel members have no conflicts of interest to declare.
+> ⚠️ The IRIS staging table (<150 / 150-159 / 160-179 / >=180) and the monitoring-frequency table are reproduced in the body as tabulated data, not as prose quotations. Source: Tables 4 and 1 respectively.
+> ⚠️ Source is the publisher PDF supplied by the repository owner, read directly — not a web-page summary. Only load-bearing sentences are excerpted; no section is reproduced in full.
 
 **PMID 33512084** · Sarchese V 2021
 > A total of 225 cats were enrolled in the study, and the prevalence of fundus abnormalities was 58.6% (21.2%: grade 1; 18.2%: grade 2; 36.4%: grade 3; and 24.2%: grade 4).
