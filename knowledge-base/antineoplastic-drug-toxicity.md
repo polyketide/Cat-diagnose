@@ -71,6 +71,14 @@
 
 **PMID 38825481** · Inazumi H 2024
 > The most common adverse event was hyperammonemia, which occurred in 10 of 12 cases where we could compare plasma ammonia concentrations before and after the first dose of L-Asp.
+> This study included 43 cats. The response rate (RR) after the first administration of L-Asp was 37.2% (Complete remission: 7.0%, partial remission: 30.2%).
+> Plasma phosphate concentrations were also significantly increased (P<0.001) within 24 hr after the first dose.
+> Decreased appetite, vomiting, and diarrhea were also observed in five, three, and seven cases, respectively, and Grade 3 or higher gastrointestinal signs were observed as adverse events in three cases.
+> The median overall survival of all cats was 150 days (range, 5-1,065 days), and the median progression-free survival was 104 days (range, 2-978 days).
+> RR was significantly higher in cases with primary gastric lesions (64.3%) than in those with primary intestinal lesions (24.1%) (P=0.018), and it was also higher in cases without anemia (57.1%) than those with anemia (15.0%) (P=0.009).
+> **【Publisher full text retrieved and checked 2026-07-20 — source: publisher PDF】**
+> When cats with LCGIL were treated by various chemotherapy, their median overall survival (OS) was reported to be 65-157 days.
+> ⚠️ **FALSE POSITIVE resolved 2026-07-20**: the figure `197` was flagged here. It belongs to **Blake 2016 (PMID 26834270)** — "197 doses in cats, 0 HSR" — cited in the same body line as this paper. Sentence-level attribution again.
 > This study included 43 cats.
 > Plasma phosphate concentrations were also significantly increased (P<0.001) within 24 hr after the first dose.
 > ⚠️ The figures `197, 1996, 2016, 8947875, 26834270` cited in the body **do not appear in the abstract text** — they may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)

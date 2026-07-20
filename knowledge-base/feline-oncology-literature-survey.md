@@ -44,6 +44,18 @@
 
 **Where things stand**: grade and subtype determine strategy; **achieving complete remission (CR) is the strongest positive prognostic factor in almost every study**; prospective RCTs are lacking.
 
+> **⭐ The single largest prognostic divide in feline lymphoma, from three independent series — none of which states the comparison.**
+>
+> | Form | Median overall survival | Source |
+> |---|---|---|
+> | **Small-cell** alimentary | **1317 days** (~3.6 years) | Pope 2015, PMID 29067174 (56 cats) |
+> | **Large-cell** gastrointestinal | **150 days** | Inazumi 2024, PMID 38825481 (43 cats) |
+> | **Intermediate-to-large-cell**, CMOP/CHOP | **103 / 80 days** | Lai 2025, PMID 40443182 (123 cats) |
+>
+> **Roughly an order of magnitude, turning on cell size.** Inazumi's own literature review puts previously reported survival for large-cell gastrointestinal lymphoma at **65–157 days**, which brackets all three large-cell figures above and makes the convergence unlikely to be chance.
+>
+> ⚠️ Different populations, protocols, countries and eras; these are not head-to-head comparisons and the medians should not be subtracted from one another. What survives every one of those caveats is the **magnitude** of the gap — which is why cell size determines what an owner is actually deciding about, and why `feline-oncology-literature-survey.md` treats the small-cell/large-cell split as the first question rather than a refinement. ⚠️ Note also that Ii 2022 (§ above) found cell size *not* predictive within intestinal T-cell lymphoma once epithelial cytotoxic phenotype was accounted for — the divide is robust across broad forms, not a law within every subtype.
+
 - **Low-grade / small-cell alimentary form** (mostly T-cell, indolent): oral **chlorambucil + prednisolone** carries the best prognosis — CR 76%, median remission 18.9 months (Lingard 2009); in a series of 56 cats, ORR 85.7%, median PFS 1078 days and median OS 1317 days, with re-induction still effective at relapse after discontinuation (Pope 2015, PMID 29067174).
 - **High-grade / intermediate-to-large-cell form**: multi-agent COP/CHOP, but overall median survival is usually only **3–7 months**. **⭐ The most recent direct comparison puts it lower**: in 123 cats across three referral hospitals, response rate was **66% in both arms**, median progression-free interval **69 days (CMOP) vs 59 days (CHOP)**, and **median survival 103 vs 80 days** (Lai 2025, PMID 40443182). ⚠️ Referral caseload and retrospective, so this is not a population estimate — but it is the number an owner is deciding against, and roughly three months is a very different proposition from "3–7 months" read optimistically. **Alternatives to CHOP**: CMOP (mitoxantrone replacing doxorubicin, giving bolus administration without extravasation risk; 123 cats, the two arms equivalent — response rates 66% in both, median PFI 69 vs 59 days, median ST 103 vs 80 days; Lai 2025, PMID 40443182) and COVP (adding vinblastine; CR 59%, median OS 412 days, with lower GI toxicity; Lee 2025, PMID 40119555).
 - **Primary laryngeal/tracheal (PLTL)**: mostly B-cell, low-to-intermediate grade, **median PFS and OS both 909 days** (Rodriguez-Piza 2023, PMID 36655881) ★ relevant to head-and-neck cases.
@@ -181,7 +193,7 @@
 > Median overall survival was 1317 days.
 > Medical records from 56 cats were evaluated.
 > Median progression-free survival was 1078 days.
-> ⚠️ The figures `76, 18.9, 2009` cited in the body **do not appear in the abstract text** — they may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
+> ⚠️ **FALSE POSITIVE resolved 2026-07-20.** `76` and `18.9` belong to **Lingard 2009 (PMID 19576832)** — "CR 76%, median remission 18.9 months" — attributed correctly in the body and cited in the same sentence as this paper. Sentence-level attribution filed them here.
 
 **PMID 31113336** · Dagher E 2019
 > ⚠️ The figure `2020` cited in the body **does not appear in the abstract text** — it may come from the full text (which the abstract does not contain), or may be erroneous; **retrieve the full text and verify before citing**. (Note: this check misses figures that the source spells out as English words.)
