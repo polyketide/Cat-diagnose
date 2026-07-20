@@ -68,6 +68,18 @@ Cats presenting to an emergency room in respiratory distress are unambiguously a
 
 > **Triage implication**: there is no single admission number that sorts these cats. Do not let any one value — lactate, respiratory rate, temperature — stand in for the clinical picture, and do not offer an owner reassurance derived from one.
 
+### 1.4 Hepatic lipidosis — why "stopped eating" is a red flag, and one intuition that is wrong
+
+**The threshold nobody has published.** Two searches have failed to find a quantified anorexia duration preceding feline hepatic lipidosis; the literature says *"prolonged anorexia"* and leaves it there (Fascetti/Center-style descriptions; here, Kuzi 2017, PMID 28978714). **The "2 days" figure that circulates — including in an earlier draft of this project's own triage section — is not sourced.** What justifies the caution is the other end: once established, this disease killed **27/71 (38%)** in a referral series.
+
+**A cat can arrive here without another disease.** Primary conditions were gastrointestinal disease, pancreatitis or cholangiohepatitis in 31/71 (44%), but **stressful events in 14/71 (20%)**, and it was idiopathic in 20/71 (28%). ⚠️ Referral population, so the mix is not what a first-opinion clinic sees. Still, it means a move, a boarding stay or a new animal in the house is a recognised trigger — an owner does not need to have missed an illness for this to happen.
+
+**⭐ The intuition that does not survive checking: "feed it as fast as possible".** In 48 cats with hepatic lipidosis, survival was **17/25 (68%) fed within 12 h of admission versus 13/23 (57%) fed later — P = .55, no difference**. Hospitalisation was actually **shorter** in the later-fed group (median 2.8 days, IQR 2.1–3.8) than the early-fed group (4.8 days, IQR 3.6–6.2; P < .001). Only increasing age (OR 1.313, 95% CI 1.032–1.671; P = .03) and ascites (OR 6.415, 95% CI 1.354–30.395; P = .02) predicted death. The authors conclude that **"An initial stabilization period before EN introduction does not decrease survival or increase duration of hospitalization"** (Griffin 2024, PMID 39447212).
+
+> **Triage consequence.** "Get it eating immediately" is the obvious advice and the evidence does not support it as urgent in itself. ⚠️ Note carefully what this does *not* say: it is about the timing of assisted feeding **in hospital, after admission**, not about how long an owner may wait at home. Nothing here licenses waiting. It removes one false urgency inside the clinic while leaving the reason to be seen untouched.
+>
+> ⚠️ 48 cats, retrospective, single centre, and the shorter stay in the later-fed group is very likely confounded by *why* those cats were stabilised first. Do not invert this into "later feeding is better".
+
 ---
 
 ## 2. Red flags kept on the list despite thin or absent evidence
@@ -76,9 +88,9 @@ Cats presenting to an emergency room in respiratory distress are unambiguously a
 
 | Red flag | Evidence status | How it must be worded |
 |---|---|---|
-| **Open-mouth breathing in a cat** | ⚠️ **No direct feline study located.** Searches for open-mouth breathing as a severity marker in cats returned nothing usable. It is standard veterinary teaching that cats, unlike dogs, do not pant benignly, but this knowledge base has not sourced it. | Give the caution. Do **not** attach a figure, and do not say "studies show". Say it is standard clinical teaching that has not been quantified here. |
-| **Anorexia ~2 days → hepatic lipidosis** | ⚠️ **No direct evidence located for the time threshold.** Searches for the duration of anorexia preceding feline hepatic lipidosis returned no usable quantitative study. The disease is well described; the specific "2 days" threshold is **not sourced here**. ⚠️ This claim currently appears in the agent's Triage section and must be softened there or sourced. | Advise being seen for a cat that has stopped eating. Do **not** state a numeric threshold as though established. |
-| **Permethrin / pyrethroid toxicosis** | ⚠️ **Only weak sources located**: a 2-cat case report of adjunctive lipid emulsion (Kuo 2013, PMID 23855545) and a correspondence letter (Sparkes 2016, PMID 27154944). No case series or incidence data retrieved. | Keep the caution — feline permethrin sensitivity is a well-known species difference and dog spot-on products applied to cats are a recognised hazard. But this file does not yet evidence it; do not cite figures. |
+| **Open-mouth breathing in a cat** | ⚠️ **Searched again 2026-07-20 from three angles; still nothing.** The only hits are single case reports that happen to mention it as a presenting sign. This appears to be a genuine absence rather than a search failure — the sign is treated as so self-evidently serious that nobody has studied it. It remains standard veterinary teaching that cats, unlike dogs, do not pant benignly. | Give the caution. Do **not** attach a figure, and do not say "studies show". Say it is standard clinical teaching that this project has searched for and been unable to source. |
+| **Anorexia → hepatic lipidosis** | ⚠️ **The time threshold is still unsourced** after a second search. The literature says "prolonged anorexia" without quantifying it. What *was* found (§1.4): the disease carries **38% mortality** (27/71), and 20% of cases follow a stressful event rather than another illness. | Advise being seen for a cat that has stopped eating, and say why — mortality once established is high. Do **not** state a numeric threshold as though established. |
+| **Permethrin / pyrethroid toxicosis** | ✅ **Improved 2026-07-20**: a 9-cat treatment series now supports the clinical picture — acute seizures, tremors and hypersalivation, all nine recovering and discharged within 24–54 h after intravenous lipid emulsion (Ricci 2022, PMID 35448426). Still no incidence data. | Keep the caution, and it can now say what the syndrome looks like. **Do not present ILE as a treatment recommendation** — that is the clinician's call, and nine cats with no control group is not an efficacy trial. |
 | **Urethral obstruction — overall survival** | ✅ **Located 2026-07-20** (this row previously read "not retrieved"). Primary-care cohort: 29.6% died during the episode, 88.0% of those by euthanasia (Beeston 2022) — see §0.1. Subgroup data remain relevant: severe anaemia (Beer 2016) and iatrogenic tears at 0.92% prevalence with worse survival (Manchester 2023, PMID 38244269). | Treat as an emergency (uncontroversial). The survival figure may now be quoted — with its denominator, and with the euthanasia fraction, which is the part that changes what an owner does. |
 
 > **Why they stay.** Absence of a retrieved study is absence of evidence, not evidence that the sign is benign — the same rule this knowledge base applies everywhere else. For a triage screen the asymmetry is decisive: an unnecessary consultation costs money, while a missed urethral obstruction costs the cat. **What is not permitted is dressing an unsourced caution in borrowed authority.**
@@ -120,9 +132,9 @@ Every study above is **human medicine**. No veterinary equivalent was found: sea
 ## 4. Gaps worth closing next
 
 - ~~Feline urethral obstruction: overall survival, and any quantified relationship between time-to-presentation and outcome.~~ **Closed 2026-07-20** — Beeston 2022 supplies the cohort outcome, Skinner 2026 the presentation-timing link via caregiver recognition (§0). Still open underneath it: whether earlier presentation *causes* the milder presentation, which no observational design here can settle.
-- Any quantitative basis for the anorexia-duration threshold in hepatic lipidosis.
-- Open-mouth breathing in cats as a severity marker — prevalence and outcome association.
-- Permethrin toxicosis in cats: a case series, incidence, and outcome with treatment.
+- ~~Any quantitative basis for the anorexia-duration threshold in hepatic lipidosis.~~ **Searched twice; still absent.** The literature says "prolonged anorexia" and does not quantify it. What was gained instead is the mortality once established (38%) and the trigger mix (§1.4). Treat the threshold as genuinely unpublished rather than merely unfound.
+- ~~Open-mouth breathing in cats as a severity marker.~~ **Searched from three angles 2026-07-20; nothing exists.** Only single case reports mentioning it in passing. Recorded as a real absence: the sign is apparently too self-evident to have been studied, which is itself worth knowing before anyone spends more time looking.
+- ~~Permethrin toxicosis in cats: a case series.~~ **Partly closed** — a 9-cat treatment series now supports the clinical picture (Ricci 2022, §2). Incidence data remain absent.
 - Whether owner-facing triage tools change time-to-presentation **in veterinary settings**. Searched 2026-07-20 — see §3. Human-medicine evidence exists and partly contradicts this project's assumptions; **no veterinary outcome study was found**, so the core question stands open.
 - Owner *compliance* with triage advice, in any species. This is the step every claimed benefit and every feared harm passes through, and Chambers 2019 found the human evidence on it "very limited".
 - Whether over-triage in cats carries measurable harm through transport stress specifically — the mechanism is documented in a single canine case (`upper-airway-response-marker-validity.md` §4.3) and nowhere quantified.
@@ -151,6 +163,9 @@ Every study above is **human medicine**. No veterinary equivalent was found: sea
 - Gerber B, Eichenberger S, Reusch CE. Guarded long-term prognosis in male cats with urethral obstruction. *J Feline Med Surg* 2008;10(1):16-23. PMID 17719255. [DOI](https://doi.org/10.1016/j.jfms.2007.06.007)
 - Beeston D, et al. Occurrence and clinical management of urethral obstruction in male cats under primary veterinary care in the United Kingdom in 2016. *J Vet Intern Med* 2022;36(2):599-608. PMID 35199370. [DOI](https://doi.org/10.1111/jvim.16389)
 - Skinner VJ, et al. Azotaemia and outcomes in male cats with initial and recurrent urethral obstruction: a multicentre, retrospective study of 601 cats (2020-2024). *J Feline Med Surg* 2026;28(7):1098612X261457846. PMID 42187200. [DOI](https://doi.org/10.1177/1098612X261457846)
+- Kuzi S, et al. Prognostic markers in feline hepatic lipidosis: a retrospective study of 71 cats. *Vet Rec* 2017;181(19):512. PMID 28978714. [DOI](https://doi.org/10.1136/vr.104192)
+- Ricci E, et al. Treatment of Permethrin Toxicosis in Cats by Intravenous Lipid Emulsion. *Toxics* 2022;10(4):165. PMID 35448426. [DOI](https://doi.org/10.3390/toxics10040165)
+- Griffin S, et al. Association of time to start of enteral nutrition and outcome in cats with hepatic lipidosis. *J Vet Intern Med* 2024;38(6):3016-3024. PMID 39447212. [DOI](https://doi.org/10.1111/jvim.17222)
 - Manchester RB, Hess RS, Reineke EL. Difficult catheterization and previous urethral obstruction are associated with lower urinary tract tears in cats with urethral obstruction. *J Am Vet Med Assoc* 2023;262(2):187-192. PMID 38244269. [DOI](https://doi.org/10.2460/javma.23.07.0419)
 
 > 以下为**人医文献**，用于评估「面向使用者的分诊工具」这一功能本身；跨物种外推的边界见正文 §3.4。
@@ -225,6 +240,28 @@ Every study above is **human medicine**. No veterinary equivalent was found: sea
 > Cats are less likely to present with azotaemia during recurrent UO episodes, which might be due to increased caregiver vigilance.
 > There was no difference in catheterisation and hospitalisation duration between cats with initial and recurrent UO.
 > ⚠️ "Increased caregiver vigilance" is the authors' proposed explanation for an observed association, not a measured variable. Cited in §0.2 as such.
+
+**PMID 28978714** · Kuzi S 2017
+> Feline hepatic lipidosis (HL) is a common, potentially life-threatening disease resulting from prolonged anorexia and increased catabolism.
+> The study included 71 cats (47 females and 24 males) and 85 control cats with non-HL diseases.
+> The overall mortality was 38 per cent (27/71 cats).
+> Common primary conditions included gastrointestinal diseases, pancreatitis and cholangiohepatitis (31 cats; 44 per cent) and stressful events (14; 20 per cent).
+> HL was idiopathic in 20 cats (28 per cent).
+> The primary disease was unassociated with mortality.
+> ⚠️ Note what this source does NOT contain: any quantified duration of anorexia. "Prolonged" is as specific as it gets, which is why the threshold remains unsourced in §2.
+
+**PMID 39447212** · Griffin S 2024
+> Seventeen of 25 (68%) cats fed ≤12 hours and 13 of 23 (57%) of cats fed >12 hours after hospital admission survived (P = .55).
+> Only increasing age (odds ratio [OR], 1.313; 95% confidence interval [CI], 1.032-1.671; P = .03) and the presence of ascites (OR, 6.415; 95% CI, 1.354-30.395; P = .02) were associated with death in multivariable analysis.
+> Hospitalization duration (median, interquartile range [IQR]) was shorter in cats fed >12 hours (2.8 days; IQR, 2.1-3.8 days) as compared with cats fed ≤12 hours (4.8 days; IQR, 3.6-6.2 days) after hospital admission (P < .001).
+> Forty-eight cats with HL.
+> ⚠️ This concerns the timing of enteral nutrition AFTER hospital admission. It says nothing about how long an owner may wait before seeking care, and must not be quoted as if it did.
+
+**PMID 35448426** · Ricci E 2022
+> In this study, the clinical response to treatment with intravenous lipid emulsion (ILE) for nine cats intoxicated with permethrin has been described.
+> The enrolled cats showed acute onset of seizures, tremors and hypersalivation that were partially controlled with the administration of benzodiazepines and intravenous fluid therapy.
+> After ILE treatment, all cats recovered rapidly and were discharged within 24-54 h.
+> ⚠️ Nine cats, no control group. Cited for the clinical picture, not as evidence of treatment efficacy.
 
 **PMID 26748857** · Beer KS 2016
 > Cats in the UO-A group had a significantly longer duration of clinical signs (P = 0.001), and were more likely to have a history of previous urethral obstruction (P = 0.011), have a heart murmur (P = 0.002), have a gallop rhythm (P = 0.005), and have lower blood pressure (P = 0.007) compared to those in the UO group.
