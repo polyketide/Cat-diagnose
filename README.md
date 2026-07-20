@@ -27,6 +27,7 @@ docs/                                  # engineering SOPs
   └── LITERATURE-PIPELINE-SOP.md       # offloading literature retrieval to a local node (design, not yet built)
 tools/                                 # citation-integrity and rendering scripts
   ├── rebuild_references.py
+  ├── fetch_fulltext.py
   ├── extract_source_excerpts.py
   └── render_markdown.py
 ```

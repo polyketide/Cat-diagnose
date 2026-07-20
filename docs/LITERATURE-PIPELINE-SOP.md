@@ -223,6 +223,18 @@ Writing the hypertension entry produced a citation to a section of a file that d
 
 A cross-reference is a claim like any other, and internal ones are the easiest to get wrong precisely because they feel like navigation rather than assertion. **Resolve the path and confirm the target says what it is cited for.** A one-line glob over inline file references catches the broken-path class in seconds; the wrong-section class still needs reading.
 
+### Getting full texts: what can be automated, and what cannot
+
+Measured 2026-07-20 while trying to remove a manual bottleneck. `tools/fetch_fulltext.py` does the automatable part and reports the rest as a short list.
+
+**Licence status is looked up, never assumed.** Unpaywall gives the open-access status and candidate locations; only open-access articles are downloaded. Paywalled ones are listed for the operator to obtain through their own institutional access, and **no attempt is made to circumvent an access control** — that boundary is not a technical limitation to be worked around.
+
+**Publisher tolerance of automated requests is unrelated to licence, which is the finding that matters.** J-Stage and Frontiers serve PDFs to a plain request. MDPI, PMC, Wiley and SAGE return 403 or a JavaScript interstitial **for the same `gold` open-access articles**. So a permissive licence is necessary but not sufficient, and a download failure must not be reported as a licence problem when it was a bot check — the tool distinguishes the two.
+
+Current yield on the knowledge base's own flagged list: **3 of 17 automatically**. The rest is a list handed back, which is still better than a guess, because it is now specific about which figures each missing paper would settle.
+
+⚠️ **A PDF read with the Read tool is the source; a page summarised by a fetching tool is not.** Downloading the file and reading it preserves the author's words. This distinction is what makes the automation admissible at all — see the next subsection.
+
 ### ⚠️ A web page is not a source
 
 Page-fetching tools return a *model's summary* of a page, not the page. Its wording is not the author's wording, and its figures have passed through a paraphrase. **Nothing obtained that way may enter `## 原文摘录` or be quoted as verbatim.** Use web search to find out *what to look for*; then retrieve the record properly and quote from that. When a figure exists only in a full text that was read through such a tool, cite nothing and record that the check was not performed — as `evidence-to-practice-gap.md` §2 does.
