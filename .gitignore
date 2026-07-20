@@ -1,0 +1,11 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# macOS
+.DS_Store
+
+# The literature archive lives OUTSIDE the repository by design
+# (docs/LITERATURE-PIPELINE-SOP.md section 3). This is a backstop in case
+# someone points --archive at the working tree.
+.catmed-archive/
