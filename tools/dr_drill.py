@@ -38,7 +38,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from pubmed_archive import archive_dir, KB, gate_record, GRADE_RAW  # noqa: E402
+from pubmed_archive import archive_dir, KB, corpus_files, gate_record, GRADE_RAW  # noqa: E402
 
 # Excerpt lines beginning with these are the author's own annotations, not source
 # text, and are excluded from verification.
@@ -77,7 +77,25 @@ def norm(s: str) -> str:
 # too, because the new marker read "full text (PDF) retrieved and checked",
 # interrupting the very phrase being matched. Keep the phrase CONTIGUOUS and put
 # qualifiers outside it.)
-FULLTEXT_MARKER = "full text retrieved and checked"
+#
+# ⚠️ And it must be matched in every language the corpus is written in. The
+# checker was English-only until 2026-07-21, while the owner guides — the only
+# documents here a cat owner reads — are Chinese and mark the same provenance as
+# 【已取 PMC 全文核对】. When the guides entered verification for the first time,
+# five excerpts failed as "not in the abstract" when the full text had in fact
+# been retrieved and checked; four of them appear verbatim in a knowledge-base
+# block carrying the English marker and passing. Nothing was wrong with the
+# documents. A monolingual checker on a multilingual corpus does not report that
+# it cannot read half of it — it reports that half of it is wrong.
+FULLTEXT_MARKERS = (
+    "full text retrieved and checked",   # English: PMC or publisher PDF
+    "全文核对",                            # Chinese: 【已取 PMC 全文核对】
+)
+FULLTEXT_MARKER = FULLTEXT_MARKERS[0]    # kept for the self-test's fault injection
+
+
+def is_fulltext_marker(body: str) -> bool:
+    return any(m in body for m in FULLTEXT_MARKERS)
 
 
 def excerpts_from_kb() -> dict[str, list[tuple[str, str, str]]]:
@@ -91,7 +109,7 @@ def excerpts_from_kb() -> dict[str, list[tuple[str, str, str]]]:
     failures or false confidence.
     """
     out: dict[str, list[tuple[str, str, str]]] = {}
-    for f in sorted(KB.glob("*.md")):
+    for f in corpus_files():
         text = f.read_text(encoding="utf-8")
         if "## 原文摘录" not in text:
             continue
@@ -108,7 +126,7 @@ def excerpts_from_kb() -> dict[str, list[tuple[str, str, str]]]:
                 continue
             if current and line.startswith("> "):
                 body = line[2:].strip()
-                if FULLTEXT_MARKER in body:
+                if is_fulltext_marker(body):
                     origin = "fulltext"
                     continue
                 # Source sentences are plain prose. A line carrying Markdown
@@ -120,20 +138,41 @@ def excerpts_from_kb() -> dict[str, list[tuple[str, str, str]]]:
     return out
 
 
-def abstract_of(raw_xml: str) -> str:
-    """All abstract text of a record, joined. Structured abstracts carry several
-    AbstractText nodes; excerpts may span or sit inside any of them."""
+def abstract_of(raw_xml: str) -> list[str]:
+    """Every legitimate rendering of a record's abstract text.
+
+    Structured abstracts carry several AbstractText nodes with their section
+    names in a `Label` attribute. Readers render those inline ("RESULTS: ...")
+    and an excerpt copied from such a view carries the prefix — so one join
+    keeps the labels. But **the space between two nodes does not exist in the
+    source at all**; it is introduced by whoever concatenates them. An excerpt
+    that legitimately spans two sections therefore matches the unlabelled join
+    and not the labelled one.
+
+    Returning both is not a loosening of the check. No word, figure or
+    punctuation mark can differ under either form; only the join between two
+    adjacent nodes does, and that join is this function's own invention.
+
+    Found 2026-07-21, when the owner guides entered verification for the first
+    time: four excerpts failed purely because they quoted across a section
+    boundary, e.g. "Retrospective study.  38 cats with lymphoma." — DESIGN and
+    ANIMALS in the record, with the label injection landing between them.
+    """
     art = ET.fromstring(raw_xml)
-    parts = []
+    labelled, plain = [], []
     for t in art.iter("AbstractText"):
-        label = t.get("Label")
         body = "".join(t.itertext())
-        # Readers render the label inline ("RESULTS: ..."); the XML keeps it as
-        # an attribute. Excerpts copied from a rendered view carry the prefix.
-        parts.append(f"{label}: {body}" if label else body)
+        label = t.get("Label")
+        labelled.append(f"{label}: {body}" if label else body)
+        plain.append(body)
     for t in art.iter("ArticleTitle"):
-        parts.append("".join(t.itertext()))
-    return " ".join(parts)
+        title = "".join(t.itertext())
+        labelled.append(title)
+        plain.append(title)
+    forms = [" ".join(labelled)]
+    if plain != labelled:
+        forms.append(" ".join(plain))
+    return forms
 
 
 def load_archive(arc: Path) -> tuple[dict[str, str], dict[str, list[str]]]:
@@ -184,14 +223,15 @@ def leg1(arc: Path, verbose: bool = False) -> tuple[str, str, set]:
         if raw is None:
             missing_records.append(pmid)
             continue
-        hay = norm(abstract_of(raw))
+        hays = [norm(form) for form in abstract_of(raw)]
         for src_file, sentence, origin in items:
             if origin == "fulltext":
                 # Correctly absent from the abstract; out of this leg's reach.
                 skipped_fulltext += 1
                 continue
             checked += 1
-            if norm(sentence) not in hay:
+            needle = norm(sentence)
+            if not any(needle in hay for hay in hays):
                 unmatched.append((pmid, src_file, sentence))
 
     if verbose:
@@ -573,10 +613,10 @@ if __name__ == "__main__":
 # acting; never bulk-clear on its output.
 def suspect_misattribution(kb_dir=None):
     import glob as _glob
-    kb = Path(kb_dir) if kb_dir else KB
+    kb = Path(kb_dir) if kb_dir else None
     year = re.compile(r"^(19|20)\d\d$")
     out = []
-    for f in sorted(kb.glob("*.md")):
+    for f in (sorted(kb.glob("*.md")) if kb else corpus_files()):
         text = f.read_text(encoding="utf-8")
         if "## 原文摘录" not in text:
             continue

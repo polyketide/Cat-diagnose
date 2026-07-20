@@ -1250,7 +1250,12 @@
 > Retrospective case series.  41 cats with histologically confirmed low-grade lymphocytic lymphoma.
 
 **PMID 18412532** · Zitz JC 2008
-> ⚠️ 正文引用的 `1825` **未出现在摘要原文中** —— 可能出自全文（摘要不含），也可能有误；**引用前请取全文核对**。（注：原文若把数字拼写为英文单词，本检查会漏报。）
+> Median overall survival time for the cats was 1,825 days, with a 1-year survival rate of 89% and a 3-year survival rate of 74%.
+> 9 cats and 11 dogs with thymoma.
+> Percentage lymphocyte composition of the mass was the only factor that was significantly correlated with survival time; animals with a high percentage of lymphocytes lived longer.
+> Results of this study indicated that most cats and dogs with thymomas did well after excision.
+> ⚠️ **假阳性，2026-07-21 结案。** 原标记称正文的 `1825` 未出现在摘要中。它就在摘要里，写作 **`1,825`（带千位逗号）**——数字提取器按无逗号形式比对，因而漏配。摘要原句已补于上。
+> ⚠️ 犬猫混合队列（9 猫 + 11 犬），且这是**胸腺瘤**不是淋巴瘤；两者在纵隔肿块的鉴别诊断中并列，故列入本指南。犬的中位生存 790 天，与猫的 1,825 天不可混用。
 
 **PMID 18974017** · Oberthaler KT 2008
 > Seventeen (74%) of the 23 cats had only one treatment of doxorubicin.

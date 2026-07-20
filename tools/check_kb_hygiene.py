@@ -76,7 +76,10 @@ def load_exceptions() -> dict[str, set[str]]:
 
 
 def kb_files() -> list[Path]:
-    return sorted(KB.glob("*.md"))
+    """Knowledge base AND owner guides -- see pubmed_archive.corpus_files()."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from pubmed_archive import corpus_files
+    return corpus_files()
 
 
 def split_sections(text: str) -> tuple[str, str]:

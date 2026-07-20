@@ -49,6 +49,23 @@ UA = "catmed-literature-pipeline/%s (+https://github.com/polyketide/catmed)" % T
 
 REPO = Path(__file__).resolve().parent.parent
 KB = REPO / "knowledge-base"
+GUIDES = REPO / "guides"
+
+# Both directories carry `## 原文摘录` sections in the same format and are held to
+# the same standard. Until 2026-07-21 every tool here scanned only `knowledge-base/`,
+# which meant the owner guides -- the ONLY artifacts in this repository a cat owner
+# actually reads -- were the one part with no verification at all. 122 PMIDs cited
+# across them, 105 never archived, 64 excerpt blocks never checked by anything.
+#
+# The README badge said every figure is checked against PubMed on every commit.
+# That was true of the analysis notes and false of the thing with readers.
+CORPUS_DIRS = (KB, GUIDES)
+
+
+def corpus_files() -> list[Path]:
+    """Every source document held to the citation contract, in a stable order."""
+    return sorted((f for d in CORPUS_DIRS if d.is_dir() for f in d.glob("*.md")),
+                  key=lambda p: (p.parent.name, p.name))
 
 
 # ---------------------------------------------------------------- archive path
@@ -88,7 +105,7 @@ def pmids_from_kb() -> dict[str, list[str]]:
     in prose, and `(29393723, nine-point BCS)` in the per-topic index lines.
     """
     out: dict[str, list[str]] = {}
-    for f in sorted(KB.glob("*.md")):
+    for f in corpus_files():
         text = f.read_text(encoding="utf-8")
         found: list[str] = re.findall(r"PMID\s+(\d+)", text)
         found += re.findall(r"\((\d{7,8}),", text)          # index-line form

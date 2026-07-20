@@ -94,6 +94,23 @@ The pipeline writes a raw archive that Claude reads directly. Requirements:
 2. **Widen `pmids_from_kb()` to scan the whole file**, not the excerpt section, so a body citation pulls its own paper into the archive. Until that lands, the orphan count is a standing figure to re-measure, not a one-off.
 3. **When a coverage check can only ever inspect what is already covered, it is measuring itself.** Ask of every checker: what would have to be true for this to stay green while being wrong?
 
+## 3e. ⚠️ The corpus is what has readers, not what is convenient to check
+
+Until 2026-07-21 every tool here scanned `knowledge-base/` and nothing else. The owner guides — **the only artifacts in this repository a cat owner actually reads** — carried 122 cited PMIDs and 64 excerpt blocks, of which 105 had never been archived and none had ever been checked by anything. The README badge said every figure is verified against PubMed on every commit. That was true of the analysis notes and false of the documents with readers.
+
+Bringing them in produced three findings, and the ordering is instructive: **two were defects in the checker, one was a defect in the documents, and the checker's defects presented as document failures.**
+
+1. **Structured-abstract label injection.** `abstract_of()` renders `<AbstractText Label="ANIMALS">` as `ANIMALS: ...` because readers do. An excerpt quoting *across* two sections — "Retrospective study.  38 cats with lymphoma.", DESIGN then ANIMALS — then fails, because the injected label lands in the middle of it. **The space between two nodes does not exist in the source at all**; it is the concatenator's invention. Fixed by matching against both the labelled and unlabelled joins. Four excerpts, all correct all along.
+
+2. **⭐ The checker was monolingual and the corpus is not.** The full-text provenance marker was matched as the English phrase `full text retrieved and checked`. The guides are Chinese and write it `【已取 PMC 全文核对】`. Five excerpts were therefore reported as "not found in the abstract" when the full text had been retrieved and checked — and four of them appear verbatim in a knowledge-base block with the English marker, passing. **A monolingual checker on a multilingual corpus does not report that it cannot read half of it. It reports that half of it is wrong.** In a project whose stated discipline is recording sources in their original language, the verification tooling assuming one language is a contradiction that ran undetected for as long as it was never pointed at the other half.
+
+3. **The documents' real defect, which the excerpt count hides.** The guide bodies carry **no inline citations at all** — not one PMID before the reference appendix. A reader meets a figure and has 144 references and 64 excerpt blocks and no way to learn which one it came from. **Backfilling excerpt blocks would not fix this**; it would produce more verified excerpts still unconnected to any sentence anyone reads. Recorded as a tracked debt in `docs/kb-exceptions.md`, with the fix — inline attribution — outstanding.
+
+**Rules.**
+1. **A document with readers is in the corpus. Convenience of checking is not a criterion.** When adding a document class, add it to `corpus_files()` in the same commit.
+2. **Verification tooling must read every language its corpus is written in.** Provenance markers, section headings and annotation prefixes all need their translations registered, or the untranslated half silently reads as broken.
+3. **Ask which artifact reaches a human, and check that one hardest.** The inverse held here for months: the most rigorously verified material was the least read, and the only material with an audience had no verification at all.
+
 ## 3d. ⚠️ Reference lists are generated, never typed — and Leg 1 does not cover them
 
 `rebuild_references.py` exists precisely because hand-maintained reference lists drift, and its own docstring says of the metadata: *"Fetch it with a tool, never from memory."*
