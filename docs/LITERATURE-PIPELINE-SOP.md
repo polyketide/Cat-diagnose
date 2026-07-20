@@ -94,6 +94,21 @@ The pipeline writes a raw archive that Claude reads directly. Requirements:
 2. **Widen `pmids_from_kb()` to scan the whole file**, not the excerpt section, so a body citation pulls its own paper into the archive. Until that lands, the orphan count is a standing figure to re-measure, not a one-off.
 3. **When a coverage check can only ever inspect what is already covered, it is measuring itself.** Ask of every checker: what would have to be true for this to stay green while being wrong?
 
+## 3d. ⚠️ Reference lists are generated, never typed — and Leg 1 does not cover them
+
+`rebuild_references.py` exists precisely because hand-maintained reference lists drift, and its own docstring says of the metadata: *"Fetch it with a tool, never from memory."*
+
+**On 2026-07-20 a new knowledge-base file was written with a hand-typed reference list. Three of its seven entries were wrong**: `33325082`'s first author is Economu L, not Schofield I; `40525629`'s is Waite O, not Bennett K, with the DOI and page number also off by a digit; `36912667` is issue 3, not 5. Every error was invented by recall — in a file whose entire argument is that recall is not evidence — and **Leg 1 passed on the same commit with 408 excerpts and 0 unmatched.**
+
+**Why the checker was silent.** Leg 1 verifies quoted excerpt lines. A reference entry is not an excerpt: it is prose *about* a paper, so nothing compares it to the record. The failure mode is exactly the one this SOP keeps rediscovering — **a green check on the part that was covered, read as coverage of the part that was not.**
+
+**Why it matters more than a cosmetic slip.** A reference list exists in order to be cited onward. A wrong title or author is copied by the next reader and, unlike a missing one, never announces itself.
+
+**Rules.**
+1. **Generate every reference entry from the archived record.** Author, title, ISO abbreviation, volume/issue/pages and DOI all come from the record; only the trailing note is written by a human.
+2. **The rebuilder does not currently cover knowledge-base files.** It is scoped to `## 附录 B`/`## 附录 C` in the owner guides, while knowledge-base files use `## 参考文献（原文記録）`. That gap is why hand-typing was possible at all — **extending it is outstanding work**, and until it lands, generate entries with a script and paste them rather than typing them.
+3. **A file arguing for evidence discipline gets more scrutiny, not less.** The temptation to write fluently about sources you have just read is strongest exactly when you have just read them.
+
 ### ⚠️ An excerpt block with no excerpts counts as a checked paper
 
 Leg 1 reports two numbers — PMIDs and excerpts. A block consisting of a header and nothing but annotation lines increments the first and not the second. It reads as a verified paper and verifies nothing.

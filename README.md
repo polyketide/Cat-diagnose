@@ -11,7 +11,7 @@
 > CI starts with no literature archive at all, rebuilds it from the PMIDs the
 > knowledge base cites, and requires each quoted sentence to be a byte-exact
 > substring of the record — then corrupts one on purpose to prove the checker
-> can still fail. Currently **116 papers, 380 verbatim excerpts, 0 unmatched**.
+> can still fail. Currently **123 papers, 408 verbatim excerpts, 0 unmatched**.
 > Contributions welcome in English, 中文 or 日本語 — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 > ⚠️ **Not medical advice.** Everything here is literature-referenced material for discussing options with a licensed veterinarian. It does not diagnose, prescribe, or replace your vet.
