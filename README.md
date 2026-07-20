@@ -1,6 +1,6 @@
 # catmed
 
-**An evidence-first sub-agent for veterinary × human medical analysis, a cited feline-oncology knowledge base, and the tooling that keeps its citations honest.**
+**An evidence-first sub-agent for veterinary × human medical analysis, a cited feline-medicine knowledge base, and the tooling that keeps its citations honest.**
 
 [![citation integrity](https://github.com/polyketide/catmed/actions/workflows/citation-integrity.yml/badge.svg)](https://github.com/polyketide/catmed/actions/workflows/citation-integrity.yml)
 [![licence: MIT](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
@@ -11,7 +11,7 @@
 > CI starts with no literature archive at all, rebuilds it from the PMIDs the
 > knowledge base cites, and requires each quoted sentence to be a byte-exact
 > substring of the record — then corrupts one on purpose to prove the checker
-> can still fail. Currently **123 papers, 408 verbatim excerpts, 0 unmatched**.
+> can still fail. Currently **134 papers, 454 verbatim excerpts, 0 unmatched**.
 > Contributions welcome in English, 中文 or 日本語 — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 > ⚠️ **Not medical advice.** Everything here is literature-referenced material for discussing options with a licensed veterinarian. It does not diagnose, prescribe, or replace your vet.
@@ -21,15 +21,17 @@
 ```
 .claude/agents/medical.md              # the sub-agent definition
 knowledge-base/                        # analysis-facing notes (English, with verbatim source excerpts)
+  ├── feline-disease-frequency.md        # what cats present with and die of — decides what gets written next
+  ├── chronic-kidney-disease.md
+  ├── hyperthyroidism-and-kidney-disease.md
+  ├── feline-hypertension.md
+  ├── emergency-triage-red-flags.md
+  ├── supportive-and-palliative-care.md
+  ├── evidence-to-practice-gap.md
   ├── antineoplastic-drug-toxicity.md
   ├── targeted-and-immunotherapy-evidence.md
-  ├── supportive-and-palliative-care.md
   ├── feline-oncology-literature-survey.md
-  ├── upper-airway-response-marker-validity.md
-  ├── emergency-triage-red-flags.md
-  ├── evidence-to-practice-gap.md
-  ├── hyperthyroidism-and-kidney-disease.md
-  └── feline-hypertension.md
+  └── upper-airway-response-marker-validity.md
 guides/                                # owner-facing guides, Markdown + PDF (Chinese)
   ├── feline-lymphoma-all-types-owner-guide.zh.{md,pdf}
   └── feline-nasal-lymphoma-owner-guide.zh.{md,pdf}
