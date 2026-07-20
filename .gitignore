@@ -12,3 +12,4 @@ __pycache__/
 
 # Local Claude Code settings — machine-specific, contains absolute paths
 .claude/settings.local.json
+site/

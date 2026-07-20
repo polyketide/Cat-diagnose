@@ -1,0 +1,61 @@
+name: publish site
+
+# The reach half of this project. Verification makes the material trustworthy;
+# this makes it reachable — until now the only way to read any of it was to
+# clone a repository, which no cat owner is going to do.
+#
+# Deliberately a SEPARATE workflow from citation-integrity.yml. Publishing must
+# never be able to make the verification build look green, and a failure to
+# deploy must never be confused with a failure of the content.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never cancel a half-finished deployment; queue instead.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build the static site
+        run: python3 tools/build_site.py --out ./site
+
+      - name: Fail if any page lost its disclaimer
+        # Readers arrive from search engines in the middle of a document, so the
+        # warning has to be on the page they actually load. A silent template
+        # change that dropped it would otherwise ship unnoticed.
+        run: |
+          missing=0
+          for f in site/*.html; do
+            grep -q "不是医疗建议" "$f" || { echo "::error::no disclaimer in $f"; missing=1; }
+          done
+          exit $missing
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
