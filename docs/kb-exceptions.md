@@ -68,6 +68,21 @@ proof the sentence is about that paper.
 **These suppressions are the marker for that debt, not its discharge.** The CKD guide was built
 with inline attribution from its first draft so the debt does not grow.
 
+**Progress 2026-07-21 (continued).** Two more standalone load-bearing figures got inline PMIDs after
+sentence-level review — the cribriform-plate 121-vs-876-day prognostic split (Reczynska 2022, verified
+in its excerpt block) and the chlorambucil 1317-day small-cell figure (Pope 2015), the latter now also
+labelled 消化道小细胞型 so the guide's own "do not extrapolate to nasal lymphoma" warning is harder to
+miss. The remaining figures were NOT auto-inserted: most repeat a study already named in the same
+paragraph or table column (e.g. 536/172 days sit directly under "Haney 2009（PMID 19143934）"), and the
+per-figure matcher's "unique" hits include coincidences — a cat's 200–300 mL blood volume matched a
+nasal-disease PMID purely because 300 appears in its abstract. That is the co-occurrence-is-not-
+attribution trap, and it is why the remainder stays human-reviewed rather than scripted.
+
+One genuine defect surfaced and is now flagged inline rather than suppressed: the nasal guide's
+"complete-remission survival 50–2520 days, median 296" (§2.1) appears in NO cited abstract and NO
+excerpt block. Marked 出处待核 in the body — the large-spread conclusion it illustrates is corroborated
+by other tables, but those two specific numbers are unverified until their full-text source is found.
+
 
 
 - orphans: 3597844 — reference-list entry in feline-lymphoma-all-types-owner-guide.zh.md; see the note above.
