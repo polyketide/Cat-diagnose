@@ -236,10 +236,59 @@ def check_coverage(exc: set[str]) -> list[str]:
     return problems
 
 
+def check_stale_pdf(exc: set[str]) -> list[str]:
+    """A committed PDF older than the Markdown it renders.
+
+    **The PDF is the only artifact here that leaves the reader's control.** An
+    owner downloads it, prints it, forwards it to another owner — and unlike the
+    site, it never updates. Yet it was the one product with no verification at
+    all: the corpus checks read Markdown, and CI never looked at a PDF.
+
+    Found 2026-07-21 by reading the repository as a stranger would. Both lymphoma
+    PDFs were roughly a day behind their sources, and the gap was not cosmetic —
+    the sources had since gained 62 inline PMIDs and, more seriously, an 出处待核
+    flag on a survival figure that could not be traced to any source. **The stale
+    PDFs still presented that figure as authoritative.** The most-forwarded
+    artifact was the least trustworthy one.
+
+    Compares git commit times, not filesystem mtimes: a fresh clone rewrites
+    every mtime, so mtime would make this check pass vacuously everywhere except
+    the maintainer's own machine — which is the opposite of what a check is for.
+    """
+    import subprocess
+
+    def last_commit(path: Path) -> int | None:
+        try:
+            out = subprocess.run(
+                ["git", "log", "-1", "--format=%ct", "--", str(path.relative_to(REPO))],
+                cwd=REPO, check=True, capture_output=True, text=True).stdout.strip()
+            return int(out) if out else None
+        except (OSError, subprocess.CalledProcessError, ValueError):
+            return None
+
+    problems = []
+    for md in sorted((REPO / "guides").glob("*.md")):
+        pdf = md.with_suffix(".pdf")
+        if not pdf.exists() or md.name in exc:
+            continue
+        t_md, t_pdf = last_commit(md), last_commit(pdf)
+        if t_md is None or t_pdf is None:
+            continue                      # uncommitted; nothing to compare yet
+        if t_md > t_pdf:
+            mins = (t_md - t_pdf) // 60
+            problems.append(
+                f"{pdf.name} is {mins} min older than {md.name}. The PDF is what "
+                f"readers download and forward, and it does not update itself. "
+                f"Rebuild it (tools/render_markdown.py + headless Chrome, see "
+                f"CONTRIBUTING.md) or add it to docs/kb-exceptions.md with a reason.")
+    return problems
+
+
 CHECKS = {
     "orphans": lambda e: check_orphans(e["orphans"]),
     "empty-blocks": lambda e: check_empty_blocks(e["empty-blocks"]),
     "coverage": lambda e: check_coverage(e.get("coverage", set())),
+    "stale-pdf": lambda e: check_stale_pdf(e.get("stale-pdf", set())),
     "pii": lambda e: check_pii(),
 }
 
