@@ -46,6 +46,11 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Unit tests for the checkers themselves
+        # dr_drill has a self-test; these three did not, and two of them had
+        # already shipped real bugs. Runs offline, no archive needed.
+        run: python3 tools/test_tools.py
+
       - name: Knowledge-base hygiene
         # Orphaned citations, excerpt blocks with no source text, and a generic
         # secret/PII sweep. Each of these was a real defect found by hand after

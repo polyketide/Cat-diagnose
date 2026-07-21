@@ -79,6 +79,11 @@ html,body{background:#fff;color:#1a1a1a}
   table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:.85em}
   pre{overflow-x:auto}
 }
+.er{border:3px solid #c0392b;border-radius:10px;padding:1.1em 1.3em;margin:1.8em 0;
+  background:#fff6f5}
+.er .ert{font-weight:800;font-size:1.12em;color:#c0392b;margin-bottom:.5em}
+.er p{margin:.45em 0}
+.er a{font-size:1.06em}
 a{word-break:break-word}
 pre{max-width:100%}
 img{max-width:100%;height:auto}
@@ -87,6 +92,8 @@ img{max-width:100%;height:auto}
 # Owner-facing documents, in the order an owner should meet them. Anything in
 # guides/ not listed here still gets rendered — it just falls to the end.
 GUIDE_ORDER = [
+    ("feline-emergency-owner-guide.zh.md", "🚨 我的猫现在要不要立刻去医院",
+     "不确定该不该现在就去时，从这里开始。一条一条对，对上任何一条就别再读了。", "先看这个"),
     ("feline-ckd-owner-guide.zh.md", "猫慢性肾病（CKD）",
      "老猫最常见的慢性病之一。每个数字都带行内 PMID，可逐条核对。", "行内出处完整"),
     ("feline-lymphoma-all-types-owner-guide.zh.md", "猫淋巴瘤（全类型）",
@@ -166,6 +173,13 @@ def build(out: Path) -> int:
 <p>这里的每一个数字都能追到一篇发表文献的原句。正文是解释，<strong>可以争论</strong>；
 每份文件末尾的「原文摘录」是证据，<strong>逐字未经改写</strong>，并由脚本在每次提交时
 比对归档的 PubMed 记录。</p>
+
+<div class="er">
+<div class="ert">🚨 如果你现在就在担心，先看这一页</div>
+<p><a href="feline-emergency-owner-guide.zh.html"><strong>我的猫现在要不要立刻去医院 →</strong></a></p>
+<p>一份对照清单。对上任何一条，就不要再读别的了——直接联系兽医。
+不确定自家猫是什么病也没关系，这一页不需要你先知道诊断。</p>
+</div>
 
 <h2>给猫主人</h2>
 <p>不需要医学背景。建议先读每份文件的「第 0 章」和「立刻就医的红线」。</p>

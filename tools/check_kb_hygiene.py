@@ -66,6 +66,12 @@ SCAN_SUFFIXES = {".md", ".py", ".yml", ".yaml", ".json", ".txt", ".sh"}
 SKIP_DIRS = {".git", "__pycache__", ".venv", "node_modules"}
 
 
+# Every check name. load_exceptions() derives its accepted keys from this, so a
+# new check cannot ship with a suppression hatch that silently does nothing.
+CHECK_NAMES = ("orphans", "empty-blocks", "coverage", "stale-pdf",
+               "agents-sync", "pii")
+
+
 def load_exceptions() -> dict[str, set[str]]:
     """Parse docs/kb-exceptions.md. Lines look like:
 
@@ -174,12 +180,14 @@ def scannable_files() -> list[Path]:
                 if not any(part in SKIP_DIRS for part in p.parts)]
 
 
-def check_pii() -> list[str]:
+def check_pii(exc: set[str] | None = None) -> list[str]:
     problems = []
     for path in sorted(scannable_files()):
         if not path.is_file() or path.suffix not in SCAN_SUFFIXES:
             continue
         rel = path.relative_to(REPO)
+        if str(rel) in (exc or set()):
+            continue
         try:
             text = path.read_text(encoding="utf-8")
         except (UnicodeDecodeError, OSError):
@@ -284,12 +292,31 @@ def check_stale_pdf(exc: set[str]) -> list[str]:
     return problems
 
 
+def check_agents_sync(exc: set[str]) -> list[str]:
+    """Portable agent prompts drifted from their Claude source.
+
+    `agents/*.prompt.md` are generated from `.claude/agents/`. Two copies of a
+    prompt always drift, and a drifted OWNER-FACING prompt is the dangerous
+    kind: a non-Claude host would be running an older set of safety rules while
+    the repository shows the newer ones."""
+    import subprocess
+    try:
+        r = subprocess.run([sys.executable, str(REPO / "tools" / "export_agents.py"),
+                            "--check"], cwd=REPO, capture_output=True, text=True)
+    except OSError as exc_:
+        return [f"could not run export_agents.py ({exc_})"]
+    if r.returncode == 0:
+        return []
+    return [line for line in (r.stdout + r.stderr).splitlines() if line.strip()]
+
+
 CHECKS = {
     "orphans": lambda e: check_orphans(e["orphans"]),
     "empty-blocks": lambda e: check_empty_blocks(e["empty-blocks"]),
     "coverage": lambda e: check_coverage(e.get("coverage", set())),
     "stale-pdf": lambda e: check_stale_pdf(e.get("stale-pdf", set())),
-    "pii": lambda e: check_pii(),
+    "agents-sync": lambda e: check_agents_sync(e.get("agents-sync", set())),
+    "pii": lambda e: check_pii(e.get("pii", set())),
 }
 
 
