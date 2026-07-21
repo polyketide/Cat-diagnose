@@ -5,7 +5,7 @@
 [![citation integrity](https://github.com/polyketide/catmed/actions/workflows/citation-integrity.yml/badge.svg)](https://github.com/polyketide/catmed/actions/workflows/citation-integrity.yml)
 [![licence: MIT](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
 
-[English](#english) · [日本語](#日本語) · [中文](#中文) · [Contributing](CONTRIBUTING.md)
+[English](#english) · [日本語](#日本語) · [中文](#中文) · [Contributing](CONTRIBUTING.md) · [项目简介](docs/PROJECT-PITCH.md)
 
 > **Every figure in this repository is checked against PubMed on every commit.**
 > CI starts with no literature archive at all, rebuilds it from the PMIDs the
