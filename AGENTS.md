@@ -144,6 +144,7 @@ not present that prompt to cat owners.
 | `knowledge-base/` | analysis notes, English, with verbatim excerpts |
 | `docs/LITERATURE-PIPELINE-SOP.md` | every defect found, and the rule it produced |
 | `docs/kb-exceptions.md` | suppressed checks, each with a written reason |
+| `docs/RELEASING.md` | tagging, DOI, and what to verify before it is irreversible |
 | `tools/` | archive, checkers, site builder, agent export |
 | `.claude/agents/` | agent definitions (source of truth) |
 | `agents/` | generated portable prompts |

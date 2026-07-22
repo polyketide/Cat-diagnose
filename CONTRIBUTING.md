@@ -219,6 +219,10 @@ Roughly in order of usefulness:
 
 ---
 
+## Releasing
+
+Tagging a release archives the tree to Zenodo and mints a DOI. **A Zenodo record is permanent in a way a git commit is not** — see [`docs/RELEASING.md`](docs/RELEASING.md), which is mostly about what to check before that becomes irreversible.
+
 ## Licence
 
 MIT. By contributing you agree your contributions are licensed under it.
