@@ -41,6 +41,7 @@
 | [`emergency-triage-red-flags.md`](emergency-triage-red-flags.md) | 21 | 85 |
 | [`evidence-to-practice-gap.md`](evidence-to-practice-gap.md) | 3 | 27 |
 | [`feline-disease-frequency.md`](feline-disease-frequency.md) | 7 | 28 |
+| [`feline-hcm-emerging-therapy.md`](feline-hcm-emerging-therapy.md) | 1 | 7 |
 | [`feline-hypertension.md`](feline-hypertension.md) | 5 | 47 |
 | [`feline-lymphoma-treatment-currency.md`](feline-lymphoma-treatment-currency.md) | 4 | 18 |
 | [`feline-oncology-literature-survey.md`](feline-oncology-literature-survey.md) | 54 | 174 |

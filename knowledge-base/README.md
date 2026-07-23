@@ -7,7 +7,7 @@ they carry verbatim source excerpts, and they state explicitly where the
 evidence runs out. For owner-facing material see [`../guides/`](../guides/) or
 the [published site](https://polyketide.github.io/catmed/).
 
-**13 files, 154 papers, 580 verbatim excerpts**, every one
+**14 files, 155 papers, 587 verbatim excerpts**, every one
 re-checked byte-for-byte against its archived PubMed record on every commit.
 
 ## If you are a veterinarian or a researcher
@@ -39,6 +39,7 @@ more than anything written here.
 | [`emergency-triage-red-flags.md`](emergency-triage-red-flags.md) | 21 | 85 |
 | [`evidence-to-practice-gap.md`](evidence-to-practice-gap.md) | 3 | 27 |
 | [`feline-disease-frequency.md`](feline-disease-frequency.md) | 7 | 28 |
+| [`feline-hcm-emerging-therapy.md`](feline-hcm-emerging-therapy.md) | 1 | 7 |
 | [`feline-hypertension.md`](feline-hypertension.md) | 5 | 47 |
 | [`feline-lymphoma-treatment-currency.md`](feline-lymphoma-treatment-currency.md) | 4 | 18 |
 | [`feline-oncology-literature-survey.md`](feline-oncology-literature-survey.md) | 54 | 174 |
@@ -94,6 +95,12 @@ CKD is 25× more common than the lymphoma this repository was built around, is r
 this repository chose its topics from one cat's illness. Before choosing the next one it needed evidence about what cat owners actually face, rather than an assumption. The assumption turned out to be right in direction and badly wrong…
 
 *7 papers, 28 verbatim excerpts.*
+
+### [`feline-hcm-emerging-therapy.md`](feline-hcm-emerging-therapy.md)
+
+**Feline Hypertrophic Cardiomyopathy — one emerging drug signal (CK-586), and everything this file does not cover**
+
+*1 papers, 7 verbatim excerpts.*
 
 ### [`feline-hypertension.md`](feline-hypertension.md)
 
