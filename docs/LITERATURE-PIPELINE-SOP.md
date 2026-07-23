@@ -420,6 +420,19 @@ Current yield on the knowledge base's own flagged list: **3 of 17 automatically*
 
 Page-fetching tools return a *model's summary* of a page, not the page. Its wording is not the author's wording, and its figures have passed through a paraphrase. **Nothing obtained that way may enter `## 原文摘录` or be quoted as verbatim.** Use web search to find out *what to look for*; then retrieve the record properly and quote from that. When a figure exists only in a full text that was read through such a tool, cite nothing and record that the check was not performed — as `evidence-to-practice-gap.md` §2 does.
 
+### ⚠️ A social-media post is a lead, not a source — and the human is the one who is human
+
+The occasion, 2026-07-23: a summary of a feline obstructive-HCM drug study was circulating on a social platform (RedNote/小红书) in image form. The user could read it but not export it — the account was not theirs — and asked whether the content could simply be scraped. Two things came out of it, a boundary and a workflow.
+
+**The boundary: do not scrape the platform, and do not defeat its human-check.** The platform gates content behind a login wall and bot detection with CAPTCHAs. Bypassing a CAPTCHA is refused here for the same reason the project exists: a CAPTCHA asserts *"a human did this,"* and having the agent defeat it is the identical category of dishonesty as claiming a verification not performed (§12) — only the object changes, from a citation to a platform. It is not primarily a capability limit; it is a line. The division of labour: **the human, who is a human, supplies the lead; the tooling verifies it.** One pasted sentence of extracted text was all that was needed, and all that was used.
+
+**The workflow: a lead becomes evidence only through the primary source.** The pasted sentence named a drug and a set of echocardiographic effects — a §7a *flag*, a hypothesis, not a finding. It was resolved the only admissible way: search PubMed, locate the primary study (Rivas 2024, PMID 38802475), and check each claimed effect against the archived record byte-exact. The post happened to be accurate — but *accurate is not usable*: it dropped that the study was n=6, single-dose, preclinical, and had the drug's manufacturer among its authors. The knowledge-base entry fused those back onto the finding, and the post itself never entered `## 原文摘录` — only the archived record did.
+
+**Rules.**
+1. **A post, a screenshot, a forwarded claim is a lead — a §7a flag.** Find the primary source and verify there, or it does not enter the knowledge base. The extracted text is a pointer to a paper, never a substitute for it.
+2. **Do not scrape a platform or defeat its human-verification to obtain content.** Refusing this is the same discipline as refusing to certify an unread source: the human supplies what only a human legitimately can, and the tooling does the verifying. This holds even when the content is genuinely wanted and the account is not the user's — the answer is to use the lead, not to take the images.
+3. **An accurate summary is still not a usable one if it drops the caveats.** Sample size, design, phase and funding are what turn a result into a recommendation or hold it back; carry them *fused to the finding*, not appended — and open a new-area entry by leading with what it does **not** cover, so a narrow early signal is never read as broad coverage of the disease.
+
 ## 8. Before building — open questions
 
 1. ~~Is the node free?~~ **Resolved 2026-07-20 by measurement**: compute idle (0% utilisation), ~10.8 GB VRAM headroom, no competing job. Re-check before each run — and per §4a, distinguish *measured idle* from *failed to measure*.
