@@ -43,7 +43,7 @@
 | [`feline-hypertension.md`](feline-hypertension.md) | 5 | 47 |
 | [`feline-oncology-literature-survey.md`](feline-oncology-literature-survey.md) | 53 | 171 |
 | [`hyperthyroidism-and-kidney-disease.md`](hyperthyroidism-and-kidney-disease.md) · [中文版](hyperthyroidism-and-kidney-disease.zh.md) | 3 | 16 |
-| [`supportive-and-palliative-care.md`](supportive-and-palliative-care.md) | 6 | 20 |
+| [`supportive-and-palliative-care.md`](supportive-and-palliative-care.md) | 11 | 28 |
 | [`targeted-and-immunotherapy-evidence.md`](targeted-and-immunotherapy-evidence.md) | 1 | 4 |
 | [`upper-airway-response-marker-validity.md`](upper-airway-response-marker-validity.md) | 26 | 80 |
 

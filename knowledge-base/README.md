@@ -7,7 +7,7 @@ they carry verbatim source excerpts, and they state explicitly where the
 evidence runs out. For owner-facing material see [`../guides/`](../guides/) or
 the [published site](https://polyketide.github.io/catmed/).
 
-**11 files, 137 papers, 534 verbatim excerpts**, every one
+**11 files, 142 papers, 542 verbatim excerpts**, every one
 re-checked byte-for-byte against its archived PubMed record on every commit.
 
 ## If you are a veterinarian or a researcher
@@ -41,7 +41,7 @@ more than anything written here.
 | [`feline-hypertension.md`](feline-hypertension.md) | 5 | 47 |
 | [`feline-oncology-literature-survey.md`](feline-oncology-literature-survey.md) | 53 | 171 |
 | [`hyperthyroidism-and-kidney-disease.md`](hyperthyroidism-and-kidney-disease.md) | 3 | 16 |
-| [`supportive-and-palliative-care.md`](supportive-and-palliative-care.md) | 6 | 20 |
+| [`supportive-and-palliative-care.md`](supportive-and-palliative-care.md) | 11 | 28 |
 | [`targeted-and-immunotherapy-evidence.md`](targeted-and-immunotherapy-evidence.md) | 1 | 4 |
 | [`upper-airway-response-marker-validity.md`](upper-airway-response-marker-validity.md) | 26 | 80 |
 
@@ -117,7 +117,7 @@ these are the two commonest chronic diseases of older cats, they occur together,
 
 **Supportive and Palliative Care in Feline Cancer (veterinary knowledge base)**
 
-*6 papers, 20 verbatim excerpts.*
+*11 papers, 28 verbatim excerpts.*
 
 ### [`targeted-and-immunotherapy-evidence.md`](targeted-and-immunotherapy-evidence.md)
 
