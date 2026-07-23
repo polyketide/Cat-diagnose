@@ -98,6 +98,22 @@ The pipeline writes a raw archive that Claude reads directly. Requirements:
 2. **Widen `pmids_from_kb()` to scan the whole file**, not the excerpt section, so a body citation pulls its own paper into the archive. Until that lands, the orphan count is a standing figure to re-measure, not a one-off.
 3. **When a coverage check can only ever inspect what is already covered, it is measuring itself.** Ask of every checker: what would have to be true for this to stay green while being wrong?
 
+## 3g. ⚠️ `cited_by` is provenance, written only at fetch — and no checker gates it, so it drifts silently
+
+Each archive record carries a `cited_by` list: which corpus files cite that paper. It is the archive's back-reference — the thing that lets you ask "who depends on this record?" It is written **once, at fetch time**, from the origin map, and after that nothing touches it. Two ordinary actions therefore leave it stale while every check stays green, because `cited_by` is gated by neither hygiene, Leg 1, nor `verify` (which re-hashes the payload, not the provenance):
+
+- **Archiving via `pubmed_archive.py fetch --pmids FILE`** sets `cited_by` to the placeholder `["(file)"]` (that code path does not know the real citing files), not the filename that actually cites the paper.
+- **A paper already in the archive is skipped on the next corpus rescan** — so when a *new* file starts citing it, its `cited_by` is never updated to include that file.
+
+**Measured 2026-07-23.** After landing two new knowledge-base entries, **106 records had stale or placeholder `cited_by`** — every PMID I had archived via `--pmids` still read `["(file)"]`, and PMID 8263850 (newly cited by the lymphoma-currency file) still listed only its old citer. None of this tripped a check; the whole verification chain was green and the provenance was wrong.
+
+**The fix** recomputes `cited_by` from `pmids_from_kb()` — the same single source of truth the rebuild input uses (PMID → the files citing it) — writing **only** that one field and leaving `raw_xml`/`sha256`/`fetched_at` untouched. `pubmed_archive.py verify` then re-hashes every payload against its stored `sha256` (259 records, 0 rejected), which is the proof that the in-place refresh altered nothing but the provenance.
+
+**Rules.**
+1. **`cited_by` is *derived* from the corpus, not *asserted* at fetch.** Treat `--pmids` archiving as fetching the payload only; refresh `cited_by` from `pmids_from_kb()` afterwards, in the same session.
+2. **A field no checker gates will drift to whatever it was last written as.** Either gate it, or refresh it on its known trigger — a new file citing an already-archived paper — and never assume it self-heals on a rescan, because the rescan skips exactly those records.
+3. **When you edit a provenance field in place, prove you touched nothing else.** Preserve `sha256` and let `verify` re-hash `raw_xml` against it; a 0-rejected pass is the evidence that the refresh was surgical.
+
 ## 3f. ⚠️ A restriction written in prose is not a restriction — measured, twice
 
 The agent was to be limited to conditions the knowledge base actually covers, declining everything else rather than answering from recall. The restriction was written into `.claude/agents/medical.md` and tested with one question: *an 11-year-old cat, newly diagnosed diabetic, losing weight — what is the prognosis and what should I feed it?* **Diabetes is not in the knowledge base.**
@@ -158,6 +174,21 @@ Bringing them in produced three findings, and the ordering is instructive: **two
 1. **Generate every reference entry from the archived record.** Author, title, ISO abbreviation, volume/issue/pages and DOI all come from the record; only the trailing note is written by a human.
 2. **The rebuilder does not currently cover knowledge-base files.** It is scoped to `## 附录 B`/`## 附录 C` in the owner guides, while knowledge-base files use `## 参考文献（原文記録）`. That gap is why hand-typing was possible at all — **extending it is outstanding work**, and until it lands, generate entries with a script and paste them rather than typing them.
 3. **A file arguing for evidence discipline gets more scrutiny, not less.** The temptation to write fluently about sources you have just read is strongest exactly when you have just read them.
+
+## 3h. ⚠️ A dose — any load-bearing number — is written only when a record states it verbatim; otherwise it stays blank
+
+This is the byte-exact rule at its highest-stakes point. A survival figure copied wrong misleads; a **chemotherapy dose** copied wrong can kill the patient it is copied for. So the same discipline that governs excerpts governs numbers, and the temptation it has to resist is the opposite one: not omitting a figure, but *supplying* one that felt standard.
+
+**2026-07-23**, asked to add reference doses to the lymphoma-currency file. Doses were written **only** where an archived record states them verbatim — doxorubicin `30 mg/m2 ... to a cumulative dose of 300 mg/m2` (PMID 8263850); lomustine `approximately 40 mg/m2`, prednisolone `5 mg PO q24h`, cobalamin `250 µg/week SC`, and the RT fractionation (PMID 32996835). The small-cell backbone **chlorambucil**, and the CHOP components **vincristine** and **cyclophosphamide**, appear as doses in **no abstract or open full text this project can verify** — their numbers live in textbook protocol tables. They were **left blank, with the reason stated in the file itself.**
+
+**The principle: a blank is the discipline working, not an oversight.** The gap was *demonstrated* before it was recorded — the Pope/Lingard/Kiselow small-cell abstracts were checked and state no dose, and the Collette UW-25 full text was retrieved and its dose table was not in the machine-readable body. "Not in any source" is a claim that has to be earned the same way a positive is (cf. §3c, §7a "check the half you believe"). Only then is the blank honest rather than lazy.
+
+A number that is publishable but hazardous to misapply is wrapped as a **reference value with a strict disclaimer** — for checking a protocol against, never for calculating or giving — and the action is routed to the licensed clinician. Writing the number and disclaiming it are one operation, not two.
+
+**Rules.**
+1. **A load-bearing number (dose, fraction, cutoff) enters a file only if a fetched record states it verbatim.** Otherwise it stays blank, and the blank says why. Textbook memory is not a source; this is the same rule as "reference lists are generated, never typed" (§3d), applied to figures.
+2. **Demonstrate the absence before recording it.** Check the abstracts *and* the retrievable full text; a gap you asserted from memory is not a gap you verified.
+3. **When a figure is publishable but dangerous to misapply, publish it as a reference value under a strict disclaimer and route the action to the clinician — in the same edit.** An undisclaimed dose in an owner-facing repository is a prescription it has no standing to write.
 
 ### ⚠️ An excerpt block with no excerpts counts as a checked paper
 
