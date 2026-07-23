@@ -160,6 +160,19 @@ Bringing them in produced three findings, and the ordering is instructive: **two
 2. **Verification tooling must read every language its corpus is written in.** Provenance markers, section headings and annotation prefixes all need their translations registered, or the untranslated half silently reads as broken.
 3. **Ask which artifact reaches a human, and check that one hardest.** The inverse held here for months: the most rigorously verified material was the least read, and the only material with an audience had no verification at all.
 
+## 3i. ⚠️ A whole directory sat outside every check — `docs/` cross-references into the KB were unguarded
+
+§3e widened the *corpus* from `knowledge-base/` to the owner guides. It did not touch `docs/`, and `docs/` is not corpus — it is the prose *about* the corpus (this SOP, the pitch, the release notes, the exceptions file). That prose points at knowledge-base files by name — `knowledge-base/<name>.md` — and **nothing verified those pointers.** A knowledge-base entry could be renamed or deleted and every reference to it in `docs/` would keep reading as valid, because no check scanned that directory at all. It is §3e's lesson one directory over: *a coverage boundary is invisible until something inside it rots*, and here the boundary was the entire `docs/` tree.
+
+**What made it live.** §12a had just added two such pointers (`blood-types-and-transfusion-compatibility.md`, `feline-lymphoma-treatment-currency.md`) into this document. Two new cross-references with no guard is exactly the condition that produces a stale link three renames later — so the guard was built before the rot, not after.
+
+**The check** (`check_docs_xref`, hygiene name `docs-xref`) resolves every markdown filename referenced in `docs/`: an explicit `knowledge-base|guides|docs|.claude/agents` path must exist at that path; a bare backticked `<name>.md` must exist in one of those directories, so that `AGENTS.md` and `README.md` are not false-positived into failures. Bare names require the backticks — unquoted prose is not a reference. Immediate scan when it landed: 18 references, 0 stale.
+
+**Rules.**
+1. **Prose that names a file is a cross-reference, and a cross-reference needs a check that the file exists (cf. §7a).** The rot is silent: a renamed target leaves the pointer looking fine.
+2. **A new check inherits the old lessons or repeats them.** This one was added to `CHECK_NAMES`, so its suppression hatch is auto-derived (§3d) and the existing "every check name parses" regression test covers its exception path without a new test — the dead-hatch failure was not re-run.
+3. **When you add a coverage boundary, name what is still outside it.** `docs/` is now checked for cross-references; it is still not checked for prose accuracy (the "8 checks"/"9 checks" count in `RELEASING.md` was stale until hand-fixed this same commit). A check closes one gap and should say which one it did *not*.
+
 ## 3d. ⚠️ Reference lists are generated, never typed — and Leg 1 does not cover them
 
 `rebuild_references.py` exists precisely because hand-maintained reference lists drift, and its own docstring says of the metadata: *"Fetch it with a tool, never from memory."*
