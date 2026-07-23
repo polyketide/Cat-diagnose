@@ -7,7 +7,7 @@ they carry verbatim source excerpts, and they state explicitly where the
 evidence runs out. For owner-facing material see [`../guides/`](../guides/) or
 the [published site](https://polyketide.github.io/catmed/).
 
-**12 files, 150 papers, 562 verbatim excerpts**, every one
+**13 files, 152 papers, 573 verbatim excerpts**, every one
 re-checked byte-for-byte against its archived PubMed record on every commit.
 
 ## If you are a veterinarian or a researcher
@@ -40,6 +40,7 @@ more than anything written here.
 | [`evidence-to-practice-gap.md`](evidence-to-practice-gap.md) | 3 | 27 |
 | [`feline-disease-frequency.md`](feline-disease-frequency.md) | 7 | 28 |
 | [`feline-hypertension.md`](feline-hypertension.md) | 5 | 47 |
+| [`feline-lymphoma-treatment-currency.md`](feline-lymphoma-treatment-currency.md) | 2 | 11 |
 | [`feline-oncology-literature-survey.md`](feline-oncology-literature-survey.md) | 54 | 174 |
 | [`hyperthyroidism-and-kidney-disease.md`](hyperthyroidism-and-kidney-disease.md) | 3 | 16 |
 | [`supportive-and-palliative-care.md`](supportive-and-palliative-care.md) | 11 | 28 |
@@ -103,6 +104,12 @@ hypertension is the third member of the older-cat triad alongside chronic kidney
 *5 papers, 47 verbatim excerpts.*
 
 > ⚠️ **Stated gap:** Whether earlier detection of hypertension changes outcomes, as opposed to detecting damage earlier. Nothing retrieved tests this, and it is the same u…
+
+### [`feline-lymphoma-treatment-currency.md`](feline-lymphoma-treatment-currency.md)
+
+**Feline Lymphoma Treatment — a currency check, and the 2025 options the textbooks predate**
+
+*2 papers, 11 verbatim excerpts.*
 
 ### [`feline-oncology-literature-survey.md`](feline-oncology-literature-survey.md)
 
